@@ -1,0 +1,281 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.test-container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+/* 섹션 공통 스타일 */
+.section {
+    display: none;
+    text-align: center;
+}
+
+.section.active {
+    display: block;
+}
+
+/* 시작 페이지 */
+h1 {
+    font-size: 2.5em;
+    margin: 20px 0;
+    line-height: 1.4;
+}
+
+.intro-text {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* 버튼 스타일 */
+.pulse-btn, .option {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+    margin: 10px auto;
+}
+
+.pulse-btn:hover, .option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 진행바 */
+.progress-container {
+    margin: 20px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    transition: width 0.3s ease;
+}
+
+.question-counter {
+    display: block;
+    text-align: right;
+    margin-top: 5px;
+    color: #666;
+}
+
+/* 질문 섹션 */
+#question-text {
+    font-size: 1.3em;
+    margin: 20px 0;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+/* 결과 섹션 */
+.animal-image {
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.result-content {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+#traits-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+#traits-list li {
+    margin: 10px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+#traits-list li::before {
+    content: '✨';
+    position: absolute;
+    left: 0;
+}
+
+/* 공유 버튼 */
+.share-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.share-btn {
+    background: #FEE500;
+    color: #000;
+}
+
+.retry-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+}
+
+.home-btn {
+    background: #f8f9fa;
+    color: #333;
+    border: 2px solid #e9ecef;
+    text-decoration: none;
+}
+
+.share-btn, .retry-btn, .home-btn {
+    padding: 15px 25px;
+    font-size: 1.1em;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* 팝업 */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+/* 로딩 애니메이션 */
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    margin: 20px auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 광고 컨테이너 */
+.ad-container {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+    /* background: white; <- 이 줄 삭제 */
+    padding: 15px;
+    /* border-radius: 10px; <- 이 줄 삭제 */
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); <- 이 줄 삭제 */
+}
+.popup-ad-container {
+    margin: 20px auto 0;
+    width: 300px;
+    height: 250px;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .test-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .animal-image {
+        width: 150px;
+        height: 150px;
+    }
+}
+.popup-ad-container {
+    margin: 20px auto 0;
+    width: 300px;
+    height: 250px;
+    overflow: hidden;
+}
+
+.popup-ad {
+    width: 300px;
+    height: 250px;
+    display: block;
+}
+
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}

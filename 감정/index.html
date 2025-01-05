@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Event snippet for ページ閲覧 conversion page -->
+<script>
+    gtag('event', 'conversion', {'send_to': 'AW-11438616604/1mSHCLiKx_4YEJzgrc4q'});
+</script>
+  
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11438616604">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-11438616604');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>私の感情状態テスト</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="test-container">
+            <h1>私の感情状態テスト</h1>
+            <div id="start-section">
+                <div class="emotion-icon"></div>
+                <button id="start-btn">テストを始める</button>
+            </div>
+            
+            <div id="question-section" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <h2 id="question-text"></h2>
+                <div class="answers">
+                    <button class="answer-btn" data-score="1">全く違う</button>
+                    <button class="answer-btn" data-score="2">違う</button>
+                    <button class="answer-btn" data-score="3">普通だ</button>
+                    <button class="answer-btn" data-score="4">そうだ</button>
+                    <button class="answer-btn" data-score="5">非常にそうだ</button>
+                </div>
+            </div>
+
+            <div id="result-section" style="display: none;">
+                <h2>あなたの感情状態は...</h2>
+                <div class="result-content">
+                    <div class="result-icon"></div>
+                    <h3 id="result-title"></h3>
+                    <p id="result-description"></p>
+                </div>
+                <div class="share-buttons">
+                    <button id="kakao-share-btn" class="share-btn kakao">LINEで共有</button>
+                    <button id="retry-btn" class="share-btn retry">もう一度テストを受ける</button>
+                    <a href="https://testpro.site" class="home-btn">他のテストを試す</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ad-popup" class="popup">
+        <div class="popup-content">
+            <div id="ad-timer">結果の分析中です</div>
+            <div class="countdown">7</div>
+            <div class="ad-container">
+                <!-- Google広告 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

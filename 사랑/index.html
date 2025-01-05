@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <!-- Event snippet for 페이지 조회 conversion page -->
+<script>
+    gtag('event', 'conversion', {'send_to': 'AW-11438616604/1mSHCLiKx_4YEJzgrc4q'});
+  </script>
+  
+        <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11438616604">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-11438616604');
+</script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>나의 사랑의 언어 테스트</title>
+        <link rel="stylesheet" href="style.css">
+        <!-- 카카오 SDK -->
+        <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+        <!-- Chart.js 추가 -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- 구글 애드센스 -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <!-- 상단 광고 -->
+    <div class="ad-container">
+        <ins class="adsbygoogle main-ad"
+            style="display:block"
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="3201247599"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="container">
+        <div class="test-container">
+            <!-- 시작 페이지 -->
+            <div id="start-section">
+                <div class="heart-icon"></div>
+                <h1>나의 사랑의 언어 찾기</h1>
+                <p class="intro-text">당신의 사랑을 표현하는 방식을 알아보세요!</p>
+                <button id="start-btn" class="pulse-btn">테스트 시작하기</button>
+            </div>
+
+            <!-- 질문 페이지 -->
+            <div id="question-section" style="display: none;">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <span class="question-counter">1/10</span>
+                </div>
+                <h2 id="question-text"></h2>
+                <div class="answers">
+                    <button class="answer-btn" data-type="words">매우 그렇다</button>
+                    <button class="answer-btn" data-type="time">그렇다</button>
+                    <button class="answer-btn" data-type="touch">보통이다</button>
+                    <button class="answer-btn" data-type="service">아니다</button>
+                    <button class="answer-btn" data-type="gifts">전혀 아니다</button>
+                </div>
+            </div>
+
+            <!-- 결과 페이지 -->
+            <div id="result-section" style="display: none;">
+                <div class="result-header">
+                    <div class="result-icon"></div>
+                    <h2>당신의 사랑의 언어는?</h2>
+                </div>
+                <div class="result-content">
+                    <h3 id="result-title"></h3>
+                    <p id="result-description"></p>
+                    <div class="chart-container">
+                        <canvas id="resultChart"></canvas>
+                    </div>
+                </div>
+                <div class="share-container">
+                    <button class="share-btn">결과 공유하기</button>
+                    <button class="retry-btn">다시 테스트하기</button>
+                    <a href="https://testpro.site" class="home-btn">다른 테스트 하기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 분석 팝업 -->
+    <div id="ad-popup" class="popup">
+        <div class="popup-content">
+            <div class="analysis-header">
+                <div class="analysis-text">결과값 분석중입니다...</div>
+                <div class="countdown">7</div>
+                <div class="loading-spinner"></div>
+            </div>
+            
+            <!-- 팝업 광고 -->
+            <div class="popup-ad-container">
+                <ins class="adsbygoogle popup-ad"
+                     style="display:inline-block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"
+                     data-ad-format="rectangle"
+                     data-full-width-responsive="false"></ins>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

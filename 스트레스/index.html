@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Event snippet for 페이지 조회 conversion page -->
+<script>
+    gtag('event', 'conversion', {'send_to': 'AW-11438616604/1mSHCLiKx_4YEJzgrc4q'});
+  </script>
+  
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11438616604">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-11438616604');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스트레스 수준 테스트</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 카카오 SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+    </script>
+    <!-- 구글 애드센스 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>당신의 스트레스 수준은?</h1>
+        
+        <!-- 상단 광고 -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="3201247599"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <div id="quiz">
+            <div id="question"></div>
+            <div id="options"></div>
+            <button id="submit-btn" style="display: none;">결과 보기</button>
+        </div>
+    </div>
+
+    <!-- 결과 팝업 -->
+    <div id="result-popup" class="popup">
+        <div class="popup-content">
+            <!-- 광고 타이머 -->
+            <div id="ad-timer">결과값 분석중 입니다 <span id="countdown">7</span>초</div>
+            
+            <!-- 광고 영역 -->
+            <div id="ad-space">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+
+            <!-- 결과 내용 (처음에는 숨김) -->
+            <div id="result-content" style="display: none;">
+                <div id="result-emoji" class="result-emoji"></div>
+                <div id="result-text"></div>
+                <div class="button-group">
+                    <button id="share-kakao">카카오톡 공유하기</button>
+                    <a href="https://testpro.site" class="home-btn">다른 테스트 하기</a>
+                    <button id="close-popup">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
