@@ -1,0 +1,97 @@
+/* 全体のスタイル */
+body {
+    font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* イントロテキストのアニメーション */
+.intro-text {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    animation: fadeIn 1s ease-in;
+}
+
+/* 質問コンテナ */
+#quiz-container {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* ボタンスタイル */
+button {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* ローディングポップアップ */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* ローディングアニメーション */
+.loading-animation {
+    font-size: 40px;
+    animation: spin 2s linear infinite;
+}
+
+/* 幸福度メーター */
+.happiness-meter {
+    width: 100%;
+    height: 20px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+    transition: width 1s ease-in-out;
+}
+
+/* アニメーション定義 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
