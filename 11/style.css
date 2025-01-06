@@ -1,47 +1,85 @@
-/* 全体のスタイル */
+/* 기본 스타일 */
 body {
     font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
 }
 
-/* イントロテキストのアニメーション */
+/* 광고 컨테이너 */
+.ad-top {
+    width: 100%;
+    margin-bottom: 20px;
+    min-height: 100px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* 인트로 텍스트 스타일 */
 .intro-text {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 30px;
+    border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    animation: fadeIn 1s ease-in;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
 }
 
-/* 質問コンテナ */
+.expert-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+    animation: bounce 2s infinite;
+}
+
+/* 공유 버튼 스타일 */
+.share-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.share-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.line-btn {
+    background: #00B900;
+    color: white;
+}
+
+.copy-btn {
+    background: #4A90E2;
+    color: white;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* 질문 컨테이너 */
 #quiz-container {
     background: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 15px;
     margin: 20px 0;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* ボタンスタイル */
-button {
-    background: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    margin: 5px;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-button:hover {
-    transform: scale(1.05);
-}
-
-/* ローディングポップアップ */
+/* 결과 분석 팝업 */
 .popup {
     display: none;
     position: fixed;
@@ -49,49 +87,109 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.8);
     z-index: 1000;
+    backdrop-filter: blur(5px);
 }
 
 .popup-content {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 30px;
+    border-radius: 20px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    width: 80%;
+    max-width: 400px;
 }
 
-/* ローディングアニメーション */
-.loading-animation {
-    font-size: 40px;
-    animation: spin 2s linear infinite;
+/* URL 복사 알림 */
+.copy-alert {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 25px;
+    animation: slideUp 0.3s ease-out;
 }
 
-/* 幸福度メーター */
+/* 행복 지수 미터 */
 .happiness-meter {
     width: 100%;
-    height: 20px;
-    background: #ddd;
-    border-radius: 10px;
+    height: 25px;
+    background: #eee;
+    border-radius: 12px;
     overflow: hidden;
     margin: 20px 0;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .meter-fill {
     height: 100%;
     background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
-    transition: width 1s ease-in-out;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
 }
 
-/* アニメーション定義 */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.meter-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0.1) 0%,
+        rgba(255,255,255,0.3) 50%,
+        rgba(255,255,255,0.1) 100%
+    );
+    animation: shine 2s infinite;
 }
 
-@keyframes spin {
-    100% { transform: rotate(360deg); }
+/* 애니메이션 정의 */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes shine {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+
+@keyframes slideUp {
+    from { transform: translate(-50%, 100%); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    
+    .share-buttons {
+        flex-direction: column;
+    }
+    
+    .popup-content {
+        width: 90%;
+        padding: 20px;
+    }
 }
