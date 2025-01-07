@@ -239,6 +239,10 @@ function showAnalysisPopup() {
     const popup = document.getElementById('analysis-popup');
     popup.style.display = 'block';
     
+    // 광고 로드
+    const adContainer = document.querySelector('.ad-container-popup');
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    
     let countdown = 7;
     const countdownElement = document.getElementById('countdown');
     
