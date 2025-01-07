@@ -1,40 +1,110 @@
-// 질문 표시 함수
-function displayQuestion() {
-    const quizContainer = document.getElementById('quiz-container');
-    const question = questions[currentQuestion];
-    
-    quizContainer.style.opacity = '0';
-    
-    let html = `
-        <div class="question animate-fade-in">
-            <h3>Q${currentQuestion + 1}. ${question.question}</h3>
-            <div class="answers">
-    `;
-    
-    question.answers.forEach((answer, index) => {
-        html += `
-            <button onclick="selectAnswer(${index})" class="answer-btn">
-                ${answer}
-            </button>
-        `;
-    });
-    
-    html += `</div></div>`;
-    quizContainer.innerHTML = html;
-    
-    // 페이드 인 효과
-    setTimeout(() => {
-        quizContainer.style.opacity = '1';
-    }, 50);
-}
+// 질문 목록
+const questions = [
+    "普段の生活で、どんな時に一番心が落ち着きますか？",
+    "困っている人を見かけたとき、あなたはどうしますか？",
+    "休日の過ごし方として、最も好きなのは？",
+    "あなたの直感は普段どのくらい当たりますか？",
+    "集団の中であなたが取る役割は？",
+    "ストレスを感じた時、どのように解消しますか？",
+    "理想の休暇の過ごし方は？",
+    "決断を下すとき、何を重視しますか？",
+    "他人からよく言われる性格は？",
+    "夢や目標を追求するとき、あなたの特徴は？",
+    "自然の中で最も心惹かれる場所は？",
+    "困難な状況での対処方法は？",
+    "他人との関係で大切にしていることは？",
+    "変化に対してどのように反応しますか？",
+    "理想の人生とは？"
+];
 
-// 답변 선택 처리
-function selectAnswer(answerIndex) {
-    answers.push(answerIndex);
+// 각 질문에 대한 선택지
+const choices = [
+    ["自然の中で", "家族や友人と過ごす時", "一人で趣味に没頭する時", "にぎやかな場所で"],
+    ["すぐに助けを申し出る", "状況を見極めてから動く", "誰かに相談する", "見守る"],
+    // ... 나머지 질문들의 선택지도 이런 형식으로 추가
+];
+
+// 수호동물 결과 타입
+const animalTypes = {
+    wolf: {
+        emoji: "🐺",
+        title: "孤高の狼",
+        description: [
+            "あなたは強い意志と独立心を持つ人です。",
+            "直感力が鋭く、的確な判断力を持っています。",
+            "仲間思いで、信頼関係を大切にします。",
+            "困難な状況でも諦めない強さがあります。"
+        ]
+    },
+    owl: {
+        emoji: "🦉",
+        title: "知恵の梟",
+        description: [
+            "優れた洞察力と知性を持つあなた。",
+            "冷静な判断力で周りをサポートします。",
+            "静かな中にも強い意志を秘めています。",
+            "夜型の傾向があり、静かな時間を大切にします。"
+        ]
+    },
+    tiger: {
+        emoji: "🐯",
+        title: "勇猛な虎",
+        description: [
+            "カリスマ性があり、周りを導くリーダーシップがあります。",
+            "情熱的で、目標に向かって突き進む力があります。",
+            "正義感が強く、弱い立場の人を守る傾向があります。",
+            "決断力があり、行動力に優れています。"
+        ]
+    },
+    deer: {
+        emoji: "🦌",
+        title: "優美な鹿",
+        description: [
+            "繊細で優しい心を持ち、周りへの気配りが自然とできます。",
+            "芸術的なセンスと創造性に優れています。",
+            "平和を愛し、調和を大切にする性格です。",
+            "直感力が鋭く、自然との結びつきが強いです。"
+        ]
+    },
+    fox: {
+        emoji: "🦊",
+        title: "賢明な狐",
+        description: [
+            "知的で機転が利き、臨機応変な対応ができます。",
+            "好奇心旺盛で、新しいことへの探究心があります。",
+            "社交的でありながら、適度な距離感を保つことができます。",
+            "創造的な問題解決能力を持っています。"
+        ]
+    }
+};
+
+let currentQuestion = 0;
+let userAnswers = [];
+
+// 테스트 시작
+document.getElementById('start-btn').addEventListener('click', () => {
+    document.querySelector('.intro-section').style.display = 'none';
+    document.getElementById('question-container').style.display = 'block';
+    showQuestion();
+});
+
+// 질문 표시 함수
+function showQuestion() {
+    const questionContainer = document.getElementById('question-container');
+    questionContainer.innerHTML = `
+        <div class="question">${questions[currentQuestion]}</div>
+        ${choices[currentQuestion].map((choice, index) => `
+            <button class="answer-btn" onclick="handleAnswer(${index})">${choice}</button>
+        `).join('')}
+    `;
+}
+// 답변 처리 함수
+function handleAnswer(choiceIndex) {
+    userAnswers.push(choiceIndex);
     
     if (currentQuestion < questions.length - 1) {
         currentQuestion++;
-        displayQuestion();
+        showQuestion();
     } else {
         showAnalysisPopup();
     }
@@ -43,131 +113,78 @@ function selectAnswer(answerIndex) {
 // 분석 팝업 표시
 function showAnalysisPopup() {
     const popup = document.getElementById('analysis-popup');
-    popup.style.display = 'block';
-    
-    // 팝업 광고 초기화
-    const popupAdContainer = document.querySelector('.ad-container-popup');
-    popupAdContainer.innerHTML = `
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="3201247599"
-             data-ad-format="rectangle"
-             data-full-width-responsive="false"></ins>
-    `;
-    
-    // 새로운 광고 로드
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.error('팝업 광고 로드 실패:', e);
-    }
+    popup.style.display = 'flex';
     
     let countdown = 7;
-    const countdownElement = document.getElementById('countdown');
-    countdownElement.textContent = countdown;
+    const countdownDisplay = document.querySelector('.countdown');
     
+    // 광고 표시
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    
+    // 카운트다운 시작
     const timer = setInterval(() => {
         countdown--;
-        countdownElement.textContent = countdown;
+        countdownDisplay.textContent = countdown;
         
         if (countdown <= 0) {
             clearInterval(timer);
-            setTimeout(() => {
-                popup.style.display = 'none';
-                showResult();
-            }, 500);
+            showResult();
+            popup.style.display = 'none';
         }
     }, 1000);
 }
 
-// 결과 계산 및 표시
-function showResult() {
-    const resultContainer = document.getElementById('result-container');
-    const resultAnimal = calculateResult();
-    
-    resultContainer.style.display = 'block';
-    resultContainer.querySelector('.result-animal').innerHTML = 
-        `${animalResults[resultAnimal].emoji}<br>${animalResults[resultAnimal].title}`;
-    
-    const description = animalResults[resultAnimal].description
-        .map(line => `<p>${line}</p>`)
-        .join('');
-    
-    resultContainer.querySelector('.result-description').innerHTML = description;
-    
-    // 결과 페이지 광고 리로드
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.error('결과 페이지 광고 로드 실패:', e);
-    }
-    
-    // 결과로 스크롤
-    resultContainer.scrollIntoView({ behavior: 'smooth' });
-}
-
-// 결과 계산 로직
+// 결과 계산 함수
 function calculateResult() {
-    const sum = answers.reduce((a, b) => a + b, 0);
-    
-    if (sum < 15) return 'wolf';
-    else if (sum < 30) return 'owl';
-    else if (sum < 45) return 'tiger';
-    else if (sum < 60) return 'deer';
-    else return 'dolphin';
+    // 답변 패턴에 따라 동물 결정
+    const answerSum = userAnswers.reduce((a, b) => a + b, 0);
+    const results = ['wolf', 'owl', 'tiger', 'deer', 'fox'];
+    return results[answerSum % 5];
 }
 
-// LINE 공유
+// 결과 표시 함수
+function showResult() {
+    const resultType = calculateResult();
+    const animal = animalTypes[resultType];
+    
+    const resultContainer = document.getElementById('result-container');
+    resultContainer.style.display = 'block';
+    resultContainer.innerHTML = `
+        <div class="result-content">
+            <div class="animal-emoji">${animal.emoji}</div>
+            <h2>あなたの守護動物は「${animal.title}」です！</h2>
+            <div class="description">
+                ${animal.description.map(text => `<p>${text}</p>`).join('')}
+            </div>
+            <div class="share-buttons">
+                <button onclick="shareLine()">LINEで共有</button>
+                <button onclick="copyUrl()">URLをコピー</button>
+                <button onclick="retakeTest()">もう一度診断する</button>
+                <button onclick="goToHome()">他のテストを見る</button>
+            </div>
+        </div>
+    `;
+}
+
+// 공유 기능 함수들
 function shareLine() {
     const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent('私の守護動物を見つけました！');
-    window.open(`https://line.me/R/msg/text/?${text}%0D%0A${url}`);
+    const text = encodeURIComponent('私の守護動物診断結果をチェックしてください！');
+    window.open(`https://line.me/R/msg/text/?${text}%0A${url}`);
 }
 
-// URL 복사
 function copyUrl() {
     navigator.clipboard.writeText(window.location.href)
         .then(() => alert('URLをコピーしました！'));
 }
 
-// 테스트 다시하기
 function retakeTest() {
     currentQuestion = 0;
-    answers = [];
+    userAnswers = [];
     document.getElementById('result-container').style.display = 'none';
-    document.querySelector('.start-section').style.display = 'block';
-    document.getElementById('quiz-container').style.display = 'none';
-    window.scrollTo(0, 0);
+    document.querySelector('.intro-section').style.display = 'block';
 }
 
-// 광고 블록 감지
-function detectAdBlock() {
-    const testAd = document.createElement('div');
-    testAd.innerHTML = '&nbsp;';
-    testAd.className = 'adsbox';
-    document.body.appendChild(testAd);
-
-    window.setTimeout(function() {
-        if (testAd.offsetHeight === 0) {
-            console.log('AdBlock detected');
-            // 광고 블록 감지 시 대체 콘텐츠 표시 로직 추가 가능
-        }
-        testAd.remove();
-    }, 100);
+function goToHome() {
+    window.location.href = 'http://japan.testpro.site/';
 }
-
-// 페이지 로드 시 실행
-window.onload = function() {
-    initializeAds();
-    detectAdBlock();
-};
-
-// 광고 로드 실패 시 대체 처리
-window.onerror = function(msg, url, lineNo, columnNo, error) {
-    if (msg.includes('adsbygoogle')) {
-        console.log('광고 로드 실패. 대체 콘텐츠 표시 필요');
-        return false;
-    }
-    return false;
-}; 

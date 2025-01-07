@@ -3,91 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="あなたの守護動物を見つけましょう！性格診断テスト 無料で楽しく診断">
-    <meta name="keywords" content="守護動物,動物占い,性格診断,心理テスト,動物性格診断,運勢,相性">
-    <title>守護動物診断テスト | 無料で性格診断</title>
+    <meta name="description" content="あなたの守護動物を見つけよう！性格から導き出される守護動物診断テスト">
+    <meta name="keywords" content="守護動物,動物診断,心理テスト,性格診断,運命の動物,スピリットアニマル">
+    <title>守護動物診断テスト | 運命の守護動物を見つけよう！</title>
     
-    <!-- Google AdSense -->
+    <!-- 구글 애드센스 코드 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- 상단 광고 -->
+    <div class="ad-container-top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <div class="container">
-        <!-- 상단 광고 -->
-        <div class="ad-container-top">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9374368296307755"
-                 data-ad-slot="3201247599"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
+        <div class="intro-section">
+            <h1>🔮 あなたの守護動物診断テスト 🔮</h1>
+            <p class="intro-text">
+                はじめまして！私は動物心理学の専門家です。
+                15個の質問であなたの内なる守護動物を見つけ出します。
+                あなたの性格や直感、心の奥底に隠れている特別な才能を分析し、
+                運命の守護動物を導き出していきましょう。
+                さあ、神秘的な旅を始めましょう！
+            </p>
+            <button id="start-btn" class="start-button">テストを始める ▶</button>
+        </div>
+        
+        <div id="question-container" class="question-container" style="display: none;">
+            <!-- 질문들은 JS로 동적 생성됨 -->
         </div>
 
-        <header class="animate-fade-in">
-            <h1 class="title">🐾 あなたの守護動物診断テスト 🐾</h1>
-            <div class="intro-text">
-                안녕하세요, 동물심리 전문가 Dr.Kim입니다.
-                지금부터 당신의 내면에 숨어있는 수호동물을 찾아보는 여정을 시작하겠습니다.
-                간단한 질문들을 통해 당신과 가장 잘 맞는 수호동물을 찾아드립니다.
-                정직하게 답변해 주시면 더 정확한 결과를 얻으실 수 있습니다.
-            </div>
-            
-            <!-- 시작 버튼 -->
-            <div class="start-section">
-                <button id="start-button" class="start-btn" onclick="startTest()">
-                    <span class="btn-text">診断スタート</span>
-                    <span class="btn-icon">🎯</span>
-                </button>
-            </div>
-        </header>
-
-        <div id="quiz-container" style="display: none;">
-            <!-- 질문들이 여기에 동적으로 삽입됩니다 -->
-        </div>
-
-        <!-- 결과 분석 팝업 -->
-        <div id="analysis-popup" class="popup">
-            <div class="popup-content">
-                <h2>結果を分析中...</h2>
-                <div class="loading-animation">🔮</div>
-                <div id="countdown">7</div>
-                <!-- 팝업 광고 -->
-                <div class="ad-container-popup">
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-9374368296307755"
-                         data-ad-slot="3201247599"
-                         data-ad-format="rectangle"
-                         data-full-width-responsive="false"></ins>
-                </div>
-            </div>
-        </div>
-
-        <!-- 결과 표시 영역 -->
-        <div id="result-container" style="display:none;">
-            <div class="result-animal"></div>
-            <div class="result-description"></div>
-            
-            <!-- 공유 버튼 -->
-            <div class="share-buttons">
-                <button onclick="shareLine()">LINEで共有</button>
-                <button onclick="copyUrl()">URLをコピー</button>
-                <button onclick="retakeTest()">もう一度診断</button>
-                <button onclick="location.href='http://japan.testpro.site/'">他の診断へ</button>
-            </div>
-
-            <!-- 결과 페이지 광고 -->
-            <div class="ad-container-result">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="3201247599"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-            </div>
+        <div id="result-container" class="result-container" style="display: none;">
+            <!-- 결과는 JS로 동적 생성됨 -->
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- 분석 중 팝업 -->
+    <div id="analysis-popup" class="popup-container" style="display: none;">
+        <div class="popup-content">
+            <h2>結果を分析中...</h2>
+            <div class="countdown">7</div>
+            <!-- 팝업 광고 -->
+            <div class="ad-container-popup">
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"></ins>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
