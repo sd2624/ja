@@ -1,80 +1,133 @@
-/* 기본 스타일 */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    min-height: 100vh;
+/* 기본 설정 */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #2196F3;
+    --accent-color: #FF6B6B;
+    --text-color: #333;
+    --background-color: #f5f7fa;
+    --shadow-color: rgba(0,0,0,0.1);
 }
 
-.container {
+/* 전체 레이아웃 */
+body {
+    font-family: 'Hiragino Kaku Gothic Pro', 'メイリオ', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, var(--background-color) 0%, #c3cfe2 100%);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.content-wrapper {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* 제목 애니메이션 */
-.title {
+/* 광고 컨테이너 스타일 */
+.ad-container {
+    width: 100%;
+    margin: 20px auto;
+    min-height: 90px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    overflow: hidden;
     text-align: center;
-    color: #2c3e50;
-    font-size: 2em;
-    animation: fadeInDown 1s ease;
 }
 
-/* 진행바 스타일 */
+.top-ad { margin-top: 0; }
+.middle-ad { margin: 30px auto; }
+.bottom-ad { margin-bottom: 0; }
+
+/* 메인 타이틀 */
+.main-title {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.8em;
+    margin: 30px 0;
+    padding: 0 20px;
+}
+
+/* 인트로 섹션 */
+.intro-text {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.expert-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+    animation: floating 3s ease-in-out infinite;
+}
+
+/* 시작 버튼 */
+.start-container {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.start-btn {
+    background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+    color: white;
+    font-size: 1.2em;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+/* 진행 상태바 */
 .progress-bar {
     width: 100%;
     height: 10px;
     background: #eee;
     border-radius: 5px;
     margin: 20px 0;
+    overflow: hidden;
 }
 
-.progress {
+.progress-fill {
     height: 100%;
-    background: linear-gradient(to right, #3498db, #2ecc71);
-    border-radius: 5px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    width: 0%;
     transition: width 0.3s ease;
 }
 
-/* 버튼 스타일 */
-.options button {
-    display: block;
+/* 질문 컨테이너 */
+#quiz-container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+/* 답변 버튼 */
+.answer-btn {
     width: 100%;
     padding: 15px;
     margin: 10px 0;
-    border: none;
-    border-radius: 5px;
+    border: 2px solid #eee;
+    border-radius: 10px;
     background: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.options button:hover {
-    transform: translateY(-2px);
-    background: #f8f9fa;
+.answer-btn:hover {
+    background: var(--background-color);
+    border-color: var(--primary-color);
 }
 
-/* 공유 버튼 스타일 */
-.share-buttons {
-    display: flex;
-    gap: 10px;
-    margin: 20px 0;
-}
-
-
-.share-line {
-    background: #00B900;
-    color: white;
-}
-
-.copy-url {
-    background: #6c757d;
-    color: white;
-}
-
-/* 팝업 스타일 */
+/* 결과 분석 팝업 */
 .popup {
     display: none;
     position: fixed;
@@ -82,136 +135,88 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
-    align-items: center;
-    justify-content: center;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
 }
 
 .popup-content {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 30px;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
+    width: 90%;
+    max-width: 400px;
 }
 
-/* 애니메이션 */
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* 기타 애니메이션 클래스들 */
-.shake {
-    animation: shake 0.5s ease;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-}
-/* 기존 CSS에 추가되는 부분 */
-
-/* 행복한 얼굴 아이콘 */
-.happy-face {
-    width: 100px;
-    height: 100px;
+.popup-ad {
     margin: 20px auto;
-    position: relative;
+    width: 300px;
+    height: 250px;
 }
 
-.face {
-    width: 100%;
-    height: 100%;
-    background: #FFE55C;
-    border-radius: 50%;
-    position: relative;
-    animation: bounce 2s infinite;
-}
-
-.eyes {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #333;
-    border-radius: 50%;
-    top: 35px;
-}
-
-.eyes:before {
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #333;
-    border-radius: 50%;
-    left: 40px;
-}
-
-.smile {
-    position: absolute;
-    width: 40px;
-    height: 20px;
-    border: 3px solid #333;
-    border-radius: 0 0 40px 40px;
-    border-top: 0;
-    bottom: 25px;
-    left: 27px;
-}
-
-/* 인트로 텍스트 스타일 */
-.intro-text {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
+/* 결과 컨테이너 */
+#result-container {
+    background: white;
+    padding: 30px;
     border-radius: 15px;
     margin: 20px 0;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    animation: fadeIn 1s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
 }
 
-.intro-text p {
-    margin: 10px 0;
-    line-height: 1.6;
-    color: #444;
+/* 행복 지수 미터 */
+.happiness-meter {
+    width: 100%;
+    height: 25px;
+    background: #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+    box-shadow: inset 0 2px 5px var(--shadow-color);
 }
 
+.meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+    width: 0%;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
 
-.start-button {
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    padding: 15px 30px;
-    background: linear-gradient(45deg, #FF6B6B, #FF8E53);
-    color: white;
+/* 공유 버튼 */
+.share-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.share-btn {
+    padding: 12px 20px;
     border: none;
     border-radius: 25px;
-    font-size: 1.2em;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: pulse 2s infinite;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: bold;
 }
 
-.start-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-}
+.line-btn { background: #00B900; color: white; }
+.copy-btn { background: #4A90E2; color: white; }
+.retake-btn { background: #FF6B6B; color: white; }
+.home-btn { background: #9C27B0; color: white; text-decoration: none; }
 
-/* 애니메이션 정의 */
-@keyframes bounce {
+/* 애니메이션 */
+@keyframes floating {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
 }
 
 @keyframes fadeIn {
@@ -219,63 +224,22 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* 결과 카드 스타일 */
-.result-card {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    margin: 20px 0;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    animation: slideIn 0.8s ease;
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+    .content-wrapper {
+        padding: 10px;
     }
-    to {
-        opacity: 1;
-        transform: translateX(0);
+    
+    .share-buttons {
+        grid-template-columns: 1fr;
     }
-}
-
-/* 공유 버튼 개선 */
-.share-buttons button {
-    padding: 10px 20px;
-    margin: 5px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.share-line::before {
-    content: "📱";
-    margin-right: 8px;
-}
-
-.copy-url::before {
-    content: "📋";
-    margin-right: 8px;
-}
-
-/* 로딩 애니메이션 */
-.loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #3498db;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 20px auto;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    
+    .popup-content {
+        width: 85%;
+        padding: 20px;
+    }
+    
+    .main-title {
+        font-size: 1.5em;
+    }
 }
