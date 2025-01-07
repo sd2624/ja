@@ -137,8 +137,6 @@ const animalResults = {
     }
 };
 
-[이전 코드에 이어서...]
-
 let currentQuestion = 0;
 let answers = [];
 
@@ -146,6 +144,8 @@ let answers = [];
 function displayQuestion() {
     const quizContainer = document.getElementById('quiz-container');
     const question = questions[currentQuestion];
+    
+    quizContainer.style.opacity = '0';
     
     let html = `
         <div class="question animate-fade-in">
@@ -163,6 +163,11 @@ function displayQuestion() {
     
     html += `</div></div>`;
     quizContainer.innerHTML = html;
+    
+    // 페이드 인 효과
+    setTimeout(() => {
+        quizContainer.style.opacity = '1';
+    }, 50);
 }
 
 // 답변 선택 처리
@@ -276,8 +281,8 @@ function calculateResult() {
 
 // 페이지 로드 시 실행
 window.onload = function() {
-    displayQuestion();
     initializeAds();
+    detectAdBlock();
 };
 
 // 광고 로드 실패 시 대체 처리
@@ -305,5 +310,14 @@ function detectAdBlock() {
     }, 100);
 }
 
-// 페이지 로드 시 광고 블록 감지 실행
-detectAdBlock();
+// 테스트 시작 함수 추가
+function startTest() {
+    document.getElementById('start-button').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    displayQuestion();
+    
+    // 부드러운 스크롤
+    document.getElementById('quiz-container').scrollIntoView({ 
+        behavior: 'smooth' 
+    });
+}
