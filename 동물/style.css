@@ -38,49 +38,7 @@ body {
     background: #fff;
     border-radius: 8px;
     overflow: hidden;
-}
-
-/* 타이틀 스타일 */
-.title {
     text-align: center;
-    color: var(--primary-color);
-    font-size: 2em;
-    margin-bottom: 30px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-}
-
-/* 인트로 텍스트 스타일 */
-.intro-text {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
-    line-height: 1.8;
-}
-
-/* 질문 스타일 */
-.question {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-/* 버튼 스타일 */
-button {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-button:hover {
-    transform: translateY(-2px);
 }
 
 /* 팝업 스타일 */
@@ -104,22 +62,177 @@ button:hover {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    width: 336px; /* 광고 크기에 맞춤 */
+    min-height: 400px;
+}
+
+/* 팝업 내 광고 컨테이너 스타일 */
+.ad-container-popup {
+    margin: 20px auto;
+    width: 336px;
+    height: 280px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+
+/* 타이틀 스타일 */
+.title {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 인트로 텍스트 스타일 */
+.intro-text {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    line-height: 1.8;
+    font-size: 1.1em;
+}
+
+/* 질문 스타일 */
+.question {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.question h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/* 답변 버튼 스타일 */
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.answer-btn {
+    background: #fff;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+}
+
+.answer-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* 로딩 애니메이션 */
+.loading-animation {
+    font-size: 50px;
+    margin: 20px 0;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* 카운트다운 스타일 */
+#countdown {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 15px 0;
 }
 
 /* 결과 스타일 */
 .result-animal {
-    font-size: 5em;
+    font-size: 8em;
     text-align: center;
+    margin: 30px 0;
+    animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+
+.result-description {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     margin: 20px 0;
+    line-height: 2;
+}
+
+.result-description p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+/* 공유 버튼 스타일 */
+.share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.share-buttons button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.share-buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .container {
-        padding: 10px;
+        padding: 15px;
     }
     
     .title {
-        font-size: 1.5em;
+        font-size: 2em;
+    }
+    
+    .popup-content {
+        width: 300px;
+        padding: 15px;
+    }
+    
+    .ad-container-popup {
+        width: 300px;
+        height: 250px;
+    }
+    
+    .share-buttons {
+        flex-direction: column;
+    }
+    
+    .share-buttons button {
+        width: 100%;
     }
 }

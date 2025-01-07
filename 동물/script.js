@@ -1,3 +1,16 @@
+// 광고 초기화 함수
+function initializeAds() {
+    try {
+        // 상단 광고
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        
+        // 팝업 광고용 새로운 광고 유닛
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error('광고 초기화 실패:', e);
+    }
+}
+
 // 질문 목록
 const questions = [
     {
@@ -239,9 +252,11 @@ function showAnalysisPopup() {
     const popup = document.getElementById('analysis-popup');
     popup.style.display = 'block';
     
-    // 광고 로드
-    const adContainer = document.querySelector('.ad-container-popup');
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    // 팝업 광고 리로드
+    const popupAd = document.querySelector('.ad-container-popup ins.adsbygoogle');
+    if (popupAd) {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    }
     
     let countdown = 7;
     const countdownElement = document.getElementById('countdown');
@@ -272,6 +287,9 @@ function showResult() {
         .join('');
     
     resultContainer.querySelector('.result-description').innerHTML = description;
+    
+    // 결과 페이지 광고 리로드
+    initializeAds();
 }
 
 // LINE 공유
@@ -293,11 +311,11 @@ function retakeTest() {
     answers = [];
     document.getElementById('result-container').style.display = 'none';
     displayQuestion();
+    window.scrollTo(0, 0);
 }
 
 // 결과 계산 로직
 function calculateResult() {
-    // 답변 패턴에 따라 결과 계산
     const sum = answers.reduce((a, b) => a + b, 0);
     
     if (sum < 15) return 'wolf';
@@ -307,10 +325,17 @@ function calculateResult() {
     else return 'dolphin';
 }
 
-// 페이지 로드 시 첫 질문 표시
+// 페이지 로드 시 실행
 window.onload = function() {
     displayQuestion();
-    
-    // 구글 광고 초기화
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    initializeAds();
+};
+
+// 광고 로드 실패 시 대체 처리
+window.onerror = function(msg, url, lineNo, columnNo, error) {
+    if (msg.includes('adsbygoogle')) {
+        console.log('광고 로드 실패. 대체 콘텐츠 표시 필요');
+        return false;
+    }
+    return false;
 };
