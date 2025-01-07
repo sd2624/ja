@@ -1,4 +1,9 @@
-// 질문 리스트
+// 전역 변수 설정
+let currentQuestion = 0;
+let score = 0;
+const totalQuestions = 15;
+
+// 질문 목록
 const questions = [
     "毎日の生活に満足感を感じていますか？",
     "家族や友人との関係は良好ですか？",
@@ -19,162 +24,76 @@ const questions = [
 
 // 결과 텍스트
 const results = {
-    high: `あなたの幸福指数は非常に高いレベルです！(90点)
+    high: `당신의 행복 지수는 매우 높은 수준입니다! (90점)
 
-あなたは現在、生活の多くの面で高い満足感を感じており、  
-前向きで健康的なライフスタイルを送っています。  
-これは、あなたの継続的な努力と正しい選択の結果と言えます。
+현재 삶의 많은 부분에서 만족감을 느끼고 있으며, 
+매우 긍정적인 마인드를 가지고 계십니다.
 
-特徴:
-• 周囲の人々と信頼と愛情を築き、健康的な人間関係を維持しています。
-• 自分の目標や夢に向かって情熱的に行動し、自己啓発に多くの時間を費やしています。
-• 日常の中で感謝すべきことを見つけ、ポジティブな態度で生活しています。
-• ストレスを適切に管理し、困難な状況でも冷静に対処する能力を持っています。
+특징:
+• 주변 사람들과 좋은 관계를 유지하고 있습니다
+• 자기 실현을 위해 적극적으로 행동하고 있습니다
+• 감사하는 마음을 소중히 여기고 있습니다
+• 스트레스 관리를 잘하고 있습니다
 
-推奨事項:
-• 現在の状態を維持するために、自分だけのルーティンを継続してください。
-• さらなる幸せを追求するために、新しい挑戦や目標を設定してみましょう。
-• 周囲の人々に感謝と愛情を表現し、共に成長する関係を築きましょう。
-• 自分をケアする時間（運動、瞑想など）を忘れずに大切にしてください。
+앞으로도 이런 멋진 삶을 계속 이어나가세요!`,
 
-あなたはすでに素晴らしい人生を送っており、これからも  
-さらに素敵な未来が待っています！`,
+    medium: `당신의 행복 지수는 평균적인 수준입니다. (65점)
 
-    medium: `あなたの幸福指数は平均的なレベルです。(65点)
+인생의 여러 측면에서 균형을 잘 잡고 계시지만,
+더 나은 행복을 위한 여지가 있습니다.
 
-現在、生活のさまざまな面でバランスを保っていますが、  
-さらに幸せを追求する可能性があります。  
-小さな変化を通じて、より満足のいく人生を作り上げることができます。
+개선을 위한 제안:
+• 작은 행복을 발견하는 습관을 기르세요
+• 취미 생활에 더 많은 시간을 투자하세요
+• 주변 사람들과의 교류를 더 깊게 가지세요
+• 자기 계발을 위한 시간을 만드세요
 
-特徴:
-• 日常の活動にある程度満足感を感じており、安定した生活を送っています。
-• 周囲の人々との関係は悪くありませんが、より深い絆を築く余地があります。
-• 新しい挑戦や自己啓発に対して、少し積極的な態度が必要です。
-• ストレス管理はある程度できていますが、時折感情的に辛い瞬間があるかもしれません。
+이러한 부분들을 의식하면 더욱 충실한 삶을 살 수 있습니다.`,
 
-改善の提案:
-• 毎日、感謝できることを1つ思い出してみてください。  
-  小さな幸せが集まることで、大きな幸せにつながります。
-• 新しい趣味や興味を探求し、日常生活に活力を加えましょう。
-• 周囲の人々との会話を増やし、心からの対話を通じて  
-  より深い関係を築いてみましょう。
-• 自己啓発のために新しいスキルを学ぶ時間や読書の時間を作りましょう。
-• 規則的な運動や瞑想を取り入れて、ストレスをより効果的に管理しましょう。
+    low: `현재 당신의 행복 지수는 다소 낮은 편입니다. (40점)
 
-あなたの人生はすでにバランスが取れていますが、  
-小さな変化を加えることで、さらに大きな満足を得ることができます。`,
+하지만 이것은 일시적인 상황일 수 있습니다.
+다음과 같은 노력으로 상황을 개선할 수 있습니다:
 
-    low: `現在、あなたの幸福指数はやや低いレベルです。(40点)
+권장사항:
+• 전문가와의 상담을 고려해보세요
+• 일상생활의 리듬을 정돈하세요
+• 운동이나 취미로 기분 전환을 하세요
+• 주변 사람들에게 마음을 털어놓으세요
+• 작은 목표를 세우고 성취감을 맛보세요
 
-生活が少し苦しいと感じることがあるかもしれませんが、  
-これは誰にでも訪れる一時的な状態である可能性が高いです。  
-小さな変化を通じて、状況を改善し、より良い人生を築いていけます。
-
-現在の特徴:
-• 日常生活で楽しさを感じることが少なく、  
-  無気力感を経験している可能性があります。
-• 周囲の人々との関係で距離を感じたり、十分な支えを得られないと感じるかもしれません。
-• ストレスやプレッシャーにより、心の余裕を持ちにくい状況かもしれません。
-• 自分の感情を抑え込んだり、気分転換がうまくできない状態である可能性があります。
-
-推奨事項:
-• 専門家との相談を検討し、自分の心をケアし必要なサポートを受けましょう。  
-  これはネガティブな感情を乗り越える大きな助けとなります。
-• 毎日のリズムを整え、規則的な生活習慣を作ることで安定感を取り戻しましょう。
-• 運動や散歩、軽い趣味を通じて気分転換を図りましょう。  
-  小さな行動でも大きな変化をもたらすことができます。
-• 親しい人に正直な気持ちを打ち明けて、感情的な支えを得ましょう。
-• 簡単に達成できる小さな目標を設定し、それを達成することで達成感を得てみましょう。  
-  例えば、毎日10分散歩する、2リットルの水を飲むといったシンプルな目標から始めてみてください。
-
-これらの努力を続けることで、状況を徐々に改善していくことができます。  
-あなたの人生には、まだ多くの可能性と希望が満ちています。  
-小さな一歩でも、大きな変化をもたらす力があります。`
+한 걸음씩 천천히 나아가면 반드시 좋아질 것입니다.`
 };
 
-// LINE 공유 기능
-function shareLine() {
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent("행복 지수 테스트");
-    window.open(`https://line.me/R/msg/text/?${text}%0D%0A${url}`);
-}
-
-// URL 복사 기능
-function copyURL() {
-    navigator.clipboard.writeText(window.location.href)
-        .then(() => {
-            const alert = document.getElementById('copy-alert');
-            alert.style.display = 'block';
-            setTimeout(() => {
-                alert.style.display = 'none';
-            }, 2000);
-        });
-}
-
-// 결과 분석 및 팝업 표시
-function showResult(score) {
-    const popup = document.getElementById('loading-popup');
-    popup.style.display = 'block';
-    
-    let count = 7;
-    const countdown = document.getElementById('countdown');
-    
-    const timer = setInterval(() => {
-        count--;
-        countdown.textContent = count;
-        
-        if (count <= 0) {
-            clearInterval(timer);
-            popup.style.display = 'none';
-            displayFinalResult(score);
-        }
-    }, 1000);
-}
-
-// 최종 결과 표시
-function displayFinalResult(score) {
-    const resultContainer = document.getElementById('result-container');
-    const resultText = document.getElementById('result-text');
-    const meterFill = document.querySelector('.meter-fill');
-    
-    let result;
-    if (score > 75) {
-        result = results.high;
-        meterFill.style.width = '90%';
-    } else if (score > 50) {
-        result = results.medium;
-        meterFill.style.width = '65%';
-    } else {
-        result = results.low;
-        meterFill.style.width = '40%';
-    }
-    
-    resultText.innerHTML = result.replace(/\n/g, '<br>');
-    resultContainer.style.display = 'block';
-    resultContainer.scrollIntoView({ behavior: 'smooth' });
-}
-
-// 테스트 초기화 및 실행
+// 테스트 초기화
 function initializeTest() {
     const startButton = document.getElementById('start-test');
     const quizContainer = document.getElementById('quiz-container');
     
-    // 시작 버튼 클릭 이벤트
     startButton.addEventListener('click', () => {
-        startButton.parentElement.style.display = 'none'; // 시작 버튼 숨기기
-        quizContainer.style.display = 'block'; // 퀴즈 표시
-        startQuiz(); // 퀴즈 시작
+        startButton.parentElement.style.display = 'none';
+        quizContainer.style.display = 'block';
+        quizContainer.classList.add('animate-fade-in');
+        startQuiz();
     });
 }
 
-// 퀴즈 시작 함수
+// 퀴즈 시작
 function startQuiz() {
     currentQuestion = 0;
     score = 0;
     showQuestion(currentQuestion);
+    updateProgressBar();
 }
 
-// 질문 표시 함수
+// 진행 상태바 업데이트
+function updateProgressBar() {
+    const progressFill = document.querySelector('.progress-fill');
+    const progress = (currentQuestion / totalQuestions) * 100;
+    progressFill.style.width = `${progress}%`;
+}
+
+// 질문 표시
 function showQuestion(questionIndex) {
     const questionContainer = document.getElementById('question-container');
     const optionsContainer = document.getElementById('options-container');
@@ -195,21 +114,105 @@ function showQuestion(questionIndex) {
     }
 }
 
-// 답변 처리 함수
+// 답변 처리
 function handleAnswer(value) {
     score += value;
     currentQuestion++;
+    updateProgressBar();
     
     if (currentQuestion < questions.length) {
         showQuestion(currentQuestion);
     } else {
-        showResult(Math.floor((score / (questions.length * 5)) * 100));
+        showLoadingPopup();
     }
 }
 
-// 전역 변수 추가
-let currentQuestion = 0;
-let score = 0;
+// 결과 분석 팝업 표시
+function showLoadingPopup() {
+    const popup = document.getElementById('loading-popup');
+    popup.style.display = 'block';
+    
+    let count = 7;
+    const countdown = document.getElementById('countdown');
+    
+    const timer = setInterval(() => {
+        count--;
+        countdown.textContent = count;
+        
+        if (count <= 0) {
+            clearInterval(timer);
+            popup.style.display = 'none';
+            showFinalResult();
+        }
+    }, 1000);
+}
+
+// 최종 결과 표시
+function showFinalResult() {
+    const resultContainer = document.getElementById('result-container');
+    const resultText = document.getElementById('result-text');
+    const meterFill = document.querySelector('.meter-fill');
+    
+    const finalScore = Math.floor((score / (questions.length * 5)) * 100);
+    let result;
+    
+    if (finalScore > 75) {
+        result = results.high;
+        meterFill.style.width = '90%';
+    } else if (finalScore > 50) {
+        result = results.medium;
+        meterFill.style.width = '65%';
+    } else {
+        result = results.low;
+        meterFill.style.width = '40%';
+    }
+    
+    resultText.innerHTML = result.replace(/\n/g, '<br>');
+    resultContainer.style.display = 'block';
+    resultContainer.scrollIntoView({ behavior: 'smooth' });
+}
+
+// LINE 공유
+function shareLine() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent("幸福度診断テスト｜あなたの幸せレベルをチェック！");
+    window.open(`https://line.me/R/msg/text/?${text}%0D%0A${url}`);
+}
+
+// URL 복사
+function copyURL() {
+    navigator.clipboard.writeText(window.location.href)
+        .then(() => {
+            const alert = document.createElement('div');
+            alert.className = 'copy-alert';
+            alert.textContent = 'URLをコピーしました！';
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 2000);
+        });
+}
+
+// 테스트 다시하기
+function retakeTest() {
+    currentQuestion = 0;
+    score = 0;
+    document.getElementById('result-container').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    startQuiz();
+}
+
+// 광고 초기화
+function initializeAds() {
+    const adElements = document.querySelectorAll('.adsbygoogle');
+    adElements.forEach(() => {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    });
+}
 
 // 페이지 로드 시 실행
-document.addEventListener('DOMContentLoaded', initializeTest); 
+document.addEventListener('DOMContentLoaded', () => {
+    initializeTest();
+    initializeAds();
+}); 
