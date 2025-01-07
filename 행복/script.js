@@ -213,7 +213,7 @@ function shareLine() {
 
 // URL 복사
 function copyURL() {
-    const url = "http://japan.testpro.site/행복/";
+    const url = "http://japan.testpro.site/행복/index.html";
     navigator.clipboard.writeText(url)
         .then(() => {
             const alert = document.createElement('div');
