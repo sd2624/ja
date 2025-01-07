@@ -1,13 +1,16 @@
-// 광고 초기화 함수
+// 광고 관리
+let adsInitialized = false;
+
 function initializeAds() {
-    try {
-        // 상단 광고
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        
-        // 팝업 광고용 새로운 광고 유닛
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.error('광고 초기화 실패:', e);
+    if (!adsInitialized) {
+        try {
+            document.querySelectorAll('.adsbygoogle').forEach(ad => {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            });
+            adsInitialized = true;
+        } catch (e) {
+            console.error('광고 초기화 실패:', e);
+        }
     }
 }
 
@@ -15,138 +18,63 @@ function initializeAds() {
 const questions = [
     {
         question: "朝起きた時、あなたが最初にすることは？",
-        answers: [
-            "窓を開けて深呼吸をする",
-            "スマホをチェックする",
-            "すぐに支度を始める",
-            "もう少し寝る"
-        ]
+        answers: ["窓を開けて深呼吸をする", "スマホをチェックする", "すぐに支度を始める", "もう少し寝る"]
     },
     {
         question: "休日の過ごし方として一番好きなのは？",
-        answers: [
-            "自然の中でリフレッシュ",
-            "友達と会って話す",
-            "家でゆっくり過ごす",
-            "新しい場所に行く"
-        ]
+        answers: ["自然の中でリフレッシュ", "友達と会って話す", "家でゆっくり過ごす", "新しい場所に行く"]
     },
     {
         question: "困っている人を見かけたとき、あなたは？",
-        answers: [
-            "すぐに助けに行く",
-            "状況を見極めてから行動する",
-            "誰か他の人が助けるのを待つ",
-            "見て見ぬふりをする"
-        ]
+        answers: ["すぐに助けに行く", "状況を見極めてから行動する", "誰か他の人が助けるのを待つ", "見て見ぬふりをする"]
     },
     {
-        question: "あなたの理想の仕事環境は？",
-        answers: [
-            "チームで協力して働く",
-            "一人で集中して働く",
-            "自由な時間に働く",
-            "外で活動的に働く"
-        ]
+        question: "理想の仕事環境は？",
+        answers: ["チームで協力", "一人で集中", "自由な環境", "活動的な環境"]
     },
     {
-        question: "ストレスを感じたとき、どうする？",
-        answers: [
-            "運動や散歩をする",
-            "音楽を聴く",
-            "友達と話す",
-            "寝る"
-        ]
+        question: "ストレス解消法は？",
+        answers: ["運動する", "音楽を聴く", "友達と話す", "寝る"]
     },
     {
-        question: "人から最もよく言われる性格は？",
-        answers: [
-            "頼りになる",
-            "優しい",
-            "面白い",
-            "マイペース"
-        ]
+        question: "人から言われる性格は？",
+        answers: ["リーダーシップがある", "思いやりがある", "明るい", "マイペース"]
     },
     {
         question: "好きな季節は？",
-        answers: [
-            "春",
-            "夏",
-            "秋",
-            "冬"
-        ]
+        answers: ["春", "夏", "秋", "冬"]
     },
     {
-        question: "理想の休暇の過ごし方は？",
-        answers: [
-            "山でキャンプ",
-            "海でのんびり",
-            "都会で観光",
-            "家でくつろぐ"
-        ]
+        question: "理想の休暇は？",
+        answers: ["アウトドア活動", "ビーチでリラックス", "都会で観光", "家でのんびり"]
     },
     {
-        question: "困難な状況に直面したとき、あなたは？",
-        answers: [
-            "正面から立ち向かう",
-            "慎重に対策を考える",
-            "誰かに相談する",
-            "時間が解決するのを待つ"
-        ]
+        question: "困難な状況での対応は？",
+        answers: ["積極的に解決", "慎重に分析", "助けを求める", "時間で解決"]
     },
     {
-        question: "友達との約束時間に対する態度は？",
-        answers: [
-            "必ず10分前に着く",
-            "ちょうど時間通り",
-            "少し遅れがち",
-            "いつも遅刻"
-        ]
+        question: "約束時間に対する態度は？",
+        answers: ["早めに到着", "定刻通り", "少し遅れがち", "いつも遅刻"]
     },
     {
-        question: "好きな食べ物のタイプは？",
-        answers: [
-            "肉料理",
-            "魚料理",
-            "野菜料理",
-            "デザート"
-        ]
+        question: "好きな食べ物は？",
+        answers: ["肉料理", "魚料理", "野菜料理", "デザート"]
     },
     {
         question: "新しい環境での態度は？",
-        answers: [
-            "積極的に溶け込む",
-            "様子を見ながら慎重に",
-            "自然に任せる",
-            "控えめにしている"
-        ]
+        answers: ["積極的", "慎重", "自然体", "消極的"]
     },
     {
-        question: "休日の予定は主にどうする？",
-        answers: [
-            "しっかり計画を立てる",
-            "大まかに決める",
-            "その日の気分で決める",
-            "予定を入れたくない"
-        ]
+        question: "休日の予定の立て方は？",
+        answers: ["計画的", "大まかに", "その日次第", "予定なし"]
     },
     {
-        question: "物事を決めるとき、重視するのは？",
-        answers: [
-            "論理的な判断",
-            "直感",
-            "他人の意見",
-            "過去の経験"
-        ]
+        question: "決断するときの基準は？",
+        answers: ["論理的判断", "直感", "周りの意見", "経験"]
     },
     {
-        question: "あなたの夢は？",
-        answers: [
-            "世界を変えること",
-            "安定した生活",
-            "自由な生き方",
-            "幸せな家庭"
-        ]
+        question: "将来の夢は？",
+        answers: ["世界を変える", "安定した生活", "自由な生活", "幸せな家庭"]
     }
 ];
 
@@ -209,6 +137,8 @@ const animalResults = {
     }
 };
 
+[이전 코드에 이어서...]
+
 let currentQuestion = 0;
 let answers = [];
 
@@ -252,14 +182,27 @@ function showAnalysisPopup() {
     const popup = document.getElementById('analysis-popup');
     popup.style.display = 'block';
     
-    // 팝업 광고 리로드
-    const popupAd = document.querySelector('.ad-container-popup ins.adsbygoogle');
-    if (popupAd) {
+    // 팝업 광고 초기화
+    const popupAdContainer = document.querySelector('.ad-container-popup');
+    popupAdContainer.innerHTML = `
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="rectangle"
+             data-full-width-responsive="false"></ins>
+    `;
+    
+    // 새로운 광고 로드
+    try {
         (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error('팝업 광고 로드 실패:', e);
     }
     
     let countdown = 7;
     const countdownElement = document.getElementById('countdown');
+    countdownElement.textContent = countdown;
     
     const timer = setInterval(() => {
         countdown--;
@@ -267,8 +210,10 @@ function showAnalysisPopup() {
         
         if (countdown <= 0) {
             clearInterval(timer);
-            popup.style.display = 'none';
-            showResult();
+            setTimeout(() => {
+                popup.style.display = 'none';
+                showResult();
+            }, 500);
         }
     }, 1000);
 }
@@ -289,7 +234,11 @@ function showResult() {
     resultContainer.querySelector('.result-description').innerHTML = description;
     
     // 결과 페이지 광고 리로드
-    initializeAds();
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error('결과 페이지 광고 로드 실패:', e);
+    }
 }
 
 // LINE 공유
@@ -339,3 +288,22 @@ window.onerror = function(msg, url, lineNo, columnNo, error) {
     }
     return false;
 };
+
+// 광고 블록 감지
+function detectAdBlock() {
+    const testAd = document.createElement('div');
+    testAd.innerHTML = '&nbsp;';
+    testAd.className = 'adsbox';
+    document.body.appendChild(testAd);
+
+    window.setTimeout(function() {
+        if (testAd.offsetHeight === 0) {
+            console.log('AdBlock detected');
+            // 광고 블록 감지 시 대체 콘텐츠 표시 로직 추가 가능
+        }
+        testAd.remove();
+    }, 100);
+}
+
+// 페이지 로드 시 광고 블록 감지 실행
+detectAdBlock();
