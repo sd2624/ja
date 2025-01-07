@@ -1,0 +1,21 @@
+function copyURL() {
+    const url = "http://japan.testpro.site/행복/index.html";
+
+    // 임시 input 생성
+    const tempInput = document.createElement('input');
+    tempInput.value = url;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy'); // 텍스트 복사
+    document.body.removeChild(tempInput);
+
+    // 복사 완료 알림
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'copy-alert';
+    alertDiv.textContent = 'URLをコピーしました！';
+    document.body.appendChild(alertDiv);
+
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 2000);
+}
