@@ -1,167 +1,243 @@
-// 카카오 SDK 초기화
-Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+// 전역 변수 설정
+let currentQuestion = 0;
+let score = 0;
+const totalQuestions = 15;
 
 // 질문 목록
 const questions = [
-    "최근 일주일 동안 기분이 좋았나요?",
-    "스트레스를 많이 받고 있다고 느끼시나요?",
-    "충분한 휴식을 취하고 있나요?",
-    "주변 사람들과의 관계는 원만한가요?",
-    "일이나 공부에 집중이 잘 되나요?",
-    "미래에 대해 긍정적으로 생각하나요?",
-    "자신에 대해 만족하시나요?",
-    "규칙적인 생활을 하고 있나요?",
-    "취미 생활을 즐기고 있나요?",
-    "전반적으로 행복하다고 느끼시나요?"
+    "最近、感情的に安定感を感じていますか？",
+    "よく喜びを感じますか？",
+    "自分の感情を正直に表現できますか？",
+    "悲しい時やストレスを感じた時、周りに助けを求めますか？",
+    "感情をコントロールするのが難しい瞬間が多いですか？",
+    "自分の感情を抑え込むことが多いですか？",
+    "よく怒りや不安を感じていますか？",
+    "周囲の人々に感情をよく共有していますか？",
+    "毎日、自分の感情をうまく管理できていると感じますか？",
+    "自分の感情状態をしっかり把握していますか？",
+    "状況に応じて感情を調整する能力がありますか？",
+    "最近、感情的にとても疲れていると感じますか？",
+    "他人の感情をよく理解し、共感できますか？",
+    "自分の感情を大切にする時間を持っていますか？",
+    "自分の感情を十分に大切にしていますか？"
 ];
 
-// 결과 유형
-const results = [
-    {
-        title: "매우 안정적인 감정 상태",
-        description: "현재 당신은 정서적으로 안정적이며, 스트레스를 효과적으로 관리하고 있는 상태입니다. 생활에서 긍정적인 태도를 유지하며, 대인 관계나 자기 관리 측면에서도 매우 건강한 모습을 보이고 있습니다. 충분한 휴식과 규칙적인 생활 습관이 지금의 상태를 유지하는 데 큰 도움을 주고 있습니다. 앞으로도 이러한 균형 잡힌 상태를 지속하기 위해, 자신에게 맞는 활동과 루틴을 계속 이어가세요. 또한, 예상치 못한 스트레스 상황에도 유연하게 대처할 수 있도록 지금의 관리법을 강화하면 좋습니다.",
-        icon: "😊"
-    },
-    {
-        title: "약간의 스트레스",
-        description: "일상적인 스트레스를 느끼고 있지만, 전반적으로 잘 관리하고 있는 모습입니다. 과도한 업무나 책임으로 인해 피로감을 느낄 수 있지만, 적절한 휴식과 스트레스 해소법을 적용하면 큰 문제가 되지 않을 것입니다. 스트레스를 해소하기 위해 산책, 음악 감상, 명상 등 간단한 활동을 시도해 보세요. 주기적으로 자신을 점검하고 필요한 경우 도움을 요청하는 것도 중요합니다. 이러한 작은 변화가 장기적으로 긍정적인 영향을 줄 것입니다.",
-        icon: "🙂"
-    },
-    {
-        title: "주의가 필요한 상태",
-        description: "현재 스트레스가 누적된 상태로, 이를 해결하지 않으면 신체적, 정신적 건강에 영향을 줄 수 있습니다. 과도한 업무나 대인 관계에서 오는 압박감을 완화하기 위한 적극적인 조치가 필요합니다. 충분한 휴식을 취하고, 긍정적인 에너지를 얻을 수 있는 활동에 참여하세요. 스트레스의 근본 원인을 파악하고, 이를 개선하기 위한 계획을 세우는 것도 효과적입니다. 필요하다면 정신건강 전문가의 도움을 받아 스트레스를 관리하고 건강한 심리 상태를 되찾으세요.",
-        icon: "😔"
-    }
-];
+// 結果テキスト
+const results = {
+    high: `あなたの感情管理能力は非常に高いです！ (90点)
 
-// 전역 변수
-let currentQuestion = 0;
-let totalScore = 0;
+あなたは感情的に安定しており、ポジティブな感情をよく感じています。  
+自分の感情を理解し、健康的に表現する能力があります。
 
-// DOM이 로드된 후 실행
-document.addEventListener('DOMContentLoaded', function() {
-    // 초기 이벤트 리스너 설정
-    document.getElementById('start-btn').addEventListener('click', startTest);
-    document.getElementById('retry-btn').addEventListener('click', resetTest);
-    document.getElementById('kakao-share-btn').addEventListener('click', shareToKakao);
-});
+特徴:
+• 感情をうまく管理しており、周囲の人々にも良い影響を与えています。
+• 感情的な困難に直面しても、冷静に対応できる能力があります。
+• ストレスや不安を上手にコントロールし、感情的にバランスを保っています。
+• 他人の感情に共感し、深い人間関係を築いています。
 
-// 테스트 시작
-function startTest() {
-    document.getElementById('start-section').style.display = 'none';
-    document.getElementById('question-section').style.display = 'block';
-    showQuestion();
+提案:
+• 現在の感情管理能力を維持するために、自分のルーチンを続けてください。
+• 時々感情的な休息を取って、自分を大切にする時間を作りましょう。
+• ポジティブな感情をさらに増やすために、感謝の気持ちを表現してください。
+• 周りの人々に感情的なサポートを提供し、良い関係を築きましょう。
+
+あなたはすでに感情的に健康な状態にあり、今後もポジティブな変化を生み出すことができます！`,
+
+    medium: `あなたの感情的なバランスは良好です。 (65点)
+
+現在、感情的に安定していますが、少しだけ感情管理の能力を向上させる余地があります。
+
+特徴:
+• 普段は感情をうまく処理していますが、時折ストレスや不安を感じることがあります。
+• 自分の感情を正直に表現していますが、時には抑え込むこともあります。
+• 周りの人々と感情的な交流はありますが、もっと深い絆を築くことができるかもしれません。
+• 感情の管理には小さな困難がありますが、乗り越える力を持っています。
+
+改善提案:
+• 自分の感情をより正直に表現し、感情管理の方法を見つけましょう。
+• 日常生活で感謝の気持ちを見つけ、ポジティブな感情を増やしましょう。
+• ストレスや不安を減らすために、新しいリラクゼーション方法を試してみましょう。
+• 周りの人々と感情的な会話を増やし、より深い関係を築きましょう。
+
+あなたは感情的にバランスを取っていますが、小さな改善でさらに安定感を得ることができます。`,
+
+    low: `現在、あなたは感情的に困難を感じているかもしれません。 (40点)
+
+感情的に不安定だったり、ストレスを感じることが多いかもしれません。  
+これは一時的な状態かもしれませんが、小さな変化で改善することができます。
+
+現在の特徴:
+• 感情を抑え込んだり、不安定な感情を頻繁に経験しているかもしれません。
+• 周りの人々との感情的な交流が少ないと感じるかもしれません。
+• ストレスや圧力で感情をコントロールできず、イライラや不安が増えているかもしれません。
+• 自分の感情をうまく表現できない状態かもしれません。
+
+提案:
+• 自分の感情を認め、正直に表現する練習をしましょう。
+• ストレスを減らすために運動や瞑想を始め、感情のコントロール能力を高めましょう。
+• 信頼できる人と感情的な会話をし、心のサポートを得ましょう。
+• 専門家に相談して、感情管理のための方法を学びましょう。
+• 小さな目標を設定し、達成することで感情的な安定を取り戻しましょう。
+
+これらの努力を通じて、感情的な安定を徐々に取り戻すことができます。あなたの人生にはまだ多くの可能性があります。`
+};
+
+// 테스트 초기화
+function initializeTest() {
+    const startButton = document.getElementById('start-test');
+    const quizContainer = document.getElementById('quiz-container');
+    
+    startButton.addEventListener('click', () => {
+        startButton.parentElement.style.display = 'none';
+        quizContainer.style.display = 'block';
+        quizContainer.classList.add('animate-fade-in');
+        startQuiz();
+    });
+}
+
+// 퀴즈 시작
+function startQuiz() {
+    currentQuestion = 0;
+    score = 0;
+    showQuestion(currentQuestion);
+    updateProgressBar();
+}
+
+// 진행 상태바 업데이트
+function updateProgressBar() {
+    const progressFill = document.querySelector('.progress-fill');
+    const progress = (currentQuestion / totalQuestions) * 100;
+    progressFill.style.width = `${progress}%`;
 }
 
 // 질문 표시
-function showQuestion() {
-    document.getElementById('question-text').textContent = questions[currentQuestion];
-    updateProgressBar();
-    setupAnswerButtons();
-}
-
-// 진행바 업데이트
-function updateProgressBar() {
-    const progress = ((currentQuestion + 1) / questions.length) * 100;
-    document.querySelector('.progress').style.width = `${progress}%`;
-}
-
-// 답변 버튼 설정
-function setupAnswerButtons() {
-    const answerButtons = document.querySelectorAll('.answer-btn');
-    answerButtons.forEach(button => {
-        button.removeEventListener('click', handleAnswer);
-        button.addEventListener('click', handleAnswer);
-    });
+function showQuestion(questionIndex) {
+    const questionContainer = document.getElementById('question-container');
+    const optionsContainer = document.getElementById('options-container');
+    
+    if (questionIndex < questions.length) {
+        questionContainer.innerHTML = `
+            <h3>質問 ${questionIndex + 1}/15</h3>
+            <p>${questions[questionIndex]}</p>
+        `;
+        
+        optionsContainer.innerHTML = `
+            <button onclick="handleAnswer(5)" class="answer-btn">とてもそう思う</button>
+            <button onclick="handleAnswer(4)" class="answer-btn">そう思う</button>
+            <button onclick="handleAnswer(3)" class="answer-btn">どちらとも言えない</button>
+            <button onclick="handleAnswer(2)" class="answer-btn">あまり思わない</button>
+            <button onclick="handleAnswer(1)" class="answer-btn">全く思わない</button>
+        `;
+    }
 }
 
 // 답변 처리
-function handleAnswer(e) {
-    const score = parseInt(e.target.dataset.score);
-    totalScore += score;
+function handleAnswer(value) {
+    score += value;
+    currentQuestion++;
+    updateProgressBar();
     
-    if (currentQuestion < questions.length - 1) {
-        currentQuestion++;
-        showQuestion();
+    if (currentQuestion < questions.length) {
+        showQuestion(currentQuestion);
     } else {
-        showAdPopup();
+        showLoadingPopup();
     }
 }
 
-// 광고 팝업 표시
-function showAdPopup() {
-    const popup = document.getElementById('ad-popup');
+// 결과 분석 팝업 표시
+function showLoadingPopup() {
+    const popup = document.getElementById('loading-popup');
     popup.style.display = 'block';
     
-    let countdown = 7;
-    const countdownElement = document.querySelector('.countdown');
+    let count = 7;
+    const countdown = document.getElementById('countdown');
     
     const timer = setInterval(() => {
-        countdown--;
-        countdownElement.textContent = countdown;
+        count--;
+        countdown.textContent = count;
         
-        if (countdown <= 0) {
+        if (count <= 0) {
             clearInterval(timer);
             popup.style.display = 'none';
-            showResult();
+            showFinalResult();
         }
     }, 1000);
-    
-    // 구글 광고 표시
-    (adsbygoogle = window.adsbygoogle || []).push({});
 }
 
-// 결과 표시
-function showResult() {
-    document.getElementById('question-section').style.display = 'none';
-    document.getElementById('result-section').style.display = 'block';
+// 최종 결과 표시
+function showFinalResult() {
+    const resultContainer = document.getElementById('result-container');
+    const resultText = document.getElementById('result-text');
+    const meterFill = document.querySelector('.meter-fill');
     
-    const averageScore = totalScore / questions.length;
-    let resultIndex;
+    const finalScore = Math.floor((score / (questions.length * 5)) * 100);
+    let result;
     
-    if (averageScore >= 4) {
-        resultIndex = 0; // 매우 안정적
-    } else if (averageScore >= 3) {
-        resultIndex = 1; // 약간의 스트레스
+    if (finalScore > 75) {
+        result = results.high;
+        meterFill.style.width = '90%';
+    } else if (finalScore > 50) {
+        result = results.medium;
+        meterFill.style.width = '65%';
     } else {
-        resultIndex = 2; // 주의 필요
+        result = results.low;
+        meterFill.style.width = '40%';
     }
     
-    const result = results[resultIndex];
-    document.getElementById('result-title').textContent = result.title;
-    document.getElementById('result-description').textContent = result.description;
-    document.querySelector('.result-icon').textContent = result.icon;
+    resultText.innerHTML = result.replace(/\n/g, '<br>');
+    resultContainer.style.display = 'block';
+    resultContainer.scrollIntoView({ behavior: 'smooth' });
 }
 
-// 테스트 초기화
-function resetTest() {
+// LINE 공유
+function shareLine() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent("幸福度診断テスト｜あなたの幸せレベルをチェック！");
+    window.open(`https://line.me/R/msg/text/?${text}%0D%0A${url}`);
+}
+
+// URL 복사
+function copyURL() {
+    const url = "http://japan.testpro.site/감정/index.html";
+
+    // 임시 input 생성
+    const tempInput = document.createElement('input');
+    tempInput.value = url;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy'); // 텍스트 복사
+    document.body.removeChild(tempInput);
+
+    // 복사 완료 알림
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'copy-alert';
+    alertDiv.textContent = 'URLをコピーしました！';
+    document.body.appendChild(alertDiv);
+
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 2000);
+}
+
+// 테스트 다시하기
+function retakeTest() {
     currentQuestion = 0;
-    totalScore = 0;
-    document.getElementById('result-section').style.display = 'none';
-    document.getElementById('start-section').style.display = 'block';
+    score = 0;
+    document.getElementById('result-container').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    startQuiz();
 }
 
-// 카카오톡 공유
-function shareToKakao() {
-    Kakao.Link.sendDefault({
-        objectType: 'feed',
-        content: {
-            title: '나의 감정 상태 테스트',
-            description: '나의 현재 감정 상태는 어떨까요? 테스트해보세요!',
-            imageUrl: 'https://example.com/your-image.jpg', // 실제 이미지 URL로 변경 필요
-            link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href
-            }
-        },
-        buttons: [
-            {
-                title: '테스트 하러가기',
-                link: {
-                    mobileWebUrl: window.location.href,
-                    webUrl: window.location.href
-                }
-            }
-        ]
+// 광고 초기화
+function initializeAds() {
+    const adElements = document.querySelectorAll('.adsbygoogle');
+    adElements.forEach(() => {
+        (adsbygoogle = window.adsbygoogle || []).push({});
     });
 }
+
+// 페이지 로드 시 실행
+document.addEventListener('DOMContentLoaded', () => {
+    initializeTest();
+    initializeAds();
+}); 
