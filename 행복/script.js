@@ -97,6 +97,7 @@ const results = {
 小さな一歩でも、大きな変化をもたらす力があります。`
 };
 
+
 // 테스트 초기화
 function initializeTest() {
     const startButton = document.getElementById('start-test');
@@ -205,6 +206,13 @@ function showFinalResult() {
 }
 
 // LINE 공유
+function shareLine() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent("幸福度診断テスト｜あなたの幸せレベルをチェック！");
+    window.open(`https://line.me/R/msg/text/?${text}%0D%0A${url}`);
+}
+
+// URL 복사
 function copyURL() {
     const url = "http://japan.testpro.site/행복/index.html";
 
