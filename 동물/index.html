@@ -16,7 +16,7 @@
         <!-- 상단 광고 -->
         <div class="ad-container-top">
             <ins class="adsbygoogle"
-                 style="display:block; min-width:300px; max-width:970px; width:100%; height:90px;"
+                 style="display:block"
                  data-ad-client="ca-pub-9374368296307755"
                  data-ad-slot="3201247599"
                  data-ad-format="auto"
@@ -31,21 +31,17 @@
                 간단한 질문들을 통해 당신과 가장 잘 맞는 수호동물을 찾아드립니다.
                 정직하게 답변해 주시면 더 정확한 결과를 얻으실 수 있습니다.
             </div>
+            
+            <!-- 시작 버튼 -->
+            <div class="start-section">
+                <button id="start-button" class="start-btn" onclick="startTest()">
+                    <span class="btn-text">診断スタート</span>
+                    <span class="btn-icon">🎯</span>
+                </button>
+            </div>
         </header>
-        
-        <!-- intro-text 다음에 추가 -->
-        <div class="start-section">
-            <button id="start-button" class="start-btn" onclick="startTest()">
-                <span class="btn-text">診断スタート</span>
-                <span class="btn-icon">🎯</span>
-            </button>
-        </div>
 
         <div id="quiz-container" style="display: none;">
-    <!-- 질문들이 여기에 동적으로 삽입됩니다 -->
-</div>
-
-        <div id="quiz-container">
             <!-- 질문들이 여기에 동적으로 삽입됩니다 -->
         </div>
 
@@ -58,7 +54,7 @@
                 <!-- 팝업 광고 -->
                 <div class="ad-container-popup">
                     <ins class="adsbygoogle"
-                         style="display:block; width:300px; height:250px;"
+                         style="display:block"
                          data-ad-client="ca-pub-9374368296307755"
                          data-ad-slot="3201247599"
                          data-ad-format="rectangle"
