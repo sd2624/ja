@@ -1,92 +1,107 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 수호동물 찾기 테스트</title>
+    <meta name="description" content="あなたの守護動物診断テスト！イルカ、フクロウ、ライオン、オオカミ、ワシの中からあなたを守る精霊の動物を見つけましょう。">
+    <meta name="keywords" content="守護動物診断,スピリットアニマル,動物占い,性格診断,心理テスト">
+    <title>【無料診断】あなたの守護動物診断テスト | 運命の動物があなたを導く</title>
     <link rel="stylesheet" href="style.css">
     
-    <!-- 구글 광고 스크립트 -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-     crossorigin="anonymous"></script>
-    
-    <!-- 카카오 SDK -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <!-- Google Adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- 상단 광고 -->
-        <div class="ad-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9374368296307755"
-                 data-ad-slot="3201247599"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        </div>
-
-        <div class="test-container">
-            <!-- 시작 섹션 -->
-            <div class="section active" id="start">
-                <h1>🌟 나의 수호동물 찾기 테스트 🌟</h1>
-                <p class="intro-text">10개의 질문으로 알아보는<br>나만의 특별한 수호동물!</p>
-                <button class="pulse-btn" onclick="startTest()">테스트 시작하기</button>
-            </div>
-
-            <!-- 질문 섹션 -->
-            <div class="section" id="question-section" style="display: none;">
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress"></div>
-                    </div>
-                    <span class="question-counter">1/10</span>
-                </div>
-                <h2 id="question-text"></h2>
-                <div class="options-container"></div>
-            </div>
-
-            <!-- 결과 섹션 -->
-            <div class="section" id="result" style="display: none;">
-                <h2 id="resultTitle"></h2>
-                <div class="animal-image" id="animal-image"></div>
-                <div class="result-content">
-                    <div class="animal-description">
-                        <p id="resultDescription"></p>
-                    </div>
-                    <div class="animal-traits">
-                        <h3>당신의 특징</h3>
-                        <ul id="traits-list"></ul>
-                    </div>
-                </div>
-                
-                <div class="share-container">
-                    <button class="share-btn" onclick="shareOnKakao()">카카오톡으로 공유하기</button>
-                    <button class="retry-btn" onclick="retryTest()">다시 테스트하기</button>
-                    <a href="https://testpro.site" class="home-btn">다른 테스트 하기</a>
-                </div>
-            </div>
-        </div>
+    <!-- 상단 광고 -->
+    <div class="ad-container top-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
     </div>
 
-<!-- 분석중 팝업 -->
-<div class="popup" id="analysis-popup">
-    <div class="popup-content">
-        <h2>🔮 결과 분석중...</h2>
-        <div class="loading-spinner"></div>
-        <div class="countdown">7</div>
+    <main class="content-wrapper mystical">
+        <div class="stars"></div>
+        <div class="twinkling"></div>
         
-        <!-- 팝업 광고 수정 -->
-        <div class="popup-ad-container">
-            <ins class="adsbygoogle popup-ad"
-                 style="display:block"
-                 data-ad-client="ca-pub-9374368296307755"
-                 data-ad-slot="3201247599"
-                 data-ad-format="rectangle"
-                 data-full-width-responsive="false"></ins>
+        <h1 class="main-title">あなたの守護動物診断</h1>
+        
+        <!-- 인트로 텍스트 -->
+        <div class="intro-text animate-fade-in">
+            <div class="spirit-icon">🔮</div>
+            <p>こんにちは！私は古代からの動物の精霊と対話してきた霊媒師のユリです。<br>
+            あなたの魂と最も強く結びついている守護動物を見つけ出しましょう。<br>
+            直感のままに質問にお答えください。<br>
+            あなたを導く運命の動物があなたを待っています。</p>
         </div>
-    </div>
-</div>
+
+        <!-- 시작 버튼 -->
+        <div class="start-container">
+            <button id="start-test" class="start-btn">
+                <span class="crystal-ball">🔮</span> 守護動物を探す
+            </button>
+        </div>
+
+        <!-- 테스트 영역 -->
+        <div id="quiz-container" class="animate-fade-in" style="display:none;">
+            <div class="mystic-border">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div id="question-container"></div>
+                <div id="options-container"></div>
+            </div>
+        </div>
+
+        <!-- 결과 분석 팝업 -->
+        <div id="loading-popup" class="popup">
+            <div class="popup-content mystical">
+                <h3>守護動物を召喚中...</h3>
+                <div class="summoning-circle">
+                    <div class="magic-symbol">✧</div>
+                </div>
+                <div id="countdown">7</div>
+                <!-- 팝업 광고 -->
+                <div class="popup-ad-container">
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:300px;height:250px"
+                         data-ad-client="ca-pub-9374368296307755"
+                         data-ad-slot="3201247599"></ins>
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 표시 -->
+        <div id="result-container" class="animate-fade-in" style="display:none;">
+            <div class="result-content">
+                <h2>あなたの守護動物</h2>
+                <div class="spirit-animal"></div>
+                <div id="result-text"></div>
+                
+                <!-- 공유 버튼 -->
+                <div class="share-buttons">
+                    <button onclick="shareLine()" class="share-btn line-btn">
+                        <span class="icon">📱</span> LINEで共有
+                    </button>
+                    <button onclick="copyURL()" class="share-btn copy-btn">
+                        <span class="icon">📋</span> URLをコピー
+                    </button>
+                    <button onclick="retakeTest()" class="share-btn retake-btn">
+                        <span class="icon">🔄</span> もう一度診断
+                    </button>
+                    <a href="http://japan.testpro.site/" class="share-btn home-btn">
+                        <span class="icon">🏠</span> 他のテストを見る
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script src="script.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 </body>
 </html>
