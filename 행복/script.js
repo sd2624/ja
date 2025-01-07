@@ -205,29 +205,26 @@ function showFinalResult() {
 }
 
 // LINE 공유
-function shareLine() {
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent("幸福度診断テスト｜あなたの幸せレベルをチェック！");
-    window.open(`https://line.me/R/msg/text/?${text}%0D%0A${url}`);
-}
-
-// URL 복사
 function copyURL() {
     const url = "http://japan.testpro.site/행복/index.html";
-    navigator.clipboard.writeText(url)
-        .then(() => {
-            const alert = document.createElement('div');
-            alert.className = 'copy-alert';
-            alert.textContent = 'URLをコピーしました！';
-            document.body.appendChild(alert);
-            
-            setTimeout(() => {
-                alert.remove();
-            }, 2000);
-        })
-        .catch((error) => {
-            console.error('URLコピーに失敗しました: ', error);
-        });
+
+    // 임시 input 생성
+    const tempInput = document.createElement('input');
+    tempInput.value = url;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy'); // 텍스트 복사
+    document.body.removeChild(tempInput);
+
+    // 복사 완료 알림
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'copy-alert';
+    alertDiv.textContent = 'URLをコピーしました！';
+    document.body.appendChild(alertDiv);
+
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 2000);
 }
 
 // 테스트 다시하기
