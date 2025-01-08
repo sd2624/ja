@@ -149,26 +149,39 @@ function showLoadingPopup() {
     const popup = document.getElementById('analysis-popup');
     popup.style.display = 'flex';
     
-    // 상단 광고를 팝업으로 복제
+    // 팝업 광고 초기화 및 로드
     try {
         const topAd = document.querySelector('.top-ad ins.adsbygoogle');
         const popupAdContainer = document.getElementById('popup-ad-container');
         
         if (topAd && popupAdContainer) {
+            // 광고 크기에 따라 팝업 크기 조정
+            const resizePopup = () => {
+                const adWidth = popupAdContainer.offsetWidth;
+                const adHeight = popupAdContainer.offsetHeight;
+                const popupContent = document.querySelector('.popup-content');
+                
+                if (adWidth && adHeight) {
+                    popupContent.style.width = `${adWidth + 40}px`; // 패딩 고려
+                    popupContent.style.minHeight = `${adHeight + 120}px`; // 텍스트 영역 고려
+                }
+            };
+
             // 기존 광고 요소 복제
             const clonedAd = topAd.cloneNode(true);
-            
-            // 팝업용 스타일 적용
             clonedAd.style.display = 'inline-block';
-            clonedAd.style.width = '300px';
-            clonedAd.style.height = '250px';
             
             // 팝업 컨테이너에 추가
             popupAdContainer.innerHTML = '';
             popupAdContainer.appendChild(clonedAd);
             
-            // 광고 리로드
-            (adsbygoogle = window.adsbygoogle || []).push({});
+            // 광고 로드 후 크기 조정
+            (adsbygoogle = window.adsbygoogle || []).push({
+                callback: resizePopup
+            });
+
+            // 창 크기 변경 시 대응
+            window.addEventListener('resize', resizePopup);
         }
     } catch (e) {
         console.error("Popup ad clone error:", e);
