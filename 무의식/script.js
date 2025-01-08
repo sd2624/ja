@@ -95,6 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
     startButton.addEventListener('click', startQuiz);
 });
 
+let currentQuestion = 0;
+let answers = [];
+
 // 퀴즈 시작 함수
 function startQuiz() {
     document.getElementById('start-screen').style.display = 'none';
@@ -103,9 +106,6 @@ function startQuiz() {
     answers = [];
     showQuestion();
 }
-
-let currentQuestion = 0;
-let answers = [];
 
 // 질문 표시 함수
 function showQuestion() {
@@ -158,6 +158,68 @@ function showAnalysisPopup() {
             showResult();
         }
     }, 1000);
+}
+
+// 결과 계산 함수
+function calculateResult(answers) {
+    const typeScores = {
+        type1: 0,
+        type2: 0,
+        type3: 0,
+        type4: 0,
+        type5: 0
+    };
+
+    answers.forEach((answer, index) => {
+        switch (index) {
+            case 0:
+            case 4:
+            case 8:
+            case 12:
+                typeScores.type1 += answer === 0 ? 1 : 0;
+                typeScores.type2 += answer === 1 ? 1 : 0;
+                typeScores.type3 += answer === 2 ? 1 : 0;
+                typeScores.type4 += answer === 3 ? 1 : 0;
+                break;
+            case 1:
+            case 5:
+            case 9:
+            case 13:
+                typeScores.type2 += answer === 0 ? 1 : 0;
+                typeScores.type3 += answer === 1 ? 1 : 0;
+                typeScores.type4 += answer === 2 ? 1 : 0;
+                typeScores.type5 += answer === 3 ? 1 : 0;
+                break;
+            case 2:
+            case 6:
+            case 10:
+            case 14:
+                typeScores.type1 += answer === 0 ? 1 : 0;
+                typeScores.type3 += answer === 1 ? 1 : 0;
+                typeScores.type5 += answer === 2 ? 1 : 0;
+                typeScores.type4 += answer === 3 ? 1 : 0;
+                break;
+            case 3:
+            case 7:
+            case 11:
+                typeScores.type1 += answer === 0 ? 1 : 0;
+                typeScores.type2 += answer === 1 ? 1 : 0;
+                typeScores.type5 += answer === 2 ? 1 : 0;
+                typeScores.type4 += answer === 3 ? 1 : 0;
+                break;
+        }
+    });
+
+    let maxScore = 0;
+    let resultType = 'type1';
+    for (const type in typeScores) {
+        if (typeScores[type] > maxScore) {
+            maxScore = typeScores[type];
+            resultType = type;
+        }
+    }
+
+    return resultType;
 }
 
 // 결과 표시 함수
