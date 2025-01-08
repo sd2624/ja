@@ -353,6 +353,46 @@ body.popup-open {
 .popup-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 3px 3px 3px 8px; /* 상단 여백 최소화 */
+    margin-bottom: 0; /* 광고와의 간격 제거 */
+    background: rgba(0, 0, 0, 0.2); /* 살짝 어두운 배경 */
+}
+
+.analysis-text {
+    font-size: 0.8em; /* 텍스트 더 작게 */
+    color: var(--text-color);
+    margin-right: auto;
+}
+
+.countdown {
+    font-size: 0.8em;
+    color: var(--primary-color);
+    margin: 0 5px;
+}
+
+.close-btn {
+    font-size: 14px; /* X 버튼 크기 축소 */
+    padding: 2px;
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    opacity: 0.8;
+}
+
+.popup-content {
+    padding: 0;
+    width: 300px;
+    overflow: hidden;
+}
+
+.popup .ad-container {
+    margin: 0;
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
     justify-content: flex-end;
     padding: 5px 5px 0 10px;
     gap: 8px;
