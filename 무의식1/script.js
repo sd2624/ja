@@ -186,14 +186,24 @@ const results = {
       analysisPopup.classList.add("active"); // 팝업 활성화
       let count = 7;
   
+      // 팝업 광고 리로드
+      try {
+          const popupAd = document.querySelector('.popup-ad ins.adsbygoogle');
+          if (popupAd) {
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          }
+      } catch (e) {
+          console.log("Popup ad load error:", e);
+      }
+  
       const countdown = setInterval(() => {
         countdownElement.textContent = count; // 카운트다운 표시
         count--;
   
         if (count < 0) {
           clearInterval(countdown); // 카운트다운 종료
-          analysisPopup.classList.remove("active"); // 팝업 닫기
           showResult(); // 결과 표시
+          analysisPopup.classList.remove("active"); // 팝업 닫기
         }
       }, 1000);
     }
@@ -202,11 +212,22 @@ const results = {
       questionSection.classList.remove("active"); // 질문 섹션 숨김
       resultSection.classList.add("active"); // 결과 섹션 표시
   
-      const resultKey = userAnswers.join("-"); // 사용자의 응답을 키로 변환
+      // 처음 3개의 답변만 사용하여 결과 키 생성
+      const resultKey = userAnswers.slice(0, 3).join("-");
+      console.log("Result Key:", resultKey); // 디버깅용
+      console.log("User Answers:", userAnswers); // 디버깅용
+  
       const result =
         results[resultKey] ||
-        "申し訳ありません。結果の分析中にエラーが発生しました。もう一度お試しください。"; // 결과가 없을 경우 메시지 표시
+        `申し訳ありません。結果の分析中にエラーが発生しました。もう一度お試しください。\n(Debug: ${resultKey})`; // 결과가 없을 경우 메시지 표시
       resultText.textContent = result; // 결과 텍스트 표시
+  
+      // 광고 리로드
+      try {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+          console.log("Ad load error:", e);
+      }
     }
   
     // LINE 공유 버튼
