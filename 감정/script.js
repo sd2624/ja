@@ -299,7 +299,8 @@ function showInitialPopup() {
     const popup = document.getElementById('analysis-popup');
     const closeBtn = document.getElementById('close-popup');
     popup.style.display = 'flex';
-    closeBtn.style.display = 'none'; // 처음에는 닫기 버튼 숨김
+    closeBtn.style.display = 'block'; // x 버튼은 보이게
+    closeBtn.style.pointerEvents = 'none'; // 클릭 비활성화
     
     let count = 7;
     const countdown = document.querySelector('.countdown');
@@ -310,22 +311,25 @@ function showInitialPopup() {
         
         if (count < 0) {
             clearInterval(timer);
-            closeBtn.style.display = 'block'; // 7초 후 닫기 버튼 표시
-            closeBtn.addEventListener('click', () => {
-                popup.style.display = 'none';
-            });
+            closeBtn.style.pointerEvents = 'auto'; // 7초 후 클릭 활성화
         }
     }, 1000);
+
+    // X 버튼 클릭 이벤트
+    closeBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
 }
 
 // 결과 분석 팝업 표시 (질문 완료 후)
 function showResultAnalysisPopup() {
     const popup = document.getElementById('result-analysis-popup');
-    const analysisText = document.querySelector('.analysis-text');
     popup.style.display = 'flex';
     
     let count = 7;
     const countdown = document.querySelector('#result-countdown');
+    const analysisText = document.querySelector('.analysis-text');
+    analysisText.textContent = '結果を分析中...';
     
     const timer = setInterval(() => {
         countdown.textContent = count;
@@ -334,7 +338,7 @@ function showResultAnalysisPopup() {
         if (count < 0) {
             clearInterval(timer);
             popup.style.display = 'none';
-            showFinalResult(); // 최종 결과 표시
+            showFinalResult(); // 결과 표시
         }
     }, 1000);
 }
@@ -343,7 +347,7 @@ function showResultAnalysisPopup() {
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
     initializeAds();
-    showInitialPopup(); // 초기 팝업 표시
+    showInitialPopup(); // 초기 팝업만 표시
 
     // 초기 광고 로드 (상단 광고만)
     try {
