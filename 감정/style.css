@@ -40,8 +40,7 @@ body {
 
 .top-ad { margin-top: 0; }
 .middle-ad { margin: 35px auto; }
-.bottom-ad { margin-bottom: 30px; }
-.start-ad { margin-top: 30px; }
+.bottom-ad { margin-bottom: 0; }
 
 /* 메인 타이틀 */
 .main-title {
@@ -250,19 +249,11 @@ body {
 }
 
 .popup-content {
-    width: 728px; /* 큰 광고 크기에 맞게 수정 */
-    padding: 0;
     background: var(--card-background);
+    padding: 15px;
     border-radius: 10px;
-    overflow: hidden;
-}
-
-.popup-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    background: rgba(0, 0, 0, 0.2);
+    position: relative;
+    width: 300px; /* 광고 크기에 맞게 조정 */
 }
 
 .close-btn {
@@ -350,23 +341,55 @@ body.popup-open {
 
 /* 팝업 광고 컨테이너 스타일 수정 */
 .popup .ad-container {
-    width: 728px;  /* 광고 컨테이너 크기 증가 */
-    height: 90px; /* 광고 컨테이너 높이 수정 */
-    margin: 0;
+    width: 300px;
+    height: 250px;
+    margin: 20px auto;
     background: var(--card-background);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.popup .ad-container ins.adsbygoogle {
-    display: block !important;
-    width: 360px !important; /* 실제 광고 크기 */
-    height: 280px !important; /* 실제 광고 크기 */
-    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 /* 팝업 스타일 수정 */
+.popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 3px 3px 8px; /* 상단 여백 최소화 */
+    margin-bottom: 0; /* 광고와의 간격 제거 */
+    background: rgba(0, 0, 0, 0.2); /* 살짝 어두운 배경 */
+}
+
+.analysis-text {
+    font-size: 0.8em; /* 텍스트 더 작게 */
+    color: var(--text-color);
+    margin-right: auto;
+}
+
+.countdown {
+    font-size: 0.8em;
+    color: var(--primary-color);
+    margin: 0 5px;
+}
+
+.close-btn {
+    font-size: 14px; /* X 버튼 크기 축소 */
+    padding: 2px;
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    opacity: 0.8;
+}
+
+.popup-content {
+    padding: 0;
+    width: 300px;
+    overflow: hidden;
+}
+
+.popup .ad-container {
+    margin: 0;
+}
+
 .popup-header {
     display: flex;
     align-items: center;
@@ -444,28 +467,6 @@ body.popup-open {
         width: 100% !important;
         height: 100% !important;
         min-height: 250px;
-    }
-}
-
-@media (max-width: 800px) {
-    .popup-content {
-        width: 336px;
-    }
-    
-    .popup .ad-container {
-        width: 336px;
-        height: 280px;
-    }
-}
-
-@media (max-width: 400px) {
-    .popup-content {
-        width: 300px;
-    }
-    
-    .popup .ad-container {
-        width: 300px;
-        height: 250px;
     }
 }
 
