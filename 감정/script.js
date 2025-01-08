@@ -262,24 +262,21 @@ function retakeTest() {
     startQuiz();
 }
 
-// 광고 초기화
+// 광고 초기화 함수 수정
 function initializeAds() {
-    const adElements = document.querySelectorAll('.adsbygoogle');
-    adElements.forEach(() => {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    });
+    try {
+        // 모든 광고 초기화
+        const adElements = document.querySelectorAll('.adsbygoogle');
+        adElements.forEach((ad) => {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        });
+    } catch (e) {
+        console.log("Ad initialization error:", e);
+    }
 }
 
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
-    // 광고 초기화
-    try {
-        const topAd = document.querySelector('.top-ad ins.adsbygoogle');
-        if (topAd) {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-    } catch (e) {
-        console.log("Top ad load error:", e);
-    }
+    initializeAds(); // 모든 광고 초기화
 });
