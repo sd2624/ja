@@ -294,33 +294,6 @@ function initializeAds() {
     });
 }
 
-// 초기 광고 팝업 표시
-function showInitialPopup() {
-    const popup = document.getElementById('analysis-popup');
-    const closeBtn = document.getElementById('close-popup');
-    popup.style.display = 'flex';
-    closeBtn.style.display = 'block'; // x 버튼은 보이게
-    closeBtn.style.pointerEvents = 'none'; // 클릭 비활성화
-    
-    let count = 7;
-    const countdown = document.querySelector('.countdown');
-    
-    const timer = setInterval(() => {
-        countdown.textContent = count;
-        count--;
-        
-        if (count < 0) {
-            clearInterval(timer);
-            closeBtn.style.pointerEvents = 'auto'; // 7초 후 클릭 활성화
-        }
-    }, 1000);
-
-    // X 버튼 클릭 이벤트
-    closeBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
-}
-
 // 결과 분석 팝업 표시 (질문 완료 후)
 function showResultAnalysisPopup() {
     if (currentQuestion >= totalQuestions) {  // 15문제가 완료된 경우에만
@@ -355,9 +328,6 @@ function showResultAnalysisPopup() {
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
-    // 초기 광고 팝업 제거
-    // showInitialPopup(); 삭제
-
     // 광고 초기화는 결과 표시 후에만 실행
     try {
         const topAd = document.querySelector('.top-ad ins.adsbygoogle');
