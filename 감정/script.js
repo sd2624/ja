@@ -292,6 +292,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
     initializeAds();
 
+    // 초기 광고 로드 (상단 광고만)
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.log("Ad load error:", e);
+    }
+
     // 페이지 로드 시 상단 광고 초기화
     try {
         (adsbygoogle = window.adsbygoogle || []).push({});
@@ -324,6 +331,38 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Popup ad load error:", e);
         }
 
+        // 상단 광고를 팝업으로 복제하여 재사용
+        try {
+            const topAd = document.querySelector('.top-ad ins.adsbygoogle');
+            const popupAdContainer = document.getElementById('popup-ad-container');
+            
+            if (topAd && popupAdContainer) {
+                const clonedAd = topAd.cloneNode(true);
+                clonedAd.style.display = 'inline-block';
+                popupAdContainer.innerHTML = '';
+                popupAdContainer.appendChild(clonedAd);
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        } catch (e) {
+            console.error("Popup ad error:", e);
+        }
+
         // ...existing countdown code...
     }
+
+    function showResult() {
+        // ...existing result code...
+
+        // 결과 표시 후 광고 로드
+        try {
+            const resultAd = document.querySelector('.result-ad ins.adsbygoogle');
+            if (resultAd) {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        } catch (e) {
+            console.log("Result ad error:", e);
+        }
+    }
+
+    // ...existing code...
 });
