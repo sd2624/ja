@@ -157,6 +157,9 @@ h1 {
     padding: 30px;
     border-radius: 10px;
     text-align: center;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
 }
 
 .loading-text {
@@ -168,6 +171,23 @@ h1 {
     font-size: 2em;
     color: #3498db;
     margin-bottom: 20px;
+}
+
+/* 팝업 광고 컨테이너 스타일 수정 */
+.popup-ad-container {
+    width: 300px;
+    height: 250px;
+    margin: 20px auto;
+    background: #f5f5f5;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.popup-ad-container ins.adsbygoogle {
+    display: block;
+    width: 300px;
+    height: 250px;
+    margin: 0 auto;
 }
 
 /* 広告のスタイル */
@@ -197,5 +217,16 @@ h1 {
 
     .btn {
         width: 100%;
+    }
+
+    .popup-content {
+        width: 95%;
+        padding: 20px;
+        max-width: 320px;
+    }
+
+    .popup-ad-container {
+        width: 280px;
+        height: 250px;
     }
 }
