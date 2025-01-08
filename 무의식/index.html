@@ -3,75 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="あなたの無意識の性格診断テスト - 15の質問であなたの隠れた性格がわかります">
-    <meta name="keywords" content="性格診断,心理テスト,無意識,自己分析,パーソナリティ,心理カウンセラー">
-    <title>あなたの無意識の性格診断テスト</title>
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Google Adsense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-     crossorigin="anonymous"></script>
+    <meta name="description" content="無意識心理テストで自分自身を深く知ろう！専門家が作成した15の質問に答えて、あなたの本当の姿を発見してください。">
+    <meta name="keywords" content="無意識, 心理テスト, 自己発見, 性格診断, メンタルヘルス">
+    <title>無意識心理テスト | 自分自身を深く知る</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- 상단 광고 -->
-    <div class="ad-container-top">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="3201247599"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9374368296307755" data-ad-slot="3201247599" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
     <div class="container">
-        <div class="start-screen" id="start-screen">
-            <h1>あなたの無意識の性格診断テスト 🎭</h1>
-            
-            <div class="intro-text">
-                <p>心理カウンセラーの田中です。<br>
-                15個の質問であなたの隠れた性格を見つけ出します。<br>
-                直感的に答えてください。所要時間は約3分です。</p>
-            </div>
+        <h1>無意識心理テスト 🧠✨</h1>
+        <p class="intro-text">専門家が作成した15の質問に答えて、あなたの本当の姿を発見してください。質問に答えることで、無意識のうちに隠された自分自身の本質を探ります。</p>
+        <button id="start-test" class="animated-button">テスト開始 🚀</button>
 
-            <button id="start-button" class="start-button">
-                テストを始める ▶
-            </button>
+        <div id="test-questions" style="display:none;">
+            <!-- 질문 영역 -->
         </div>
 
-        <div id="quiz-container" style="display: none">
-            <!-- 질문들이 여기에 동적으로 삽입됩니다 -->
-        </div>
-
-        <div id="result-container" style="display: none">
-            <!-- 결과가 여기에 표시됩니다 -->
-        </div>
-
-        <div id="share-container" style="display: none">
-            <button id="line-share" class="share-btn">LINEで共有</button>
-            <button id="copy-url" class="share-btn">URLをコピー</button>
-            <button id="retry-test" class="share-btn">もう一度診断する</button>
-            <button id="other-test" class="share-btn">他の診断を試す</button>
+        <div id="test-result" style="display:none;">
+            <!-- 결과 영역 -->
         </div>
     </div>
 
-    <!-- 결과 분석 팝업 -->
-    <div id="analysis-popup" class="popup" style="display: none">
+    <!-- 팝업 광고 -->
+    <div id="popup-ad" class="popup">
         <div class="popup-content">
-            <h3>結果を分析中です...</h3>
+            <h2>結果分析中です... 🔍</h2>
+            <p>広告が表示されます。お待ちください...</p>
             <div id="countdown">7</div>
-            <!-- 팝업 광고 -->
-            <div class="ad-container-popup">
-                <ins class="adsbygoogle"
-                     style="display:inline-block;width:300px;height:250px"
-                     data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="3201247599"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9374368296307755" data-ad-slot="3201247599" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
     </div>
 
