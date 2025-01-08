@@ -131,7 +131,7 @@ function showQuestion(questionIndex) {
     }
 }
 
-// 답변 처리
+// 답변 처리 수정
 function handleAnswer(value) {
     score += value;
     currentQuestion++;
@@ -140,73 +140,8 @@ function handleAnswer(value) {
     if (currentQuestion < questions.length) {
         showQuestion(currentQuestion);
     } else {
-        showResultAnalysisPopup(); // 모든 질문 완료 후 결과 분석 팝업 표시
+        showFinalResult(); // 바로 결과 표시
     }
-}
-
-// 결과 분석 팝업 표시
-function showLoadingPopup() {
-    const popup = document.getElementById('analysis-popup');
-    const closeBtn = document.getElementById('close-popup');
-    popup.style.display = 'flex';
-    closeBtn.style.display = 'block'; // 닫기 버튼 처음부터 표시
-    
-    // 광고 로드
-    try {
-        const adContainer = document.querySelector('.popup-ad-container');
-        adContainer.innerHTML = '';
-        const newAd = document.createElement('ins');
-        newAd.className = 'adsbygoogle';
-        newAd.style.display = 'block';
-        newAd.style.width = '300px';
-        newAd.style.height = '250px';
-        newAd.dataset.adClient = 'ca-pub-9374368296307755';
-        newAd.dataset.adSlot = '3201247599';
-        newAd.dataset.adFormat = 'rectangle';
-        adContainer.appendChild(newAd);
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.error("Popup ad error:", e);
-    }
-    
-    let count = 7;
-    const countdown = document.querySelector('.countdown');
-    
-    const timer = setInterval(() => {
-        countdown.textContent = count;
-        count--;
-        
-        if (count < 0) {
-            clearInterval(timer);
-        }
-    }, 1000);
-
-    // X 버튼 클릭 이벤트
-    closeBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
-        showAnalysisPopup(); // 두 번째 팝업 표시
-    });
-}
-
-// 결과 분석 팝업
-function showAnalysisPopup() {
-    const popup = document.getElementById('result-analysis-popup');
-    const analysisText = document.querySelector('.analysis-text');
-    popup.style.display = 'flex';
-    
-    let count = 7;
-    const countdown = document.querySelector('#result-countdown');
-    
-    const timer = setInterval(() => {
-        countdown.textContent = count;
-        count--;
-        
-        if (count < 0) {
-            clearInterval(timer);
-            popup.style.display = 'none';
-            showFinalResult(); // 결과 표시
-        }
-    }, 1000);
 }
 
 // 최종 결과 표시
@@ -294,41 +229,10 @@ function initializeAds() {
     });
 }
 
-// 결과 분석 팝업 표시 (질문 완료 후)
-function showResultAnalysisPopup() {
-    if (currentQuestion >= totalQuestions) {  // 15문제가 완료된 경우에만
-        const popup = document.getElementById('analysis-popup');
-        const closeBtn = document.getElementById('close-popup');
-        popup.style.display = 'flex';
-        closeBtn.style.display = 'block';
-        
-        let count = 7;
-        const countdown = document.querySelector('.countdown');
-        
-        const timer = setInterval(() => {
-            countdown.textContent = count;
-            count--;
-            
-            if (count < 0) {
-                clearInterval(timer);
-                popup.style.display = 'none';
-                showFinalResult();
-            }
-        }, 1000);
-
-        // 광고 초기화
-        try {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-            console.log("Result ad error:", e);
-        }
-    }
-}
-
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
-    // 광고 초기화는 결과 표시 후에만 실행
+    // 광고 초기화
     try {
         const topAd = document.querySelector('.top-ad ins.adsbygoogle');
         if (topAd) {
@@ -338,63 +242,3 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Top ad load error:", e);
     }
 });
-
-function showAnalysisPopup() {
-    const popup = document.getElementById('analysis-popup');
-    popup.style.display = 'flex';
-    let count = 7;
-
-    // 팝업 광고 초기화 및 로드
-    try {
-        const adContainer = document.querySelector('.popup-ad-container');
-        adContainer.innerHTML = '';
-        
-        const newAd = document.createElement('ins');
-        newAd.className = 'adsbygoogle';
-        newAd.style.display = 'inline-block';
-        newAd.style.width = '300px';
-        newAd.style.height = '250px';
-        newAd.dataset.adClient = 'ca-pub-9374368296307755';
-        newAd.dataset.adSlot = '3201247599';
-        newAd.dataset.adFormat = 'rectangle';
-        
-        adContainer.appendChild(newAd);
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.error("Popup ad load error:", e);
-    }
-
-    // 상단 광고를 팝업으로 복제하여 재사용
-    try {
-        const topAd = document.querySelector('.top-ad ins.adsbygoogle');
-        const popupAdContainer = document.getElementById('popup-ad-container');
-        
-        if (topAd && popupAdContainer) {
-            const clonedAd = topAd.cloneNode(true);
-            clonedAd.style.display = 'inline-block';
-            popupAdContainer.innerHTML = '';
-            popupAdContainer.appendChild(clonedAd);
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-    } catch (e) {
-        console.error("Popup ad error:", e);
-    }
-
-    // ...existing countdown code...
-}
-
-function showResult() {
-    // ...existing result code...
-
-    // 결과 표시 후 광고 로드
-    try {
-        const resultAd = document.querySelector('.result-ad ins.adsbygoogle');
-        if (resultAd) {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-    } catch (e) {
-        console.log("Result ad error:", e);
-    }
-}
-
-// ...existing code...
