@@ -123,15 +123,15 @@ body {
 /* 답변 버튼 */
 .answer-btn {
     width: 100%;
-    padding: 20px;
-    margin: 15px 0;
+    padding: 15px;  /* 패딩 축소 */
+    margin: 10px 0; /* 마진 축소 */
     border: 2px solid var(--background-color);
-    border-radius: 15px;
+    border-radius: 12px;
     background: var(--card-background);
     color: var(--text-color);
     cursor: pointer;
-    transition: all 0.4s ease;
-    font-size: 1.1em;
+    transition: all 0.3s ease;
+    font-size: 1em; /* 기본 폰트 크기 축소 */
 }
 
 .answer-btn:hover {
@@ -240,14 +240,18 @@ body {
         padding: 12px;
     }
     
-    .share-buttons {
-        grid-template-columns: 1fr;
+    .answer-btn {
+        padding: 12px; /* 모바일에서 더 작게 */
+        margin: 8px 0;
+        font-size: 0.9em; /* 모바일에서 폰트 크기 축소 */
+    }
+
+    #quiz-container {
+        padding: 20px; /* 컨테이너 패딩 축소 */
     }
     
-    .popup-content {
-        width: 300px;
-        min-height: 380px;
-        padding: 15px;
+    .share-buttons {
+        grid-template-columns: 1fr;
     }
     
     .main-title {
@@ -266,6 +270,18 @@ body {
         min-height: 250px;
     }
 }
+
+@media (min-width: 601px) {
+    .answer-btn {
+        padding: 15px; /* PC에서는 기본 크기 유지 */
+        font-size: 1em;
+    }
+    
+    #quiz-container {
+        padding: 30px;
+    }
+}
+
 .ad-container-popup {
     width: 300px;
     height: 250px;
