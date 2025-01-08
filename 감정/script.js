@@ -22,7 +22,7 @@ const questions = [
     "自分の感情を十分に大切にしていますか？"
 ];
 
-// 結果テキスト
+// 결과 텍스트
 const results = {
     high: `あなたの感情管理能力は非常に高いです！ (90点)
 
@@ -146,17 +146,27 @@ function handleAnswer(value) {
 
 // 결과 분석 팝업 표시
 function showLoadingPopup() {
-    const popup = document.getElementById('loading-popup');
-    popup.style.display = 'block';
+    const popup = document.getElementById('analysis-popup');
+    popup.style.display = 'flex'; // 'block'에서 'flex'로 변경
+    
+    // 팝업 광고 초기화 및 로드
+    try {
+        document.querySelectorAll('.popup-ad-container ins.adsbygoogle').forEach(ad => {
+            ad.innerHTML = '';
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        });
+    } catch (e) {
+        console.error("Popup ad load error:", e);
+    }
     
     let count = 7;
-    const countdown = document.getElementById('countdown');
+    const countdown = document.querySelector('.countdown');
     
     const timer = setInterval(() => {
-        count--;
         countdown.textContent = count;
+        count--;
         
-        if (count <= 0) {
+        if (count < 0) {
             clearInterval(timer);
             popup.style.display = 'none';
             showFinalResult();
@@ -166,13 +176,19 @@ function showLoadingPopup() {
 
 // 최종 결과 표시
 function showFinalResult() {
+    const quizContainer = document.getElementById('quiz-container');
     const resultContainer = document.getElementById('result-container');
     const resultText = document.getElementById('result-text');
     const meterFill = document.querySelector('.meter-fill');
     
-    const finalScore = Math.floor((score / (questions.length * 5)) * 100);
-    let result;
+    // 퀴즈 컨테이너 숨기기
+    quizContainer.style.display = 'none';
     
+    // 점수 계산
+    const finalScore = Math.floor((score / (totalQuestions * 5)) * 100);
+    console.log('Final Score:', finalScore); // 디버깅용
+    
+    let result;
     if (finalScore > 75) {
         result = results.high;
         meterFill.style.width = '90%';
@@ -184,9 +200,16 @@ function showFinalResult() {
         meterFill.style.width = '40%';
     }
     
+    // 결과 텍스트 설정 및 컨테이너 표시
     resultText.innerHTML = result.replace(/\n/g, '<br>');
     resultContainer.style.display = 'block';
-    resultContainer.scrollIntoView({ behavior: 'smooth' });
+    
+    // 상단 광고 리로드
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.log("Result ad load error:", e);
+    }
 }
 
 // LINE 공유
@@ -240,4 +263,39 @@ function initializeAds() {
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
     initializeAds();
-}); 
+
+    // 페이지 로드 시 상단 광고 초기화
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.log("Top ad load error:", e);
+    }
+
+    function showAnalysisPopup() {
+        const popup = document.getElementById('analysis-popup');
+        popup.style.display = 'flex';
+        let count = 7;
+
+        // 팝업 광고 초기화 및 로드
+        try {
+            const adContainer = document.querySelector('.popup-ad-container');
+            adContainer.innerHTML = '';
+            
+            const newAd = document.createElement('ins');
+            newAd.className = 'adsbygoogle';
+            newAd.style.display = 'inline-block';
+            newAd.style.width = '300px';
+            newAd.style.height = '250px';
+            newAd.dataset.adClient = 'ca-pub-9374368296307755';
+            newAd.dataset.adSlot = '3201247599';
+            newAd.dataset.adFormat = 'rectangle';
+            
+            adContainer.appendChild(newAd);
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+            console.error("Popup ad load error:", e);
+        }
+
+        // ...existing countdown code...
+    }
+});
