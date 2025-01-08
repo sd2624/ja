@@ -140,7 +140,7 @@ function handleAnswer(value) {
     if (currentQuestion < questions.length) {
         showQuestion(currentQuestion);
     } else {
-        showAnalysisPopup(); // 모든 질문 완료 후 분석 팝업 표시
+        showResultAnalysisPopup(); // 모든 질문 완료 후 결과 분석 팝업 표시
     }
 }
 
@@ -311,13 +311,32 @@ function showInitialPopup() {
         if (count < 0) {
             clearInterval(timer);
             closeBtn.style.display = 'block'; // 7초 후 닫기 버튼 표시
+            closeBtn.addEventListener('click', () => {
+                popup.style.display = 'none';
+            });
         }
     }, 1000);
+}
 
-    // X 버튼 클릭 이벤트
-    closeBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
+// 결과 분석 팝업 표시 (질문 완료 후)
+function showResultAnalysisPopup() {
+    const popup = document.getElementById('result-analysis-popup');
+    const analysisText = document.querySelector('.analysis-text');
+    popup.style.display = 'flex';
+    
+    let count = 7;
+    const countdown = document.querySelector('#result-countdown');
+    
+    const timer = setInterval(() => {
+        countdown.textContent = count;
+        count--;
+        
+        if (count < 0) {
+            clearInterval(timer);
+            popup.style.display = 'none';
+            showFinalResult(); // 최종 결과 표시
+        }
+    }, 1000);
 }
 
 // 페이지 로드 시 실행
