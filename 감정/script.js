@@ -147,16 +147,31 @@ function handleAnswer(value) {
 // 결과 분석 팝업 표시
 function showLoadingPopup() {
     const popup = document.getElementById('analysis-popup');
-    popup.style.display = 'flex'; // 'block'에서 'flex'로 변경
+    popup.style.display = 'flex';
     
-    // 팝업 광고 초기화 및 로드
+    // 상단 광고를 팝업으로 복제
     try {
-        document.querySelectorAll('.popup-ad-container ins.adsbygoogle').forEach(ad => {
-            ad.innerHTML = '';
+        const topAd = document.querySelector('.top-ad ins.adsbygoogle');
+        const popupAdContainer = document.getElementById('popup-ad-container');
+        
+        if (topAd && popupAdContainer) {
+            // 기존 광고 요소 복제
+            const clonedAd = topAd.cloneNode(true);
+            
+            // 팝업용 스타일 적용
+            clonedAd.style.display = 'inline-block';
+            clonedAd.style.width = '300px';
+            clonedAd.style.height = '250px';
+            
+            // 팝업 컨테이너에 추가
+            popupAdContainer.innerHTML = '';
+            popupAdContainer.appendChild(clonedAd);
+            
+            // 광고 리로드
             (adsbygoogle = window.adsbygoogle || []).push({});
-        });
+        }
     } catch (e) {
-        console.error("Popup ad load error:", e);
+        console.error("Popup ad clone error:", e);
     }
     
     let count = 7;

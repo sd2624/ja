@@ -136,97 +136,157 @@ const results = {
       あなたは信頼できる頼もしい存在として、多くの人に尊敬されています。`
   };
 
-let currentQuestion = 0;
-let userAnswers = [];
-
-document.addEventListener("DOMContentLoaded", () => {
-  const startBtn = document.getElementById("start-btn");
-  const introSection = document.getElementById("intro");
-  const questionSection = document.getElementById("question");
-  const resultSection = document.getElementById("result");
-  const questionText = document.getElementById("question-text");
-  const optionsContainer = document.getElementById("options");
-  const resultText = document.getElementById("result-text");
-  const analysisPopup = document.getElementById("analysis-popup");
-  const countdownElement = document.getElementById("countdown");
-
-  startBtn.addEventListener("click", () => {
-    introSection.classList.remove("active");
-    questionSection.classList.add("active");
-    showQuestion();
-  });
-
-  function showQuestion() {
-    if (currentQuestion >= questions.length) {
-      showAnalysisPopup();
-      return;
+  let currentQuestion = 0;
+  let userAnswers = [];
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    // 페이지 로드 시 상단 광고 초기화
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.log("Top ad load error:", e);
     }
 
-    questionText.textContent = questions[currentQuestion].text;
-    optionsContainer.innerHTML = "";
-
-    questions[currentQuestion].options.forEach((option) => {
-      const button = document.createElement("button");
-      button.classList.add("option");
-      button.textContent = option;
-      button.addEventListener("click", () => handleAnswer(option));
-      optionsContainer.appendChild(button);
+    const startBtn = document.getElementById("start-btn");
+    const introSection = document.getElementById("intro");
+    const questionSection = document.getElementById("question");
+    const resultSection = document.getElementById("result");
+    const questionText = document.getElementById("question-text");
+    const optionsContainer = document.getElementById("options");
+    const resultText = document.getElementById("result-text");
+    const analysisPopup = document.getElementById("analysis-popup");
+    const countdownElement = document.getElementById("countdown");
+  
+    startBtn.addEventListener("click", () => {
+      introSection.classList.remove("active");
+      questionSection.classList.add("active");
+      showQuestion();
     });
-  }
-
-  function handleAnswer(answer) {
-    userAnswers.push(answer);
-    currentQuestion++;
-    showQuestion();
-  }
-
-  function showAnalysisPopup() {
-    analysisPopup.classList.add("active");
-    let count = 7;
-
-    const countdown = setInterval(() => {
-      countdownElement.textContent = count;
-      count--;
-
-      if (count < 0) {
-        clearInterval(countdown);
-        showResult();
-        analysisPopup.classList.remove("active");
+  
+    function showQuestion() {
+      // 모든 질문을 완료한 경우 분석 팝업 표시
+      if (currentQuestion >= questions.length) {
+        showAnalysisPopup();
+        return;
       }
-    }, 1000);
-  }
-
-  function showResult() {
-    questionSection.classList.remove("active");
-    resultSection.classList.add("active");
-
-    const resultKey = userAnswers.join("-");
-    const result =
-      results[resultKey] ||
-      "申し訳ありません。結果の分析中にエラーが発生しました。もう一度お試しください。";
-    resultText.textContent = result;
-  }
-
-  // シェアボタンの処理
-  document.getElementById("line-share").addEventListener("click", () => {
-    const url = encodeURIComponent(window.location.href);
-    window.open(`https://line.me/R/msg/text/?無意識心理テスト${url}`);
+  
+      // 현재 질문과 선택지를 표시
+      questionText.textContent = questions[currentQuestion].text;
+      optionsContainer.innerHTML = "";
+  
+      questions[currentQuestion].options.forEach((option) => {
+        const button = document.createElement("button");
+        button.classList.add("option");
+        button.textContent = option;
+        button.addEventListener("click", () => handleAnswer(option));
+        optionsContainer.appendChild(button);
+      });
+    }
+  
+    function handleAnswer(answer) {
+      userAnswers.push(answer); // 사용자의 선택 저장
+      currentQuestion++; // 다음 질문으로 이동
+      showQuestion(); // 다음 질문 표시
+    }
+  
+    function showAnalysisPopup() {
+      analysisPopup.classList.add("active"); // 팝업 활성화
+      let count = 7;
+  
+      // 팝업 광고 초기화 및 로드
+      try {
+          // 기존 광고 제거
+          const adContainer = document.querySelector('.popup-ad-container');
+          adContainer.innerHTML = '';
+          
+          // 새 광고 요소 생성
+          const newAd = document.createElement('ins');
+          newAd.className = 'adsbygoogle';
+          newAd.style.display = 'inline-block';
+          newAd.style.width = '300px';
+          newAd.style.height = '250px';
+          newAd.dataset.adClient = 'ca-pub-9374368296307755';
+          newAd.dataset.adSlot = '3201247599';
+          newAd.dataset.adFormat = 'rectangle';
+          
+          // 광고 컨테이너에 추가
+          adContainer.appendChild(newAd);
+          
+          // 광고 로드
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+          console.error("Popup ad load error:", e);
+      }
+  
+      const countdown = setInterval(() => {
+        countdownElement.textContent = count; // 카운트다운 표시
+        count--;
+  
+        if (count < 0) {
+          clearInterval(countdown); // 카운트다운 종료
+          showResult(); // 결과 표시
+          analysisPopup.classList.remove("active"); // 팝업 닫기
+        }
+      }, 1000);
+    }
+  
+    function showResult() {
+      questionSection.classList.remove("active"); // 질문 섹션 숨김
+      resultSection.classList.add("active"); // 결과 섹션 표시
+  
+      // 처음 3개의 답변만 사용하여 결과 키 생성
+      const resultKey = userAnswers.slice(0, 3).join("-");
+      console.log("Result Key:", resultKey); // 디버깅용
+      console.log("User Answers:", userAnswers); // 디버깅용
+  
+      const result =
+        results[resultKey] ||
+        `申し訳ありません。結果の分析中にエラーが発生しました。もう一度お試しください。\n(Debug: ${resultKey})`; // 결과가 없을 경우 메시지 표시
+      resultText.textContent = result; // 결과 텍스트 표시
+  
+      // 결과 표시 후 상단 광고 리로드
+      try {
+          const topAd = document.querySelector('.ad-container ins.adsbygoogle');
+          if (topAd) {
+              topAd.innerHTML = '';
+              const newAd = document.createElement('ins');
+              newAd.className = 'adsbygoogle';
+              newAd.style.display = 'block';
+              newAd.dataset.adClient = 'ca-pub-9374368296307755';
+              newAd.dataset.adSlot = '3201247599';
+              newAd.dataset.adFormat = 'auto';
+              newAd.dataset.fullWidthResponsive = 'true';
+              topAd.parentNode.replaceChild(newAd, topAd);
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          }
+      } catch (e) {
+          console.log("Result ad load error:", e);
+      }
+    }
+  
+    // LINE 공유 버튼
+    document.getElementById("line-share").addEventListener("click", () => {
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://line.me/R/msg/text/?無意識心理テスト${url}`);
+    });
+  
+    // URL 복사 버튼
+    document.getElementById("copy-url").addEventListener("click", () => {
+      navigator.clipboard
+        .writeText(window.location.href)
+        .then(() => alert("URLをコピーしました！"));
+    });
+  
+    // 다시 시작 버튼
+    document.getElementById("retry").addEventListener("click", () => {
+      currentQuestion = 0; // 질문 초기화
+      userAnswers = []; // 사용자 응답 초기화
+      resultSection.classList.remove("active"); // 결과 섹션 숨김
+      introSection.classList.add("active"); // 시작 섹션 표시
+    });
+  
+    // 홈으로 버튼
+    document.getElementById("go-home").addEventListener("click", () => {
+      window.location.href = "../index.html";
+    });
   });
-
-  document.getElementById("copy-url").addEventListener("click", () => {
-    navigator.clipboard
-      .writeText(window.location.href)
-      .then(() => alert("URLをコピーしました！"));
-  });
-
-  document.getElementById("retry").addEventListener("click", () => {
-    currentQuestion = 0;
-    userAnswers = [];
-    resultSection.classList.remove("active");
-    introSection.classList.add("active");
-  });
-
-  document.getElementById("go-home").addEventListener("click", () => {
-    window.location.href = "../index.html";
-  });
-});

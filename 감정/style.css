@@ -28,8 +28,9 @@ body {
 /* 광고 컨테이너 스타일 */
 .ad-container {
     width: 100%;
-    margin: 30px auto;
-    min-height: 120px;
+    max-width: 800px;
+    margin: 20px auto;
+    min-height: 90px;
     background: var(--card-background);
     border-radius: 15px;
     box-shadow: 0 10px 30px var(--shadow-color);
@@ -154,16 +155,16 @@ body {
 }
 
 .popup-content {
-    background: var(--card-background);
-    padding: 40px;
-    border-radius: 15px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     width: 90%;
-    max-width: 480px;
+    max-width: 400px;
 }
 
 .popup-ad {
@@ -264,11 +265,16 @@ body {
     
     .popup-content {
         width: 95%;
-        padding: 30px;
+        padding: 20px;
+        max-width: 320px;
     }
     
     .main-title {
         font-size: 1.8em;
+    }
+    .popup-ad-container {
+        width: 280px;
+        height: 250px;
     }
 }
 .ad-container-popup {
@@ -288,4 +294,24 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+}
+
+/* 팝업 광고 컨테이너 스타일 수정 */
+.popup-ad-container {
+    width: 300px;
+    height: 250px;
+    margin: 20px auto;
+    background: #f5f5f5;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-ad-container ins.adsbygoogle {
+    display: inline-block !important;
+    width: 300px !important;
+    height: 250px !important;
+    margin: 0 auto;
 }
