@@ -248,3 +248,7 @@ button:disabled {
         padding: 12px 25px;
     }
 }
+.line-btn { background: #2c6e49; color: white; }
+.copy-btn { background: #3578e5; color: white; }
+.retake-btn { background: #d32f2f; color: white; }
+.home-btn { background: #8e24aa; color: white; text-decoration: none; }

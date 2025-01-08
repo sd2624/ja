@@ -166,6 +166,36 @@ function addShareButtons() {
 }
 
 // 콘텐츠 공유 함수 (각 소셜 미디어 버튼 클릭 시)
+// LINEで共有
+function shareLine() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent("財務診断テスト｜あなたの財務レベルをチェック！");
+    window.open(`https://line.me/R/msg/text/?${text}%0D%0A${url}`);
+}
+
+// URLをコピー
+function copyURL() {
+    const url = "http://japan.testpro.site/再テスト/index.html";
+
+    // 一時的なinputを作成
+    const tempInput = document.createElement('input');
+    tempInput.value = url;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy'); // テキストコピー
+    document.body.removeChild(tempInput);
+
+    // コピー完了通知
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'copy-alert';
+    alertDiv.textContent = 'URLをコピーしました！';
+    document.body.appendChild(alertDiv);
+
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 2000);
+}
+
 function shareContent(platform) {
     const url = window.location.href;  // 현재 페이지 URL
     const text = '나의 에니어그램 유형은? 확인해보세요!';
