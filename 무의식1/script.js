@@ -140,6 +140,13 @@ const results = {
   let userAnswers = [];
   
   document.addEventListener("DOMContentLoaded", () => {
+    // 페이지 로드 시 상단 광고 초기화
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.log("Top ad load error:", e);
+    }
+
     const startBtn = document.getElementById("start-btn");
     const introSection = document.getElementById("intro");
     const questionSection = document.getElementById("question");
@@ -186,10 +193,19 @@ const results = {
       analysisPopup.classList.add("active"); // 팝업 활성화
       let count = 7;
   
-      // 팝업 광고 리로드
+      // 팝업 광고 강제 리로드
       try {
           const popupAd = document.querySelector('.popup-ad ins.adsbygoogle');
           if (popupAd) {
+              popupAd.innerHTML = ''; // 기존 광고 제거
+              const newAd = document.createElement('ins');
+              newAd.className = 'adsbygoogle';
+              newAd.style.display = 'block';
+              newAd.dataset.adClient = 'ca-pub-9374368296307755';
+              newAd.dataset.adSlot = '3201247599';
+              newAd.dataset.adFormat = 'auto';
+              newAd.dataset.fullWidthResponsive = 'true';
+              popupAd.appendChild(newAd);
               (adsbygoogle = window.adsbygoogle || []).push({});
           }
       } catch (e) {
@@ -222,11 +238,23 @@ const results = {
         `申し訳ありません。結果の分析中にエラーが発生しました。もう一度お試しください。\n(Debug: ${resultKey})`; // 결과가 없을 경우 메시지 표시
       resultText.textContent = result; // 결과 텍스트 표시
   
-      // 광고 리로드
+      // 결과 표시 후 상단 광고 리로드
       try {
-          (adsbygoogle = window.adsbygoogle || []).push({});
+          const topAd = document.querySelector('.ad-container ins.adsbygoogle');
+          if (topAd) {
+              topAd.innerHTML = '';
+              const newAd = document.createElement('ins');
+              newAd.className = 'adsbygoogle';
+              newAd.style.display = 'block';
+              newAd.dataset.adClient = 'ca-pub-9374368296307755';
+              newAd.dataset.adSlot = '3201247599';
+              newAd.dataset.adFormat = 'auto';
+              newAd.dataset.fullWidthResponsive = 'true';
+              topAd.parentNode.replaceChild(newAd, topAd);
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          }
       } catch (e) {
-          console.log("Ad load error:", e);
+          console.log("Result ad load error:", e);
       }
     }
   
