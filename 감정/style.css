@@ -1,11 +1,12 @@
 /* 기본 설정 */
 :root {
-    --primary-color: #FF5722;
-    --secondary-color: #009688;
-    --accent-color: #8E24AA;
-    --text-color: #1C1C1C;
-    --background-color: #e0f7fa;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --primary-color: #6C5CE7; /* 보라색으로 변경 (미니멀하고 세련된 느낌) */
+    --secondary-color: #00B894; /* 청록색으로 변경 */
+    --accent-color: #FF7675; /* 코랄색으로 변경 */
+    --text-color: #E0E0E0; /* 밝은 회색 (어두운 배경에 잘 어울림) */
+    --background-color: #2D3436; /* 어두운 회색 (어두운 모드) */
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --card-background: #3A3F44; /* 카드 배경색 */
 }
 
 /* 전체 레이아웃 */
@@ -13,7 +14,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(45deg, var(--background-color) 0%, #80deea 100%);
+    background: var(--background-color);
     color: var(--text-color);
     line-height: 1.7;
 }
@@ -29,8 +30,8 @@ body {
     width: 100%;
     margin: 30px auto;
     min-height: 120px;
-    background: #fff;
-    border-radius: 20px;
+    background: var(--card-background);
+    border-radius: 15px;
     box-shadow: 0 10px 30px var(--shadow-color);
     overflow: hidden;
     text-align: center;
@@ -44,16 +45,18 @@ body {
 .main-title {
     text-align: center;
     color: var(--text-color);
-    font-size: 2.2em;
+    font-size: 2.5em;
     margin: 50px 0;
     padding: 0 20px;
+    font-weight: bold;
+    letter-spacing: -1px;
 }
 
 /* 인트로 섹션 */
 .intro-text {
-    background: #fff;
-    padding: 50px;
-    border-radius: 25px;
+    background: var(--card-background);
+    padding: 40px;
+    border-radius: 15px;
     box-shadow: 0 10px 30px var(--shadow-color);
     margin: 30px 0;
     position: relative;
@@ -64,6 +67,7 @@ body {
     font-size: 50px;
     margin-bottom: 25px;
     animation: floating 3.5s ease-in-out infinite;
+    color: var(--accent-color);
 }
 
 /* 시작 버튼 */
@@ -73,7 +77,7 @@ body {
 }
 
 .start-btn {
-    background: linear-gradient(60deg, var(--accent-color), var(--primary-color));
+    background: linear-gradient(60deg, var(--primary-color), var(--secondary-color));
     color: white;
     font-size: 1.5em;
     padding: 20px 55px;
@@ -84,11 +88,16 @@ body {
     box-shadow: 0 7px 30px var(--shadow-color);
 }
 
+.start-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 40px rgba(108, 92, 231, 0.5);
+}
+
 /* 진행 상태바 */
 .progress-bar {
     width: 100%;
-    height: 15px;
-    background: #f5f5f5;
+    height: 10px;
+    background: var(--card-background);
     border-radius: 8px;
     margin: 30px 0;
     overflow: hidden;
@@ -96,16 +105,16 @@ body {
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     width: 0%;
     transition: width 0.4s ease;
 }
 
 /* 질문 컨테이너 */
 #quiz-container {
-    background: #fff;
+    background: var(--card-background);
     padding: 40px;
-    border-radius: 25px;
+    border-radius: 15px;
     margin: 30px 0;
     box-shadow: 0 10px 30px var(--shadow-color);
 }
@@ -115,16 +124,20 @@ body {
     width: 100%;
     padding: 20px;
     margin: 15px 0;
-    border: 3px solid #f0f0f0;
+    border: 2px solid var(--background-color);
     border-radius: 15px;
-    background: white;
+    background: var(--card-background);
+    color: var(--text-color);
     cursor: pointer;
     transition: all 0.4s ease;
+    font-size: 1.1em;
 }
 
 .answer-btn:hover {
-    background: var(--background-color);
+    background: var(--primary-color);
     border-color: var(--primary-color);
+    color: white;
+    transform: translateY(-3px);
 }
 
 /* 결과 분석 팝업 */
@@ -141,9 +154,9 @@ body {
 }
 
 .popup-content {
-    background: white;
+    background: var(--card-background);
     padding: 40px;
-    border-radius: 30px;
+    border-radius: 15px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -157,8 +170,8 @@ body {
     margin: 25px auto;
     min-width: 350px;
     min-height: 270px;
-    background: #f7f7f7;
-    border-radius: 20px;
+    background: var(--background-color);
+    border-radius: 15px;
     overflow: hidden;
 }
 
@@ -169,9 +182,9 @@ body {
 
 /* 결과 컨테이너 */
 #result-container {
-    background: #fff;
+    background: var(--card-background);
     padding: 40px;
-    border-radius: 25px;
+    border-radius: 15px;
     margin: 30px 0;
     box-shadow: 0 10px 30px var(--shadow-color);
 }
@@ -179,9 +192,9 @@ body {
 /* 행복 지수 미터 */
 .happiness-meter {
     width: 100%;
-    height: 30px;
-    background: #f5f5f5;
-    border-radius: 15px;
+    height: 20px;
+    background: var(--background-color);
+    border-radius: 10px;
     overflow: hidden;
     margin: 30px 0;
     box-shadow: inset 0 4px 10px var(--shadow-color);
@@ -214,12 +227,19 @@ body {
     justify-content: center;
     gap: 12px;
     font-weight: bold;
+    background: var(--primary-color);
+    color: white;
 }
 
-.line-btn { background: #2c6e49; color: white; }
-.copy-btn { background: #3578e5; color: white; }
-.retake-btn { background: #d32f2f; color: white; }
-.home-btn { background: #8e24aa; color: white; text-decoration: none; }
+.share-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+.line-btn { background: #2c6e49; }
+.copy-btn { background: #3578e5; }
+.retake-btn { background: #d32f2f; }
+.home-btn { background: #8e24aa; text-decoration: none; }
 
 /* 애니메이션 */
 @keyframes floating {

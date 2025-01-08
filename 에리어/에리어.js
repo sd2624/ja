@@ -151,8 +151,8 @@ function addShareButtons() {
         const buttonElement = document.createElement('button');
         buttonElement.id = button.id;
         buttonElement.classList.add('share-button');
-        buttonElement.innerHTML = `<img src="${button.icon}" alt="${button.alt}" />`;
-
+        buttonElement.innerHTML = button.alt;
+        
         // 공유 버튼 클릭 이벤트
         buttonElement.addEventListener('click', () => {
             shareContent(button.id);
