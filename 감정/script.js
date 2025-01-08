@@ -149,6 +149,7 @@ function showLoadingPopup() {
     const popup = document.getElementById('analysis-popup');
     const closeBtn = document.getElementById('close-popup');
     popup.style.display = 'flex';
+    closeBtn.style.display = 'block'; // 닫기 버튼 처음부터 표시
     
     // 광고 로드
     try {
@@ -168,7 +169,6 @@ function showLoadingPopup() {
         console.error("Popup ad error:", e);
     }
     
-    // 카운트다운
     let count = 7;
     const countdown = document.querySelector('.countdown');
     
@@ -178,11 +178,33 @@ function showLoadingPopup() {
         
         if (count < 0) {
             clearInterval(timer);
-            closeBtn.style.display = 'block'; // 카운트다운 종료 후 닫기 버튼 표시
-            closeBtn.addEventListener('click', () => {
-                popup.style.display = 'none';
-                showResult();
-            });
+        }
+    }, 1000);
+
+    // X 버튼 클릭 이벤트
+    closeBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
+        showAnalysisPopup(); // 두 번째 팝업 표시
+    });
+}
+
+// 결과 분석 팝업
+function showAnalysisPopup() {
+    const popup = document.getElementById('result-analysis-popup');
+    const analysisText = document.querySelector('.analysis-text');
+    popup.style.display = 'flex';
+    
+    let count = 7;
+    const countdown = document.querySelector('#result-countdown');
+    
+    const timer = setInterval(() => {
+        countdown.textContent = count;
+        count--;
+        
+        if (count < 0) {
+            clearInterval(timer);
+            popup.style.display = 'none';
+            showResult(); // 결과 표시
         }
     }, 1000);
 }
