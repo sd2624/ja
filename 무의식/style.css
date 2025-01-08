@@ -134,15 +134,17 @@ h1 {
     color: white;
 }
 
-/* 分析中ポップアップ */
-.popup {
-    display: none;
+/* 팝업 스타일 */
+.popup-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 1000;
 }
 
@@ -177,8 +179,10 @@ h1 {
     text-align: center;
 }
 
-.popup-ad {
-    margin-top: 20px;
+.ad-container-popup {
+    width: 300px;
+    height: 250px;
+    margin: 20px auto;
 }
 
 /* レスポンシブ対応 */
