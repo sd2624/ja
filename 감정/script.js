@@ -153,7 +153,7 @@ function showResultPopup() {
     let count = 7;
     const countdown = document.querySelector('.countdown');
     
-    // 광고 로드
+    // 기존 광고 재사용
     try {
         (adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
