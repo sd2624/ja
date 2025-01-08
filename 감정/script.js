@@ -149,44 +149,32 @@ function showLoadingPopup() {
     const popup = document.getElementById('analysis-popup');
     popup.style.display = 'flex';
     
-    // 팝업 광고 초기화 및 로드
+    // 팝업 광고 초기화
     try {
-        const topAd = document.querySelector('.top-ad ins.adsbygoogle');
-        const popupAdContainer = document.getElementById('popup-ad-container');
+        // 기존 광고 제거
+        const adContainer = document.querySelector('.popup-ad-container');
+        adContainer.innerHTML = '';
         
-        if (topAd && popupAdContainer) {
-            // 광고 크기에 따라 팝업 크기 조정
-            const resizePopup = () => {
-                const adWidth = popupAdContainer.offsetWidth;
-                const adHeight = popupAdContainer.offsetHeight;
-                const popupContent = document.querySelector('.popup-content');
-                
-                if (adWidth && adHeight) {
-                    popupContent.style.width = `${adWidth + 40}px`; // 패딩 고려
-                    popupContent.style.minHeight = `${adHeight + 120}px`; // 텍스트 영역 고려
-                }
-            };
-
-            // 기존 광고 요소 복제
-            const clonedAd = topAd.cloneNode(true);
-            clonedAd.style.display = 'inline-block';
-            
-            // 팝업 컨테이너에 추가
-            popupAdContainer.innerHTML = '';
-            popupAdContainer.appendChild(clonedAd);
-            
-            // 광고 로드 후 크기 조정
-            (adsbygoogle = window.adsbygoogle || []).push({
-                callback: resizePopup
-            });
-
-            // 창 크기 변경 시 대응
-            window.addEventListener('resize', resizePopup);
-        }
+        // 새 광고 생성
+        const newAd = document.createElement('ins');
+        newAd.className = 'adsbygoogle';
+        newAd.style.display = 'block';
+        newAd.style.width = '300px';
+        newAd.style.height = '250px';
+        newAd.dataset.adClient = 'ca-pub-9374368296307755';
+        newAd.dataset.adSlot = '3201247599';
+        newAd.dataset.adFormat = 'rectangle';
+        newAd.dataset.fullWidthResponsive = 'false';
+        
+        adContainer.appendChild(newAd);
+        
+        // 광고 로드
+        (adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
-        console.error("Popup ad clone error:", e);
+        console.error("Popup ad error:", e);
     }
     
+    // 카운트다운
     let count = 7;
     const countdown = document.querySelector('.countdown');
     
@@ -196,8 +184,8 @@ function showLoadingPopup() {
         
         if (count < 0) {
             clearInterval(timer);
+            showResult();
             popup.style.display = 'none';
-            showFinalResult();
         }
     }, 1000);
 }
