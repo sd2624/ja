@@ -195,6 +195,9 @@ function showFinalResult() {
     // 퀴즈 컨테이너 숨기기
     quizContainer.style.display = 'none';
     
+    // 결과 중간 광고 제거하고 결과 표시
+    resultContainer.querySelector('.middle-ad')?.remove();
+    
     // 점수 계산
     const finalScore = Math.floor((score / (totalQuestions * 5)) * 100);
     console.log('Final Score:', finalScore); // 디버깅용

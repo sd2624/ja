@@ -40,7 +40,8 @@ body {
 
 .top-ad { margin-top: 0; }
 .middle-ad { margin: 35px auto; }
-.bottom-ad { margin-bottom: 0; }
+.bottom-ad { margin-bottom: 30px; }
+.start-ad { margin-top: 30px; }
 
 /* 메인 타이틀 */
 .main-title {
@@ -249,11 +250,11 @@ body {
 }
 
 .popup-content {
+    width: 336px; /* 광고 크기에 맞게 수정 */
+    padding: 0;
     background: var(--card-background);
-    padding: 15px;
     border-radius: 10px;
-    position: relative;
-    width: 300px; /* 광고 크기에 맞게 조정 */
+    overflow: hidden;
 }
 
 .close-btn {
@@ -341,12 +342,10 @@ body.popup-open {
 
 /* 팝업 광고 컨테이너 스타일 수정 */
 .popup .ad-container {
-    width: 300px;
-    height: 250px;
-    margin: 20px auto;
-    background: var(--card-background);
-    border-radius: 10px;
-    overflow: hidden;
+    width: 336px;
+    height: 280px;
+    margin: 0;
+    border-radius: 0;
 }
 
 /* 팝업 스타일 수정 */
