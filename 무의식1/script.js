@@ -193,23 +193,29 @@ const results = {
       analysisPopup.classList.add("active"); // 팝업 활성화
       let count = 7;
   
-      // 팝업 광고 강제 리로드
+      // 팝업 광고 초기화 및 로드
       try {
-          const popupAd = document.querySelector('.popup-ad ins.adsbygoogle');
-          if (popupAd) {
-              popupAd.innerHTML = ''; // 기존 광고 제거
-              const newAd = document.createElement('ins');
-              newAd.className = 'adsbygoogle';
-              newAd.style.display = 'block';
-              newAd.dataset.adClient = 'ca-pub-9374368296307755';
-              newAd.dataset.adSlot = '3201247599';
-              newAd.dataset.adFormat = 'auto';
-              newAd.dataset.fullWidthResponsive = 'true';
-              popupAd.appendChild(newAd);
-              (adsbygoogle = window.adsbygoogle || []).push({});
-          }
+          // 기존 광고 제거
+          const adContainer = document.querySelector('.popup-ad-container');
+          adContainer.innerHTML = '';
+          
+          // 새 광고 요소 생성
+          const newAd = document.createElement('ins');
+          newAd.className = 'adsbygoogle';
+          newAd.style.display = 'inline-block';
+          newAd.style.width = '300px';
+          newAd.style.height = '250px';
+          newAd.dataset.adClient = 'ca-pub-9374368296307755';
+          newAd.dataset.adSlot = '3201247599';
+          newAd.dataset.adFormat = 'rectangle';
+          
+          // 광고 컨테이너에 추가
+          adContainer.appendChild(newAd);
+          
+          // 광고 로드
+          (adsbygoogle = window.adsbygoogle || []).push({});
       } catch (e) {
-          console.log("Popup ad load error:", e);
+          console.error("Popup ad load error:", e);
       }
   
       const countdown = setInterval(() => {
