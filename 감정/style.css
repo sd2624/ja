@@ -349,6 +349,50 @@ body.popup-open {
     overflow: hidden;
 }
 
+/* 팝업 스타일 수정 */
+.popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 5px 5px 0 10px;
+    gap: 8px;
+}
+
+.analysis-text {
+    font-size: 0.85em;
+    color: var(--text-color);
+    margin-right: auto;
+}
+
+.countdown {
+    font-size: 0.85em;
+    color: var(--primary-color);
+}
+
+.close-btn {
+    position: static;
+    font-size: 16px;
+    padding: 0;
+    margin-left: 5px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    padding: 0;
+    width: 300px;
+    background: var(--card-background);
+    border-radius: 10px;
+}
+
+.popup .ad-container {
+    margin: 0;
+    border-radius: 0 0 10px 10px;
+}
+
 /* 반응형 디자인 */
 @media (max-width: 600px) {
     .content-wrapper {
