@@ -144,16 +144,18 @@ function handleAnswer(value) {
     }
 }
 
-// 결과 팝업 표시 함수 추가
+// 결과 팝업 표시 함수 수정
 function showResultPopup() {
     const popup = document.getElementById('result-popup');
     const closeBtn = document.getElementById('close-popup');
+    const analysisText = document.querySelector('.analysis-text');
     popup.style.display = 'flex';
+    document.body.classList.add('popup-open');
     
     let count = 7;
     const countdown = document.querySelector('.countdown');
+    analysisText.textContent = '結果を分析しています...';
     
-    // 기존 광고 재사용
     try {
         (adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
@@ -166,15 +168,20 @@ function showResultPopup() {
         
         if (count < 0) {
             clearInterval(timer);
-            popup.style.display = 'none';
-            showFinalResult(); // 최종 결과 표시
+            closeBtn.style.pointerEvents = 'auto'; // 7초 후 클릭 활성화
         }
     }, 1000);
     
+    // 7초 후에만 닫기 버튼 활성화
+    closeBtn.style.pointerEvents = 'none';
+    
     closeBtn.addEventListener('click', () => {
-        clearInterval(timer);
-        popup.style.display = 'none';
-        showFinalResult();
+        if (count < 0) {  // 7초 후에만 닫기 가능
+            clearInterval(timer);
+            popup.style.display = 'none';
+            document.body.classList.remove('popup-open');
+            showFinalResult();
+        }
     });
 }
 
