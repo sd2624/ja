@@ -134,12 +134,12 @@ function showResult() {
 // 소셜 미디어 공유 버튼 추가
 function addShareButtons() {
     const shareButtons = [
-        { id: 'facebookShare', alt: '페이스북 공유', icon: '/k-test/log/페이스북.png' },
-        { id: 'instagramShare', alt: '인스타그램 공유', icon: '/k-test/log/인스타.png' },
-        { id: 'twitterShare', alt: '트위터 공유', icon: '/k-test/log/트위터.png' },
-        { id: 'naverLineShare', alt: '네이버 라인 공유', icon: '/k-test/log/라인.png' },
-        { id: 'kakaoShare', alt: '카카오톡 공유', icon: '/k-test/log/카톡.png' }, // 카카오톡 공유 버튼 추가
-        { id: 'urlShare', alt: 'URL 복사', icon: '/k-test/log/url.png' },    
+        { id: 'facebookShare', alt: '페이스북 공유' },
+        { id: 'instagramShare', alt: '인스타그램 공유' },
+        { id: 'twitterShare', alt: '트위터 공유'},
+        { id: 'naverLineShare', alt: '네이버 라인 공유' },
+        { id: 'kakaoShare', alt: '카카오톡 공유' }, // 카카오톡 공유 버튼 추가
+        { id: 'urlShare', alt: 'URL 복사'},    
     ];
 
     const resultSection = document.getElementById('resultSection');
@@ -165,36 +165,7 @@ function addShareButtons() {
     resultSection.appendChild(shareContainer);
 }
 
-// 콘텐츠 공유 함수 (각 소셜 미디어 버튼 클릭 시)
-// LINEで共有
-function shareLine() {
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent("財務診断テスト｜あなたの財務レベルをチェック！");
-    window.open(`https://line.me/R/msg/text/?${text}%0D%0A${url}`);
-}
 
-// URLをコピー
-function copyURL() {
-    const url = "http://japan.testpro.site/再テスト/index.html";
-
-    // 一時的なinputを作成
-    const tempInput = document.createElement('input');
-    tempInput.value = url;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand('copy'); // テキストコピー
-    document.body.removeChild(tempInput);
-
-    // コピー完了通知
-    const alertDiv = document.createElement('div');
-    alertDiv.className = 'copy-alert';
-    alertDiv.textContent = 'URLをコピーしました！';
-    document.body.appendChild(alertDiv);
-
-    setTimeout(() => {
-        alertDiv.remove();
-    }, 2000);
-}
 
 function shareContent(platform) {
     const url = window.location.href;  // 현재 페이지 URL
