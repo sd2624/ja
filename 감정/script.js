@@ -147,15 +147,13 @@ function handleAnswer(value) {
 // 결과 분석 팝업 표시
 function showLoadingPopup() {
     const popup = document.getElementById('analysis-popup');
+    const closeBtn = document.getElementById('close-popup');
     popup.style.display = 'flex';
     
-    // 팝업 광고 초기화
+    // 광고 로드
     try {
-        // 기존 광고 제거
         const adContainer = document.querySelector('.popup-ad-container');
         adContainer.innerHTML = '';
-        
-        // 새 광고 생성
         const newAd = document.createElement('ins');
         newAd.className = 'adsbygoogle';
         newAd.style.display = 'block';
@@ -164,11 +162,7 @@ function showLoadingPopup() {
         newAd.dataset.adClient = 'ca-pub-9374368296307755';
         newAd.dataset.adSlot = '3201247599';
         newAd.dataset.adFormat = 'rectangle';
-        newAd.dataset.fullWidthResponsive = 'false';
-        
         adContainer.appendChild(newAd);
-        
-        // 광고 로드
         (adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
         console.error("Popup ad error:", e);
@@ -184,8 +178,11 @@ function showLoadingPopup() {
         
         if (count < 0) {
             clearInterval(timer);
-            showResult();
-            popup.style.display = 'none';
+            closeBtn.style.display = 'block'; // 카운트다운 종료 후 닫기 버튼 표시
+            closeBtn.addEventListener('click', () => {
+                popup.style.display = 'none';
+                showResult();
+            });
         }
     }, 1000);
 }
