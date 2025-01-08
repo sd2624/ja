@@ -1,152 +1,253 @@
-/* 기본 스타일 */
+/* 기본 설정 */
 :root {
-    --primary-color: #4a90e2;
-    --secondary-color: #f39c12;
-    --background-color: #f5f6fa;
-    --text-color: #2c3e50;
+    --primary-color: #4CAF50; /* 초록색으로 변경하여 재테크 느낌 강조 */
+    --secondary-color: #2196F3; /* 파란색으로 변경 */
+    --accent-color: #FFC107; /* 금색으로 변경하여 부자 느낌 강조 */
+    --text-color: #2C3E50; /* 어두운 회색으로 변경 */
+    --background-color: #F5F5F5; /* 밝은 회색으로 변경 */
+    --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
+/* 전체 레이아웃 */
 body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background-color: var(--background-color);
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
+    background: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.7;
 }
 
-.container {
-    max-width: 800px;
+.content-wrapper {
+    max-width: 780px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 25px;
 }
 
 /* 광고 컨테이너 스타일 */
-.ad-container-top {
+.ad-container {
     width: 100%;
-    min-height: 90px;
-    margin: 20px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.ad-container-popup {
-    width: 300px;
-    height: 250px;
-    margin: 20px auto;
-}
-/* 인트로 섹션 애니메이션과 스타일 */
-.intro-section {
+    margin: 30px auto;
+    min-height: 120px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    overflow: hidden;
     text-align: center;
-    animation: fadeIn 1.5s ease-in;
-    padding: 30px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.intro-section h1 {
-    font-size: 2em;
+.top-ad { margin-top: 0; }
+.middle-ad { margin: 35px auto; }
+.bottom-ad { margin-bottom: 0; }
+
+/* 메인 타이틀 */
+.main-title {
+    text-align: center;
     color: var(--text-color);
-    margin-bottom: 20px;
-    animation: bounce 1s ease infinite;
+    font-size: 2.2em;
+    margin: 50px 0;
+    padding: 0 20px;
 }
 
-/* 시작 버튼 스타일 */
-.start-button {
-    background: linear-gradient(45deg, #4a90e2, #67b26f);
-    color: white;
-    border: none;
-    padding: 15px 40px;
+/* 인트로 섹션 */
+.intro-text {
+    background: #fff;
+    padding: 50px;
     border-radius: 25px;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    margin-top: 20px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    margin: 30px 0;
+    position: relative;
+    overflow: hidden;
 }
 
-.start-button:hover {
-    transform: scale(1.05);
+.expert-icon {
+    font-size: 50px;
+    margin-bottom: 25px;
+    animation: floating 3.5s ease-in-out infinite;
 }
 
-/* 질문 컨테이너 스타일 */
-.question-container {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    animation: slideIn 0.5s ease-out;
+/* 시작 버튼 */
+.start-container {
+    text-align: center;
+    margin: 50px 0;
 }
 
-.question {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    color: var(--text-color);
-}
-
-/* 답변 버튼 스타일 */
-.answer-btn {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;
+.start-btn {
+    background: linear-gradient(60deg, var(--accent-color), var(--primary-color));
+    color: white;
+    font-size: 1.5em;
+    padding: 20px 55px;
     border: none;
-    border-radius: 8px;
-    background: #f8f9fa;
-    color: var(--text-color);
+    border-radius: 40px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    box-shadow: 0 7px 30px var(--shadow-color);
+}
+
+/* 진행 상태바 */
+.progress-bar {
+    width: 100%;
+    height: 15px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    margin: 30px 0;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+    width: 0%;
+    transition: width 0.4s ease;
+}
+
+/* 질문 컨테이너 */
+#quiz-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 25px;
+    margin: 30px 0;
+    box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+/* 답변 버튼 */
+.answer-btn {
+    width: 100%;
+    padding: 20px;
+    margin: 15px 0;
+    border: 3px solid #f0f0f0;
+    border-radius: 15px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.4s ease;
 }
 
 .answer-btn:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: translateX(10px);
+    background: var(--background-color);
+    border-color: var(--primary-color);
 }
 
-/* 팝업 스타일 */
-.popup-container {
+/* 결과 분석 팝업 */
+.popup {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: rgba(0, 0, 0, 0.9);
     z-index: 1000;
+    backdrop-filter: blur(10px);
 }
 
 .popup-content {
     background: white;
-    padding: 30px;
-    border-radius: 15px;
+    padding: 40px;
+    border-radius: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
-    max-width: 400px;
     width: 90%;
+    max-width: 480px;
 }
 
-/* 카운트다운 스타일 */
-.countdown {
-    font-size: 3em;
-    color: var(--primary-color);
-    margin: 20px 0;
+.popup-ad {
+    margin: 25px auto;
+    min-width: 350px;
+    min-height: 270px;
+    background: #f7f7f7;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-/* 애니메이션 정의 */
+.popup-ad-slot {
+    width: 100%;
+    height: 100%;
+}
+
+/* 결과 컨테이너 */
+#result-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 25px;
+    margin: 30px 0;
+    box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+/* 행복 지수 미터 */
+.happiness-meter {
+    width: 100%;
+    height: 30px;
+    background: #f5f5f5;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 30px 0;
+    box-shadow: inset 0 4px 10px var(--shadow-color);
+}
+
+.meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    width: 0%;
+    transition: width 2s cubic-bezier(0.5, 0, 0.5, 1);
+    position: relative;
+}
+
+/* 공유 버튼 */
+.share-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.share-btn {
+    padding: 16px 28px;
+    border: none;
+    border-radius: 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-weight: bold;
+}
+
+.line-btn { background: #2c6e49; color: white; }
+.copy-btn { background: #3578e5; color: white; }
+.retake-btn { background: #d32f2f; color: white; }
+.home-btn { background: #8e24aa; color: white; text-decoration: none; }
+
+/* 애니메이션 */
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideIn {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+    .content-wrapper {
+        padding: 12px;
+    }
+    
+    .share-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .popup-content {
+        width: 95%;
+        padding: 30px;
+    }
+    
+    .main-title {
+        font-size: 1.8em;
+    }
 }
