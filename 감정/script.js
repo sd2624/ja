@@ -323,103 +323,108 @@ function showInitialPopup() {
 
 // 결과 분석 팝업 표시 (질문 완료 후)
 function showResultAnalysisPopup() {
-    const popup = document.getElementById('result-analysis-popup');
-    popup.style.display = 'flex';
-    
-    let count = 7;
-    const countdown = document.querySelector('#result-countdown');
-    const analysisText = document.querySelector('.analysis-text');
-    analysisText.textContent = '結果を分析中...';
-    
-    const timer = setInterval(() => {
-        countdown.textContent = count;
-        count--;
+    if (currentQuestion >= totalQuestions) {  // 15문제가 완료된 경우에만
+        const popup = document.getElementById('analysis-popup');
+        const closeBtn = document.getElementById('close-popup');
+        popup.style.display = 'flex';
+        closeBtn.style.display = 'block';
         
-        if (count < 0) {
-            clearInterval(timer);
-            popup.style.display = 'none';
-            showFinalResult(); // 결과 표시
+        let count = 7;
+        const countdown = document.querySelector('.countdown');
+        
+        const timer = setInterval(() => {
+            countdown.textContent = count;
+            count--;
+            
+            if (count < 0) {
+                clearInterval(timer);
+                popup.style.display = 'none';
+                showFinalResult();
+            }
+        }, 1000);
+
+        // 광고 초기화
+        try {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+            console.log("Result ad error:", e);
         }
-    }, 1000);
+    }
 }
 
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
-    initializeAds();
-    showInitialPopup(); // 초기 팝업만 표시
+    // 초기 광고 팝업 제거
+    // showInitialPopup(); 삭제
 
-    // 초기 광고 로드 (상단 광고만)
+    // 광고 초기화는 결과 표시 후에만 실행
     try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.log("Ad load error:", e);
-    }
-
-    // 페이지 로드 시 상단 광고 초기화
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
+        const topAd = document.querySelector('.top-ad ins.adsbygoogle');
+        if (topAd) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
     } catch (e) {
         console.log("Top ad load error:", e);
     }
-
-    function showAnalysisPopup() {
-        const popup = document.getElementById('analysis-popup');
-        popup.style.display = 'flex';
-        let count = 7;
-
-        // 팝업 광고 초기화 및 로드
-        try {
-            const adContainer = document.querySelector('.popup-ad-container');
-            adContainer.innerHTML = '';
-            
-            const newAd = document.createElement('ins');
-            newAd.className = 'adsbygoogle';
-            newAd.style.display = 'inline-block';
-            newAd.style.width = '300px';
-            newAd.style.height = '250px';
-            newAd.dataset.adClient = 'ca-pub-9374368296307755';
-            newAd.dataset.adSlot = '3201247599';
-            newAd.dataset.adFormat = 'rectangle';
-            
-            adContainer.appendChild(newAd);
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-            console.error("Popup ad load error:", e);
-        }
-
-        // 상단 광고를 팝업으로 복제하여 재사용
-        try {
-            const topAd = document.querySelector('.top-ad ins.adsbygoogle');
-            const popupAdContainer = document.getElementById('popup-ad-container');
-            
-            if (topAd && popupAdContainer) {
-                const clonedAd = topAd.cloneNode(true);
-                clonedAd.style.display = 'inline-block';
-                popupAdContainer.innerHTML = '';
-                popupAdContainer.appendChild(clonedAd);
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            }
-        } catch (e) {
-            console.error("Popup ad error:", e);
-        }
-
-        // ...existing countdown code...
-    }
-
-    function showResult() {
-        // ...existing result code...
-
-        // 결과 표시 후 광고 로드
-        try {
-            const resultAd = document.querySelector('.result-ad ins.adsbygoogle');
-            if (resultAd) {
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            }
-        } catch (e) {
-            console.log("Result ad error:", e);
-        }
-    }
-
-    // ...existing code...
 });
+
+function showAnalysisPopup() {
+    const popup = document.getElementById('analysis-popup');
+    popup.style.display = 'flex';
+    let count = 7;
+
+    // 팝업 광고 초기화 및 로드
+    try {
+        const adContainer = document.querySelector('.popup-ad-container');
+        adContainer.innerHTML = '';
+        
+        const newAd = document.createElement('ins');
+        newAd.className = 'adsbygoogle';
+        newAd.style.display = 'inline-block';
+        newAd.style.width = '300px';
+        newAd.style.height = '250px';
+        newAd.dataset.adClient = 'ca-pub-9374368296307755';
+        newAd.dataset.adSlot = '3201247599';
+        newAd.dataset.adFormat = 'rectangle';
+        
+        adContainer.appendChild(newAd);
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error("Popup ad load error:", e);
+    }
+
+    // 상단 광고를 팝업으로 복제하여 재사용
+    try {
+        const topAd = document.querySelector('.top-ad ins.adsbygoogle');
+        const popupAdContainer = document.getElementById('popup-ad-container');
+        
+        if (topAd && popupAdContainer) {
+            const clonedAd = topAd.cloneNode(true);
+            clonedAd.style.display = 'inline-block';
+            popupAdContainer.innerHTML = '';
+            popupAdContainer.appendChild(clonedAd);
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    } catch (e) {
+        console.error("Popup ad error:", e);
+    }
+
+    // ...existing countdown code...
+}
+
+function showResult() {
+    // ...existing result code...
+
+    // 결과 표시 후 광고 로드
+    try {
+        const resultAd = document.querySelector('.result-ad ins.adsbygoogle');
+        if (resultAd) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    } catch (e) {
+        console.log("Result ad error:", e);
+    }
+}
+
+// ...existing code...
