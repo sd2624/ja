@@ -250,7 +250,7 @@ body {
 }
 
 .popup-content {
-    width: 336px; /* 광고 크기에 맞게 수정 */
+    width: 400px; /* 광고 컨테이너를 위한 더 큰 크기 */
     padding: 0;
     background: var(--card-background);
     border-radius: 10px;
@@ -342,10 +342,20 @@ body.popup-open {
 
 /* 팝업 광고 컨테이너 스타일 수정 */
 .popup .ad-container {
-    width: 336px;
-    height: 280px;
+    width: 400px;  /* 광고 컨테이너 크기 증가 */
+    height: 300px; /* 광고 컨테이너 높이 증가 */
     margin: 0;
-    border-radius: 0;
+    background: var(--card-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup .ad-container ins.adsbygoogle {
+    display: block !important;
+    width: 360px !important; /* 실제 광고 크기 */
+    height: 280px !important; /* 실제 광고 크기 */
+    margin: 0 auto;
 }
 
 /* 팝업 스타일 수정 */
