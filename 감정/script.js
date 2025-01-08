@@ -140,7 +140,7 @@ function handleAnswer(value) {
     if (currentQuestion < questions.length) {
         showQuestion(currentQuestion);
     } else {
-        showLoadingPopup();
+        showAnalysisPopup(); // 모든 질문 완료 후 분석 팝업 표시
     }
 }
 
@@ -204,7 +204,7 @@ function showAnalysisPopup() {
         if (count < 0) {
             clearInterval(timer);
             popup.style.display = 'none';
-            showResult(); // 결과 표시
+            showFinalResult(); // 결과 표시
         }
     }, 1000);
 }
@@ -294,10 +294,37 @@ function initializeAds() {
     });
 }
 
+// 초기 광고 팝업 표시
+function showInitialPopup() {
+    const popup = document.getElementById('analysis-popup');
+    const closeBtn = document.getElementById('close-popup');
+    popup.style.display = 'flex';
+    closeBtn.style.display = 'none'; // 처음에는 닫기 버튼 숨김
+    
+    let count = 7;
+    const countdown = document.querySelector('.countdown');
+    
+    const timer = setInterval(() => {
+        countdown.textContent = count;
+        count--;
+        
+        if (count < 0) {
+            clearInterval(timer);
+            closeBtn.style.display = 'block'; // 7초 후 닫기 버튼 표시
+        }
+    }, 1000);
+
+    // X 버튼 클릭 이벤트
+    closeBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+}
+
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
     initializeAds();
+    showInitialPopup(); // 초기 팝업 표시
 
     // 초기 광고 로드 (상단 광고만)
     try {
