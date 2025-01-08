@@ -1,100 +1,71 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
-    <!-- Event snippet for 페이지 조회 conversion page -->
-<script>
-    gtag('event', 'conversion', {'send_to': 'AW-11438616604/1mSHCLiKx_4YEJzgrc4q'});
-  </script>
-  
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11438616604">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-11438616604');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 돈 관리 성향 테스트</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="あなたの資産管理スタイルを診断！最適な投資戦略を見つけよう！">
+    <meta name="keywords" content="資産管理, 投資テスト, マネー管理, ファイナンシャルプラン, 投資傾向, 財務戦略">
+    <title>資産管理傾向テスト | あなたにぴったりな投資戦略を見つけよう</title>
     
-    <!-- 카카오 SDK -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script>
-        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
-    </script>
-    
-    <!-- 구글 광고 -->
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    
+    <!-- CSS ファイルのリンク -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google フォント Noto Sans JP -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- 上部広告 -->
+    <div class="ad-container-top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <div class="container">
-        <div class="test-container">
-            <!-- 시작 섹션 -->
-            <div id="start-section">
-                <div class="money-icon"></div>
-                <h1>나의 돈 관리 성향 테스트</h1>
-                <p class="intro-text">당신의 재테크 유형을 알아보세요!</p>
-                <button id="start-btn" class="pulse-btn">테스트 시작하기</button>
-            </div>
+        <div class="intro-section">
+            <h1>💰 あなたの資産管理スタイル診断 💰</h1>
+            <p class="intro-text">
+                こんにちは！あなたの投資傾向と資産管理スタイルを診断するテストへようこそ！<br>
+                15個の質問を通して、あなたの金融習慣や傾向を分析し、最適な資産管理戦略を提案します。<br>
+                さあ、あなたにぴったりな投資方法を見つけるために、テストを始めましょう！
+            </p>
+            <button id="start-btn" class="start-button">テストを開始 ▶</button>
+        </div>
+        
+        <div id="question-container" class="question-container" style="display: none;">
+            <!-- 質問はJSで動的に生成されます -->
+        </div>
 
-            <!-- 질문 섹션 -->
-            <div id="question-section" style="display: none;">
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress"></div>
-                    </div>
-                    <span class="question-counter">1/15</span>
-                </div>
-                <h2 id="question-text"></h2>
-                <div class="answers">
-                    <button class="answer-btn" data-score="5">매우 그렇다</button>
-                    <button class="answer-btn" data-score="4">그렇다</button>
-                    <button class="answer-btn" data-score="3">보통이다</button>
-                    <button class="answer-btn" data-score="2">아니다</button>
-                    <button class="answer-btn" data-score="1">전혀 아니다</button>
-                </div>
-            </div>
-
-            <!-- 결과 섹션 -->
-            <div id="result-section" style="display: none;">
-                <div class="result-header">
-                    <div class="result-icon"></div>
-                    <h2>당신의 돈 관리 유형은</h2>
-                </div>
-                <div class="result-content">
-                    <h3 id="result-title"></h3>
-                    <div id="result-description" class="result-description"></div>
-                </div>
-                <div class="button-container">
-                    <button class="share-btn">결과 공유하기</button>
-                    <button class="retry-btn">다시 테스트하기</button>
-                    <a href="https://testpro.site" class="home-btn">다른 테스트 하기</a>
-                </div>
-            </div>
+        <div id="result-container" class="result-container" style="display: none;">
+            <!-- 結果はJSで動的に生成されます -->
         </div>
     </div>
 
-    <!-- 광고 팝업 -->
-    <div id="ad-popup" class="popup">
+    <!-- 分析中のポップアップ -->
+    <div id="analysis-popup" class="popup-container" style="display: none;">
         <div class="popup-content">
-            <div class="loading-text">결과 분석 중...</div>
+            <h2>結果分析中...</h2>
             <div class="countdown">7</div>
-            <div class="ad-container">
+            <!-- ポップアップ広告 -->
+            <div class="ad-container-popup">
                 <ins class="adsbygoogle"
-                     style="display:block"
+                     style="display:inline-block;width:300px;height:250px"
                      data-ad-client="ca-pub-9374368296307755"
-                     data-ad-slot="3201247599"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                     data-ad-slot="3201247599"></ins>
             </div>
         </div>
     </div>
-    
 
+    <!-- JavaScript ファイルのリンク -->
     <script src="script.js"></script>
 </body>
 </html>

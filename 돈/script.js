@@ -1,201 +1,240 @@
-// 카카오 SDK 초기화 확인
-if (!Kakao.isInitialized()) {
-    Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
-}
+// グローバル変数の設定
+let currentQuestion = 0;
+let score = 0;
+const totalQuestions = 15;
 
-// 질문 목록
+// 質問リスト
 const questions = [
-    "매달 고정적으로 저축하는 금액이 정해져 있다.",
-    "투자 전 철저한 분석과 리서치를 하는 편이다.",
-    "비상금을 따로 모아두는 편이다.",
-    "충동구매를 하지 않으려고 노력한다.",
-    "장기 투자를 선호한다.",
-    "재테크 관련 정보를 자주 찾아본다.",
-    "수입과 지출을 꼼꼼히 기록한다.",
-    "신용카드보다 체크카드를 주로 사용한다.",
-    "투자 위험을 감수할 수 있다.",
-    "돈을 쓸 때 계획을 세우고 지출한다.",
-    "금융 상품의 특징을 잘 파악하고 가입한다.",
-    "미래를 위한 보험이나 연금에 가입했다.",
-    "자산 포트폴리오를 다양화하려고 노력한다.",
-    "가격 대비 가치를 중요하게 생각한다.",
-    "재무 목표를 세우고 실천하려 노력한다."
+    "最近、あなたの財務状況についてどう感じていますか？",
+    "貯金はうまくできていると思いますか？",
+    "投資に自信がありますか？",
+    "借金が多いと感じていますか？",
+    "株式投資に興味がありますか？",
+    "金融知識を継続的に積んでいますか？",
+    "ローンを借りる際に慎重に決定していますか？",
+    "毎月予算を立てて支出を管理していますか？",
+    "さまざまな投資商品について知っていますか？",
+    "資産配分をうまく管理していると思いますか？",
+    "緊急時用の貯金が十分だと感じていますか？",
+    "税金計画を立てていますか？",
+    "不動産投資に興味がありますか？",
+    "投資について家族と話し合っていますか？",
+    "将来の財務計画を立てていますか？"
 ];
 
-// 결과 유형
-const moneyTypes = {
-    conservative: {
-        minScore: 15,
-        maxScore: 35,
-        title: "안정 추구형 머니 메이커",
-        description: [
-            "당신은 안정적인 재테크를 선호하는 보수적인 성향을 가지고 있습니다.",
-            "위험을 최소화하고 안전한 수익을 추구하는 편입니다.",
-            "예금과 적금 같은 안전한 금융상품을 선호합니다.",
-            "계획적인 소비와 저축 습관이 있습니다.",
-            "장기적인 관점에서 자산을 관리하려 노력합니다.",
-            "급격한 수익보다는 안정적인 수익을 선호합니다.",
-            "재무적 안정성을 매우 중요하게 생각합니다.",
-            "위험 관리에 특히 신경 쓰는 편입니다.",
-            "비상금 관리를 잘하는 편입니다.",
-            "신중한 투자 결정을 내리는 것이 특징입니다."
-        ]
-    },
-    balanced: {
-        minScore: 36,
-        maxScore: 55,
-        title: "균형 잡힌 자산 관리자",
-        description: [
-            "당신은 위험과 수익의 균형을 추구하는 합리적인 성향을 가지고 있습니다.",
-            "분산 투자를 통해 리스크를 관리하려 노력합니다.",
-            "투자 전 충분한 정보 수집을 하는 편입니다.",
-            "계획적인 포트폴리오 구성을 선호합니다.",
-            "적절한 위험 감수를 통해 수익을 추구합니다.",
-            "장단기 투자를 적절히 혼합하여 운용합니다.",
-            "시장 상황에 따라 유연하게 대응합니다.",
-            "재무 목표 설정이 명확한 편입니다.",
-            "정기적인 포트폴리오 리밸런싱을 실시합니다.",
-            "새로운 투자 기회를 적극적으로 탐색합니다."
-        ]
-    },
-    aggressive: {
-        minScore: 56,
-        maxScore: 75,
-        title: "공격적 수익 추구형",
-        description: [
-            "당신은 높은 수익을 위해 적극적인 투자를 하는 성향을 가지고 있습니다.",
-            "새로운 투자 기회를 항상 모색하고 있습니다.",
-            "위험을 감수하고 높은 수익을 추구합니다.",
-            "투자 정보에 대한 높은 관심을 가지고 있습니다.",
-            "시장 변화에 빠르게 대응하는 편입니다.",
-            "다양한 투자 상품에 도전적으로 접근합니다.",
-            "수익 극대화를 위한 전략을 수립합니다.",
-            "새로운 재테크 방법을 적극 수용합니다.",
-            "단기 고수익 기회를 놓치지 않으려 합니다.",
-            "투자에 대한 자신감이 높은 편입니다."
-        ]
-    }
+// 結果テキスト
+const results = {
+    high: `あなたの財務管理能力は非常に高いです！ (90点)
+
+あなたは財務的に非常に安定しており、さまざまな投資方法と資産管理について深い理解を持っています。  
+自分の資産を効果的に管理し、未来の準備もきちんと行っています。
+
+特徴:
+• さまざまな投資商品に精通しており、株式、不動産など多岐にわたる投資を行っています。
+• 財務目標を設定し、それを実現するための計画を着実に実行しています。
+• 緊急用の貯金や資産配分などをうまく管理し、財務的な安定性を維持しています。
+• 定期的な財務点検と計画で安定した財務管理を行っています。
+
+提案:
+• 現在の財務管理方法を維持し、引き続き金融知識をアップデートしてください。
+• 自信を持ってさらに多くの分野に投資し、リスク管理にも注意を払いましょう。
+• 財務計画を定期的に確認し、目標に沿った修正を行うことをお勧めします。
+
+あなたはすでに非常に健康な財務状態にあり、今後も安定した財務管理を行うことができます！`,
+
+    medium: `あなたの財務管理能力は平均的です。 (65点)
+
+現在、財務的には安定していますが、改善の余地があります。財務管理に対する理解は良好で、少し努力すればさらに良い財務状態を維持できます。
+
+特徴:
+• 普段は財務をうまく管理していますが、時々不確実な状況で困難に直面することがあります。
+• 株式、不動産などさまざまな投資商品について知っていますが、投資判断は慎重に行っています。
+• 借金やローンの管理についてはまだ改善が必要で、緊急時用の貯金にももっと注意を払うべきです。
+• 財務計画を立てていますが、その計画をチェックする頻度や具体性が足りないかもしれません。
+
+改善提案:
+• 定期的に財務計画をチェックし、具体的な目標を設定して実行しましょう。
+• 借金管理や資産配分を慎重に見直し、金融商品についての知識をさらに深めてください。
+• 緊急用の貯金と税金計画の準備がもっと必要かもしれません。
+• 定期的な財務チェックで長期的な財務計画を立てましょう。
+
+あなたは良い財務管理能力を持っていますが、小さな改善でさらに安定した財務状態を維持できます。`,
+
+    low: `現在、財務状況に困難を感じているかもしれません。 (40点)
+
+財務的に不安定で、管理すべき点が多いかもしれません。しかし、努力を続ければ改善することができます。
+
+現在の特徴:
+• 財務管理や投資に対する具体的な計画や知識が不足しているかもしれません。
+• 借金やローンが多く、予算管理が不十分かもしれません。
+• 緊急用の貯金や資産配分に対する準備が足りず、金融商品についての理解が低い可能性があります。
+• 財務計画を立てることに困難を感じ、日々の支出管理が不足しているかもしれません。
+
+提案:
+• 財務管理の基本から始め、予算を立てて支出を管理しましょう。
+• 金融商品について学び、資産管理能力を高めましょう。
+• 借金やローンの管理を見直し、返済計画を立てましょう。
+• 緊急用の貯金を準備し、資産配分を見直してリスクを分散することをお勧めします。
+
+あなたは現在財務的に困難を感じていますが、少しずつ改善することでより良い財務状態を作り出すことができます。小さな目標から始めてみましょう。`
 };
 
-let currentQuestion = 0;
-let totalScore = 0;
-
-// DOM 로드 완료 후 실행
-document.addEventListener('DOMContentLoaded', function() {
-    initializeTest();
-});
-
-// 테스트 초기화
+// テストの初期化
 function initializeTest() {
-    document.getElementById('start-btn').addEventListener('click', startTest);
-    document.querySelectorAll('.answer-btn').forEach(btn => {
-        btn.addEventListener('click', handleAnswer);
+    const startButton = document.getElementById('start-test');
+    const quizContainer = document.getElementById('quiz-container');
+    
+    startButton.addEventListener('click', () => {
+        startButton.parentElement.style.display = 'none';
+        quizContainer.style.display = 'block';
+        quizContainer.classList.add('animate-fade-in');
+        startQuiz();
     });
 }
 
-// 테스트 시작
-function startTest() {
-    document.getElementById('start-section').style.display = 'none';
-    document.getElementById('question-section').style.display = 'block';
-    showQuestion();
-}
-
-// 질문 표시
-function showQuestion() {
-    document.getElementById('question-text').textContent = questions[currentQuestion];
-    document.querySelector('.question-counter').textContent = `${currentQuestion + 1}/15`;
+// クイズ開始
+function startQuiz() {
+    currentQuestion = 0;
+    score = 0;
+    showQuestion(currentQuestion);
     updateProgressBar();
 }
 
-// 진행바 업데이트
+// 進行状況バーの更新
 function updateProgressBar() {
-    const progress = ((currentQuestion + 1) / questions.length) * 100;
-    document.querySelector('.progress').style.width = `${progress}%`;
+    const progressFill = document.querySelector('.progress-fill');
+    const progress = (currentQuestion / totalQuestions) * 100;
+    progressFill.style.width = `${progress}%`;
 }
 
-// 답변 처리
-function handleAnswer(e) {
-    const score = parseInt(e.target.dataset.score);
-    totalScore += score;
-
-    if (currentQuestion < questions.length - 1) {
-        currentQuestion++;
-        showQuestion();
-    } else {
-        showAdPopup();
+// 質問を表示
+function showQuestion(questionIndex) {
+    const questionContainer = document.getElementById('question-container');
+    const optionsContainer = document.getElementById('options-container');
+    
+    if (questionIndex < questions.length) {
+        questionContainer.innerHTML = `
+            <h3>質問 ${questionIndex + 1}/15</h3>
+            <p>${questions[questionIndex]}</p>
+        `;
+        
+        optionsContainer.innerHTML = `
+            <button onclick="handleAnswer(5)" class="answer-btn">非常にそう思う</button>
+            <button onclick="handleAnswer(4)" class="answer-btn">そう思う</button>
+            <button onclick="handleAnswer(3)" class="answer-btn">どちらとも言えない</button>
+            <button onclick="handleAnswer(2)" class="answer-btn">あまりそう思わない</button>
+            <button onclick="handleAnswer(1)" class="answer-btn">全くそう思わない</button>
+        `;
     }
 }
 
-// 광고 팝업 표시
-function showAdPopup() {
-    const popup = document.getElementById('ad-popup');
+// 回答の処理
+function handleAnswer(value) {
+    score += value;
+    currentQuestion++;
+    updateProgressBar();
+    
+    if (currentQuestion < questions.length) {
+        showQuestion(currentQuestion);
+    } else {
+        showLoadingPopup();
+    }
+}
+
+// 結果分析ポップアップの表示
+function showLoadingPopup() {
+    const popup = document.getElementById('loading-popup');
     popup.style.display = 'block';
     
-    let countdown = 7;
-    const countdownElement = document.querySelector('.countdown');
+    let count = 7;
+    const countdown = document.getElementById('countdown');
     
     const timer = setInterval(() => {
-        countdown--;
-        countdownElement.textContent = countdown;
+        count--;
+        countdown.textContent = count;
         
-        if (countdown <= 0) {
+        if (count <= 0) {
             clearInterval(timer);
             popup.style.display = 'none';
-            showResult();
+            showFinalResult();
         }
     }, 1000);
+}
+
+// 最終結果の表示
+function showFinalResult() {
+    const resultContainer = document.getElementById('result-container');
+    const resultText = document.getElementById('result-text');
+    const meterFill = document.querySelector('.meter-fill');
     
-    // 구글 광고 표시
-    (adsbygoogle = window.adsbygoogle || []).push({});
-}
-
-// 결과 표시
-function showResult() {
-    document.getElementById('question-section').style.display = 'none';
-    document.getElementById('result-section').style.display = 'block';
-
-    let resultType;
-    if (totalScore <= 35) {
-        resultType = moneyTypes.conservative;
-    } else if (totalScore <= 55) {
-        resultType = moneyTypes.balanced;
+    const finalScore = Math.floor((score / (questions.length * 5)) * 100);
+    let result;
+    
+    if (finalScore > 75) {
+        result = results.high;
+        meterFill.style.width = '90%';
+    } else if (finalScore > 50) {
+        result = results.medium;
+        meterFill.style.width = '65%';
     } else {
-        resultType = moneyTypes.aggressive;
+        result = results.low;
+        meterFill.style.width = '40%';
     }
-
-    document.getElementById('result-title').textContent = resultType.title;
-    document.getElementById('result-description').textContent = resultType.description.join('\n');
+    
+    resultText.innerHTML = result.replace(/\n/g, '<br>');
+    resultContainer.style.display = 'block';
+    resultContainer.scrollIntoView({ behavior: 'smooth' });
 }
 
-// 테스트 다시하기
-document.querySelector('.retry-btn').addEventListener('click', () => {
-    currentQuestion = 0;
-    totalScore = 0;
-    document.getElementById('result-section').style.display = 'none';
-    document.getElementById('start-section').style.display = 'block';
-});
+// LINEで共有
+function shareLine() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent("財務診断テスト｜あなたの財務レベルをチェック！");
+    window.open(`https://line.me/R/msg/text/?${text}%0D%0A${url}`);
+}
 
-// 결과 공유하기
-document.querySelector('.share-btn').addEventListener('click', () => {
-    Kakao.Link.sendDefault({
-        objectType: 'feed',
-        content: {
-            title: '나의 돈 관리 성향 테스트',
-            description: '당신의 재테크 유형을 알아보세요!',
-            imageUrl: 'YOUR_IMAGE_URL',
-            link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href
-            }
-        },
-        buttons: [
-            {
-                title: '테스트 하러가기',
-                link: {
-                    mobileWebUrl: window.location.href,
-                    webUrl: window.location.href
-                }
-            }
-        ]
+// URLをコピー
+function copyURL() {
+    const url = "http://japan.testpro.site/再テスト/index.html";
+
+    // 一時的なinputを作成
+    const tempInput = document.createElement('input');
+    tempInput.value = url;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy'); // テキストコピー
+    document.body.removeChild(tempInput);
+
+    // コピー完了通知
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'copy-alert';
+    alertDiv.textContent = 'URLをコピーしました！';
+    document.body.appendChild(alertDiv);
+
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 2000);
+}
+
+// テストをやり直す
+function retakeTest() {
+    currentQuestion = 0;
+    score = 0;
+    document.getElementById('result-container').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    startQuiz();
+}
+
+// 広告の初期化
+function initializeAds() {
+    const adElements = document.querySelectorAll('.adsbygoogle');
+    adElements.forEach(() => {
+        (adsbygoogle = window.adsbygoogle || []).push({});
     });
+}
+
+// ページが読み込まれた時に実行
+document.addEventListener('DOMContentLoaded', () => {
+    initializeTest();
+    initializeAds();
 });
