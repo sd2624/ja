@@ -124,7 +124,7 @@ let currentQuestion = 0;
 let userAnswers = [];
 
 // 테스트 시작
-document.getElementById('start-btn').addEventListener('click', () => {
+document.getElementById('start-test').addEventListener('click', () => {
     document.querySelector('.intro-section').style.display = 'none';
     document.getElementById('question-container').style.display = 'block';
     showQuestion();
