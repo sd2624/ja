@@ -140,8 +140,46 @@ function handleAnswer(value) {
     if (currentQuestion < questions.length) {
         showQuestion(currentQuestion);
     } else {
-        showFinalResult(); // 바로 결과 표시
+        showAdPopup();
     }
+}
+
+// 광고 팝업 표시 함수 추가
+function showAdPopup() {
+    const popup = document.getElementById('ad-popup');
+    const closeBtn = document.getElementById('close-popup');
+    popup.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    
+    let count = 7;
+    const countdown = popup.querySelector('.countdown');
+    
+    // 광고 로드
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.log("Popup ad error:", e);
+    }
+    
+    const timer = setInterval(() => {
+        countdown.textContent = count;
+        count--;
+        
+        if (count < 0) {
+            clearInterval(timer);
+            closeBtn.disabled = false;
+            closeBtn.style.opacity = '1';
+            closeBtn.style.cursor = 'pointer';
+        }
+    }, 1000);
+    
+    closeBtn.addEventListener('click', () => {
+        if (!closeBtn.disabled) {
+            popup.style.display = 'none';
+            document.body.style.overflow = '';
+            showFinalResult();
+        }
+    });
 }
 
 // 최종 결과 표시
