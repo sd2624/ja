@@ -159,7 +159,7 @@ function showAdPopup() {
     const closeBtn = document.getElementById('close-popup');
     const countdown = popup.querySelector('.countdown');
     
-    popup.style.display = 'block';
+    popup.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     
     // 광고 요소 초기화 및 새로 로드
