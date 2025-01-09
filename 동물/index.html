@@ -69,9 +69,9 @@
                     <span class="countdown">5</span>
                     <button class="close-btn" id="close-popup" disabled>×</button>
                 </div>
-                <div class="popup-ad">
+                <div id="popup-ad-container">
                     <ins class="adsbygoogle"
-                         style="display:block"
+                         style="display:block; width:336px; height:280px;"
                          data-ad-client="ca-pub-9374368296307755"
                          data-ad-slot="3201247599"
                          data-ad-format="auto"
@@ -119,7 +119,10 @@
 
     <script src="script.js"></script>
     <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
+        // 페이지 로드 시 광고 초기화
+        window.onload = function() {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
     </script>
 </body>
 </html>
