@@ -252,9 +252,9 @@ body {
 
 .countdown {
     color: var(--text-color);
-    font-size: 3em; /* 카운터 폰트 크기 변경 */
+    font-size: 3em; /* 카운터 폰트 크기 */
     background: rgba(0, 0, 0, 0.6);
-    padding: 4px 10px;
+    padding: 5px 10px; /* 패딩 변경 */
     border-radius: 15px;
 }
 
