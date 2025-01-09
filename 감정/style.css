@@ -393,6 +393,34 @@ body.popup-open {
     border-radius: 0 0 10px 10px;
 }
 
+/* 팝업 스타일 수정 */
+.popup-content {
+    width: 728px;  /* 큰 광고 크기로 수정 */
+    padding: 0;
+    background: var(--card-background);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.popup .ad-container {
+    width: 728px;
+    height: 90px;
+    margin: 0;
+    background: var(--card-background);
+}
+
+/* 모바일 대응 */
+@media (max-width: 800px) {
+    .popup-content {
+        width: 336px;
+    }
+    
+    .popup .ad-container {
+        width: 336px;
+        height: 280px;
+    }
+}
+
 /* 반응형 디자인 */
 @media (max-width: 600px) {
     .content-wrapper {
