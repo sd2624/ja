@@ -252,7 +252,7 @@ body {
 
 .countdown {
     color: var(--text-color);
-    font-size: 1em;
+    font-size: 3em; /* 카운터 폰트 크기 변경 */
     background: rgba(0, 0, 0, 0.6);
     padding: 4px 10px;
     border-radius: 15px;
@@ -261,7 +261,7 @@ body {
 .close-btn {
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 26px; /* X 버튼의 폰트 크기 변경 */
     color: var(--text-color);
     cursor: pointer;
 }
@@ -344,7 +344,7 @@ body {
     right: 10px;
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 26px; /* X 버튼의 폰트 크기 변경 */
     color: var(--text-color);
     cursor: pointer;
 }
