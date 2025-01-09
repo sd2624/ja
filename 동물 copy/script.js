@@ -148,73 +148,32 @@ function handleAnswer(choiceIndex) {
         currentQuestion++;
         showQuestion();
     } else {
-        showAdPopup();
+        showAnalysisPopup();
     }
 }
 
-// 광고 팝업 표시 함수 수정
-function showAdPopup() {
-    const popup = document.getElementById('ad-popup');
-    const closeBtn = document.getElementById('close-popup');
-    const countdown = popup.querySelector('.countdown');
-    
+// 분석 팝업 표시
+function showAnalysisPopup() {
+    const popup = document.getElementById('analysis-popup');
     popup.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
     
-    // 광고 스크립트 실행
+    let countdown = 7;
+    const countdownDisplay = document.querySelector('.countdown');
+    
+    // 광고 표시
     (adsbygoogle = window.adsbygoogle || []).push({});
     
-    let count = 7;
-    countdown.textContent = count;
-    
+    // 카운트다운 시작
     const timer = setInterval(() => {
-        count--;
-        if (count < 0) {
+        countdown--;
+        countdownDisplay.textContent = countdown;
+        
+        if (countdown <= 0) {
             clearInterval(timer);
-            countdown.style.display = 'none'; // 카운터 숫자 사라지게 함
-            closeBtn.disabled = false;
-            closeBtn.classList.add('active');
-        } else {
-            countdown.textContent = count;
+            showResult();
+            popup.style.display = 'none';
         }
     }, 1000);
-    
-    closeBtn.onclick = function() {
-        popup.style.display = 'none';
-        document.body.style.overflow = '';
-        showFinalResult();
-    };
-}
-
-// 최종 결과 표시 함수 수정
-function showFinalResult() {
-    const quizContainer = document.getElementById('quiz-container');
-    const resultContainer = document.getElementById('result-container');
-    const resultText = document.getElementById('result-text');
-    const meterFill = document.querySelector('.meter-fill');
-    
-    // 퀴즈 컨테이너 숨기기
-    quizContainer.style.display = 'none';
-    
-    // 점수 계산 및 결과 설정
-    const finalScore = Math.floor((score / (totalQuestions * 5)) * 100);
-    
-    let result;
-    if (finalScore > 75) {
-        result = results.high;
-        meterFill.style.width = '90%';
-    } else if (finalScore > 50) {
-        result = results.medium;
-        meterFill.style.width = '65%';
-    } else {
-        result = results.low;
-        meterFill.style.width = '40%';
-    }
-    
-    // 결과 텍스트 설정 및 컨테이너 표시
-    resultText.innerHTML = result.replace(/\n/g, '<br>');
-    resultContainer.style.display = 'block';
-    resultContainer.scrollIntoView({ behavior: 'smooth' });
 }
 
 // 결과 계산 함수
@@ -271,8 +230,3 @@ function retakeTest() {
 function goToHome() {
     window.location.href = 'http://japan.testpro.site/';
 }
-
-// 페이지 로드 시 실행
-document.addEventListener('DOMContentLoaded', () => {
-    initializeTest();
-});
