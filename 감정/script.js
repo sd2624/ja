@@ -157,12 +157,13 @@ function showAdPopup() {
     
     const timer = setInterval(() => {
         count--;
-        countdown.textContent = count;
-        
         if (count < 0) {
             clearInterval(timer);
+            countdown.style.display = 'none'; // 카운터 숫자 사라지게 함
             closeBtn.disabled = false;
             closeBtn.classList.add('active');
+        } else {
+            countdown.textContent = count;
         }
     }, 1000);
     

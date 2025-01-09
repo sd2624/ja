@@ -243,7 +243,7 @@ body {
 
 .popup-controls {
     position: absolute;
-    top: 10px;
+    top: 0; /* 위치를 더 위로 올림 */
     right: 10px;
     display: flex;
     align-items: center;
@@ -265,7 +265,7 @@ body {
     color: var(--text-color);
     cursor: pointer;
     position: absolute;
-    top: 5px; /* 위치를 더 위로 올림 */
+    top: 0; /* 위치를 더 위로 올림 */
     right: 10px;
 }
 
