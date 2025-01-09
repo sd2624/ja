@@ -153,17 +153,24 @@ function showAdPopup() {
     popup.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     
-    // 광고 로드
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.log("Popup ad error:", e);
+    // 광고 초기화 먼저 실행
+    const adElement = popup.querySelector('.adsbygoogle');
+    if (adElement) {
+        try {
+            if (!adElement.hasAttribute('data-ad-status')) {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        } catch (e) {
+            console.log("Popup ad error:", e);
+        }
     }
     
     let count = 7;
+    countdown.textContent = count;
+    
     const timer = setInterval(() => {
-        countdown.textContent = count;
         count--;
+        countdown.textContent = count;
         
         if (count < 0) {
             clearInterval(timer);
@@ -173,8 +180,10 @@ function showAdPopup() {
         }
     }, 1000);
     
-    closeBtn.onclick = () => {
-        if (!closeBtn.disabled) {
+    // 클릭 이벤트는 한 번만 등록
+    closeBtn.onclick = function() {
+        if (!this.disabled) {
+            clearInterval(timer);
             popup.style.display = 'none';
             document.body.style.overflow = '';
             showFinalResult();
@@ -264,15 +273,14 @@ function retakeTest() {
 
 // 광고 초기화 함수 수정
 function initializeAds() {
-    try {
-        // 모든 광고 초기화
-        const adElements = document.querySelectorAll('.adsbygoogle');
-        adElements.forEach((ad) => {
+    const adElements = document.querySelectorAll('.adsbygoogle:not([data-ad-status])');
+    adElements.forEach(ad => {
+        try {
             (adsbygoogle = window.adsbygoogle || []).push({});
-        });
-    } catch (e) {
-        console.log("Ad initialization error:", e);
-    }
+        } catch (e) {
+            console.log("Ad initialization error:", e);
+        }
+    });
 }
 
 // 페이지 로드 시 실행
