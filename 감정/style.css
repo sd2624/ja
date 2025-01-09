@@ -476,3 +476,19 @@ body {
     max-width: 100%;
     height: auto;
 }
+
+/* 광고 컨테이너 스타일 */
+.ad-container {
+    width: 100%;
+    max-width: 780px;
+    margin: 20px auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* 모바일 광고 조정 */
+@media (max-width: 600px) {
+    .ad-container {
+        margin: 15px auto;
+    }
+}

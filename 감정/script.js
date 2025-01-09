@@ -131,7 +131,28 @@ function showQuestion(questionIndex) {
     }
 }
 
-// 답변 처리 수정
+// 광고 로드 함수
+function loadAds() {
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error('광고 로드 실패:', e);
+    }
+}
+
+// 결과 표시 전 광고 표시
+function showResultWithAd() {
+    const resultAd = document.getElementById('result-ad');
+    resultAd.style.display = 'block';
+    loadAds();
+    
+    // 광고 로드 후 결과 표시
+    setTimeout(() => {
+        showFinalResult();
+    }, 1000);
+}
+
+// 기존 handleAnswer 함수 수정
 function handleAnswer(value) {
     score += value;
     currentQuestion++;
@@ -140,7 +161,7 @@ function handleAnswer(value) {
     if (currentQuestion < questions.length) {
         showQuestion(currentQuestion);
     } else {
-        showAdPopup();
+        showResultWithAd();
     }
 }
 
