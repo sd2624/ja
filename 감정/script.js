@@ -259,19 +259,4 @@ function retakeTest() {
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
-
-    // 페이지 로드 2초 후 팝업 표시
-    setTimeout(() => {
-        const popup = document.getElementById('ad-popup');
-        const closeBtn = document.getElementById('close-popup');
-        
-        popup.style.display = 'flex';
-        
-        // 광고 스크립트 실행
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        
-        closeBtn.onclick = function() {
-            popup.style.display = 'none';
-        }
-    }, 2000);
 });
