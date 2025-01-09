@@ -137,7 +137,7 @@ function handleAnswer(value) {
     if (currentQuestion < questions.length) {
         showQuestion(currentQuestion);
     } else {
-        showLoadingPopup();
+        showAdPopup();
     }
 }
 
@@ -163,13 +163,18 @@ function showLoadingPopup() {
 
 // 最終結果の表示
 function showFinalResult() {
+    const quizContainer = document.getElementById('quiz-container');
     const resultContainer = document.getElementById('result-container');
     const resultText = document.getElementById('result-text');
     const meterFill = document.querySelector('.meter-fill');
     
-    const finalScore = Math.floor((score / (questions.length * 5)) * 100);
-    let result;
+    // 퀴즈 컨테이너 숨기기
+    quizContainer.style.display = 'none';
     
+    // 점수 계산 및 결과 설정
+    const finalScore = Math.floor((score / (totalQuestions * 5)) * 100);
+    
+    let result;
     if (finalScore > 75) {
         result = results.high;
         meterFill.style.width = '90%';
@@ -181,6 +186,7 @@ function showFinalResult() {
         meterFill.style.width = '40%';
     }
     
+    // 결과 텍스트 설정 및 컨테이너 표시
     resultText.innerHTML = result.replace(/\n/g, '<br>');
     resultContainer.style.display = 'block';
     resultContainer.scrollIntoView({ behavior: 'smooth' });
