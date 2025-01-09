@@ -1,3 +1,253 @@
+/* 기본 설정: 활기차고 대조적인 색상 조합 */
+:root {
+    --primary-color: #FF5722; /* 생동감 있는 주황색 */
+    --secondary-color: #2196F3; /* 선명한 파란색 */
+    --accent-color: #FFC107; /* 따뜻한 노란색 */
+    --text-color: #212121; /* 진한 검정색 텍스트 */
+    --background-color: #FAFAFA; /* 부드러운 밝은 회색 */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* 은은한 그림자 */
+    --card-background: #FFFFFF; /* 순백색 카드 배경 */
+}
+
+/* 전체 레이아웃: 넓고 시원한 느낌의 여백 */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.content-wrapper {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 40px;
+    background: var(--card-background);
+    box-shadow: 0 4px 20px var(--shadow-color);
+    border-radius: 20px;
+}
+
+/* 메인 타이틀: 밝고 대담한 스타일 */
+.main-title {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 3em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 30px 0;
+    text-transform: uppercase;
+}
+
+/* 인트로 섹션: 시각적으로 강조된 카드 스타일 */
+.intro-text {
+    background: var(--accent-color);
+    color: #FFFFFF;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(255, 193, 7, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.expert-icon {
+    font-size: 70px;
+    margin-bottom: 30px;
+    color: #FFFFFF;
+    animation: bounce 2s infinite;
+}
+
+/* 시작 버튼: 강렬한 대조와 애니메이션 추가 */
+.start-container {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.start-btn {
+    background: var(--primary-color);
+    color: #FFFFFF;
+    font-size: 1.4em;
+    padding: 15px 60px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 15px rgba(255, 87, 34, 0.3);
+}
+
+.start-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 87, 34, 0.5);
+}
+
+/* 진행 상태바: 부드러운 움직임과 생동감 */
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: var(--card-background);
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: inset 0 2px 5px var(--shadow-color);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    width: 0%;
+    transition: width 0.5s ease-in-out;
+}
+
+/* 질문 컨테이너: 깔끔하고 집중된 스타일 */
+#quiz-container {
+    background: var(--card-background);
+    padding: 30px;
+    border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 6px 20px var(--shadow-color);
+    border-left: 5px solid var(--primary-color);
+}
+
+/* 답변 버튼: 역동적인 버튼 디자인 */
+.answer-btn {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    background: var(--secondary-color);
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1em;
+}
+
+.answer-btn:hover {
+    background: var(--primary-color);
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+/* 애니메이션: 자연스러운 움직임 */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* 반응형 디자인: 모바일 친화적 레이아웃 */
+@media (max-width: 600px) {
+    .content-wrapper {
+        padding: 20px;
+    }
+
+    .main-title {
+        font-size: 2em;
+    }
+
+    .start-btn {
+        font-size: 1.2em;
+        padding: 12px 40px;
+    }
+
+    .answer-btn {
+        font-size: 0.9em;
+    }
+}
+
+
+/* 결과 분석 팝업 */
+#result-analysis-popup .popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: auto;
+    min-width: 300px;
+}
+
+.analysis-text {
+    font-size: 1.3em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#result-countdown {
+    font-size: 2em;
+    color: var(--primary-color);
+}
+
+/* 결과 컨테이너 */
+#result-container {
+    background: var(--card-background);
+    padding: 40px;
+    border-radius: 15px;
+    margin: 30px 0;
+    box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+/* 행복 지수 미터 */
+.happiness-meter {
+    width: 100%;
+    height: 20px;
+    background: var(--background-color);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 30px 0;
+    box-shadow: inset 0 4px 10px var(--shadow-color);
+}
+
+.meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    width: 0%;
+    transition: width 2s cubic-bezier(0.5, 0, 0.5, 1);
+    position: relative;
+}
+
+/* 공유 버튼 */
+.share-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.share-btn {
+    padding: 16px 28px;
+    border: none;
+    border-radius: 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-weight: bold;
+    background: var(--primary-color);
+    color: white;
+}
+
+.share-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+.line-btn { background: #2c6e49; }
+.copy-btn { background: #3578e5; }
+.retake-btn { background: #d32f2f; }
+.home-btn { background: #8e24aa; text-decoration: none; }
+
+/* 애니메이션 */
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* 팝업 스타일 수정 */
 .popup {
     display: none;
