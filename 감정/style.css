@@ -303,6 +303,23 @@ body {
     height: 280px !important;
 }
 
+/* 팝업 광고 컨테이너 스타일 수정 */
+.popup .ad-container {
+    width: 336px;
+    height: 280px;
+    margin: 0;
+    background: var(--card-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-ad ins.adsbygoogle {
+    display: block !important;
+    width: 336px !important;
+    height: 280px !important;
+}
+
 /* 모바일 대응 */
 @media (max-width: 800px) {
     .popup-content {

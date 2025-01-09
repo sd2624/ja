@@ -153,16 +153,14 @@ function showAdPopup() {
     popup.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     
-    // 광고 초기화 먼저 실행
-    const adElement = popup.querySelector('.adsbygoogle');
-    if (adElement) {
-        try {
-            if (!adElement.hasAttribute('data-ad-status')) {
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            }
-        } catch (e) {
-            console.log("Popup ad error:", e);
+    // 팝업 광고 초기화 (새로운 슬롯 사용)
+    try {
+        const adElement = popup.querySelector('.adsbygoogle');
+        if (adElement && !adElement.hasAttribute('data-ad-status')) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
         }
+    } catch (e) {
+        console.log("Popup ad error:", e);
     }
     
     let count = 7;
@@ -180,7 +178,6 @@ function showAdPopup() {
         }
     }, 1000);
     
-    // 클릭 이벤트는 한 번만 등록
     closeBtn.onclick = function() {
         if (!this.disabled) {
             clearInterval(timer);
@@ -283,5 +280,14 @@ function initializeAds() {
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
-    initializeAds(); // 모든 광고 초기화
+    
+    // 모든 광고 초기화 (중간 광고와 시작 버튼 밑 광고)
+    const regularAds = document.querySelectorAll('.ad-container:not(.popup-ad) .adsbygoogle');
+    regularAds.forEach(ad => {
+        try {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+            console.log("Ad initialization error:", e);
+        }
+    });
 });
