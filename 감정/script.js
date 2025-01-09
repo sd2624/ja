@@ -246,6 +246,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         popup.style.display = 'flex';
         
+        // 광고 스크립트 실행
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        
         closeBtn.onclick = function() {
             popup.style.display = 'none';
         }
