@@ -140,7 +140,7 @@ function handleAnswer(value) {
     if (currentQuestion < questions.length) {
         showQuestion(currentQuestion);
     } else {
-        showFinalResult();
+        showFinalResult(); // 바로 결과 표시
     }
 }
 
@@ -151,8 +151,10 @@ function showFinalResult() {
     const resultText = document.getElementById('result-text');
     const meterFill = document.querySelector('.meter-fill');
     
+    // 퀴즈 컨테이너 숨기기
     quizContainer.style.display = 'none';
     
+    // 점수 계산 및 결과 설정
     const finalScore = Math.floor((score / (totalQuestions * 5)) * 100);
     
     let result;
@@ -167,8 +169,10 @@ function showFinalResult() {
         meterFill.style.width = '40%';
     }
     
+    // 결과 텍스트 설정 및 컨테이너 표시
     resultText.innerHTML = result.replace(/\n/g, '<br>');
     resultContainer.style.display = 'block';
+    resultContainer.scrollIntoView({ behavior: 'smooth' });
 }
 
 // LINE 공유
