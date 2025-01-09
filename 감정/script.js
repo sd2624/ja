@@ -191,7 +191,7 @@ function showAdPopup() {
     };
 }
 
-// 최종 결과 표시
+// 최종 결과 표시 함수 수정
 function showFinalResult() {
     const quizContainer = document.getElementById('quiz-container');
     const resultContainer = document.getElementById('result-container');
@@ -200,9 +200,6 @@ function showFinalResult() {
     
     // 퀴즈 컨테이너 숨기기
     quizContainer.style.display = 'none';
-    
-    // 결과 중간 광고 제거하고 결과 표시
-    resultContainer.querySelector('.middle-ad')?.remove();
     
     // 점수 계산
     const finalScore = Math.floor((score / (totalQuestions * 5)) * 100);
