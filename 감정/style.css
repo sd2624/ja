@@ -240,50 +240,6 @@ body {
     position: relative;
 }
 
-.popup-header {
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    background: rgba(0, 0, 0, 0.2);
-    gap: 8px;
-}
-
-.analysis-text {
-    font-size: 0.85em;
-    color: var(--text-color);
-    margin-right: auto;
-}
-
-.countdown {
-    font-size: 0.85em;
-    color: var(--primary-color);
-}
-
-.close-btn {
-    font-size: 16px;
-    color: var(--text-color);
-    background: none;
-    border: none;
-    cursor: not-allowed;
-    padding: 4px 8px;
-    opacity: 0.5;
-}
-
-.close-btn.active {
-    cursor: pointer;
-    opacity: 1;
-}
-
-/* 팝업 스타일 수정 */
-.popup-content {
-    width: 336px;
-    padding: 0;
-    background: var(--card-background);
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-}
-
 .popup-controls {
     position: absolute;
     top: -30px;
