@@ -140,52 +140,8 @@ function handleAnswer(value) {
     if (currentQuestion < questions.length) {
         showQuestion(currentQuestion);
     } else {
-        showAdPopup();
+        showFinalResult();
     }
-}
-
-// 광고 팝업 표시 함수 수정
-function showAdPopup() {
-    const popup = document.getElementById('ad-popup');
-    const closeBtn = document.getElementById('close-popup');
-    const countdown = popup.querySelector('.countdown');
-    
-    popup.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    
-    // 팝업 광고 초기화 (새로운 슬롯 사용)
-    try {
-        const adElement = popup.querySelector('.adsbygoogle');
-        if (adElement && !adElement.hasAttribute('data-ad-status')) {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-    } catch (e) {
-        console.log("Popup ad error:", e);
-    }
-    
-    let count = 7;
-    countdown.textContent = count;
-    
-    const timer = setInterval(() => {
-        count--;
-        countdown.textContent = count;
-        
-        if (count < 0) {
-            clearInterval(timer);
-            closeBtn.classList.add('active');
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.disabled = false;
-        }
-    }, 1000);
-    
-    closeBtn.onclick = function() {
-        if (!this.disabled) {
-            clearInterval(timer);
-            popup.style.display = 'none';
-            document.body.style.overflow = '';
-            showFinalResult();
-        }
-    };
 }
 
 // 최종 결과 표시 함수 수정
@@ -195,12 +151,9 @@ function showFinalResult() {
     const resultText = document.getElementById('result-text');
     const meterFill = document.querySelector('.meter-fill');
     
-    // 퀴즈 컨테이너 숨기기
     quizContainer.style.display = 'none';
     
-    // 점수 계산
     const finalScore = Math.floor((score / (totalQuestions * 5)) * 100);
-    console.log('Final Score:', finalScore); // 디버깅용
     
     let result;
     if (finalScore > 75) {
@@ -214,16 +167,8 @@ function showFinalResult() {
         meterFill.style.width = '40%';
     }
     
-    // 결과 텍스트 설정 및 컨테이너 표시
     resultText.innerHTML = result.replace(/\n/g, '<br>');
     resultContainer.style.display = 'block';
-    
-    // 상단 광고 리로드
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.log("Result ad load error:", e);
-    }
 }
 
 // LINE 공유
@@ -265,29 +210,7 @@ function retakeTest() {
     startQuiz();
 }
 
-// 광고 초기화 함수 수정
-function initializeAds() {
-    const adElements = document.querySelectorAll('.adsbygoogle:not([data-ad-status])');
-    adElements.forEach(ad => {
-        try {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-            console.log("Ad initialization error:", e);
-        }
-    });
-}
-
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
-    
-    // 모든 광고 초기화 (중간 광고와 시작 버튼 밑 광고)
-    const regularAds = document.querySelectorAll('.ad-container:not(.popup-ad) .adsbygoogle');
-    regularAds.forEach(ad => {
-        try {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-            console.log("Ad initialization error:", e);
-        }
-    });
 });

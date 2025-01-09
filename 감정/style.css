@@ -25,25 +25,6 @@ body {
     padding: 25px;
 }
 
-/* 광고 컨테이너 스타일 */
-.ad-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 20px auto;
-    min-height: 90px;
-    background: var(--card-background);
-    border-radius: 15px;
-    box-shadow: 0 10px 30px var(--shadow-color);
-    overflow: hidden;
-    text-align: center;
-}
-
-/* 광고 위치별 마진 */
-.top-ad { margin-top: 0; }
-.middle-ad { margin: 35px auto; }
-.bottom-ad { margin-bottom: 0; }
-.start-ad { margin: 30px auto; } /* 시작 버튼 밑 광고 마진 추가 */
-
 /* 메인 타이틀 */
 .main-title {
     text-align: center;
@@ -292,43 +273,10 @@ body {
     opacity: 1;
 }
 
-.popup-ad {
-    width: 336px;
-    height: 280px;
-}
-
-.popup-ad ins.adsbygoogle {
-    display: block !important;
-    width: 336px !important;
-    height: 280px !important;
-}
-
-/* 팝업 광고 컨테이너 스타일 수정 */
-.popup .ad-container {
-    width: 336px;
-    height: 280px;
-    margin: 0;
-    background: var(--card-background);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.popup-ad ins.adsbygoogle {
-    display: block !important;
-    width: 336px !important;
-    height: 280px !important;
-}
-
 /* 모바일 대응 */
 @media (max-width: 800px) {
     .popup-content {
         width: 336px;
-    }
-    
-    .popup .ad-container {
-        width: 336px;
-        height: 280px;
     }
 }
 
@@ -355,18 +303,6 @@ body {
     .main-title {
         font-size: 1.8em;
     }
-    .popup-ad-container {
-        width: 100%;
-        max-width: 300px;
-        height: auto;
-        min-height: 250px;
-    }
-
-    .popup-ad-container ins.adsbygoogle {
-        width: 100% !important;
-        height: 100% !important;
-        min-height: 250px;
-    }
 }
 
 @media (min-width: 601px) {
@@ -378,10 +314,4 @@ body {
     #quiz-container {
         padding: 30px;
     }
-}
-
-.ad-container-popup {
-    width: 300px;
-    height: 250px;
-    margin: 20px auto;
 }
