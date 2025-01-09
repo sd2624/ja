@@ -164,14 +164,14 @@ function showAdPopup() {
     // 광고 스크립트 실행
     (adsbygoogle = window.adsbygoogle || []).push({});
     
-    let count = 7;
+    let count = 5;
     countdown.textContent = count;
     
     const timer = setInterval(() => {
         count--;
         if (count < 0) {
             clearInterval(timer);
-            countdown.style.display = 'none'; // 카운ター 숫자 사라지게 함
+            countdown.style.display = 'none'; // 카운터 숫자 사라지게 함
             closeBtn.disabled = false;
             closeBtn.classList.add('active');
         } else {
@@ -182,7 +182,7 @@ function showAdPopup() {
     closeBtn.onclick = function() {
         popup.style.display = 'none';
         document.body.style.overflow = '';
-        showFinalResult();
+        showResult();
     };
 }
 
@@ -193,7 +193,7 @@ function showFinalResult() {
     const resultText = document.getElementById('result-text');
     const meterFill = document.querySelector('.meter-fill');
     
-    // 퀴즈 컨テ이너 숨기기
+    // 퀴즈 컨테이너 숨기기
     quizContainer.style.display = 'none';
     
     // 점수 계산 및 결과 설정
