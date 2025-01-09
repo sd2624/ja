@@ -140,49 +140,8 @@ function handleAnswer(value) {
     if (currentQuestion < questions.length) {
         showQuestion(currentQuestion);
     } else {
-        showResultPopup(); // 결과 팝업 표시
+        showFinalResult(); // 바로 결과 표시
     }
-}
-
-// 결과 팝업 표시 함수 수정
-function showResultPopup() {
-    const popup = document.getElementById('result-popup');
-    const closeBtn = document.getElementById('close-popup');
-    const analysisText = document.querySelector('.analysis-text');
-    popup.style.display = 'flex';
-    document.body.classList.add('popup-open');
-    
-    let count = 7;
-    const countdown = document.querySelector('.countdown');
-    analysisText.textContent = '結果を分析しています...';
-    
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.log("Popup ad error:", e);
-    }
-    
-    const timer = setInterval(() => {
-        countdown.textContent = count;
-        count--;
-        
-        if (count < 0) {
-            clearInterval(timer);
-            closeBtn.style.pointerEvents = 'auto'; // 7초 후 클릭 활성화
-        }
-    }, 1000);
-    
-    // 7초 후에만 닫기 버튼 활성화
-    closeBtn.style.pointerEvents = 'none';
-    
-    closeBtn.addEventListener('click', () => {
-        if (count < 0) {  // 7초 후에만 닫기 가능
-            clearInterval(timer);
-            popup.style.display = 'none';
-            document.body.classList.remove('popup-open');
-            showFinalResult();
-        }
-    });
 }
 
 // 최종 결과 표시
