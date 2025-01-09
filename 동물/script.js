@@ -272,6 +272,13 @@ function goToHome() {
     window.location.href = 'http://japan.testpro.site/';
 }
 
+// 테스트 초기화 함수 추가
+function initializeTest() {
+    document.querySelector('.intro-section').style.display = 'block';
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('result-container').style.display = 'none';
+}
+
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
