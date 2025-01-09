@@ -153,21 +153,14 @@ function handleAnswer(choiceIndex) {
     }
 }
 
-// 광고 팝업 표시 함수 수정
+// 광고 팝업 표시 함수
 function showAdPopup() {
     const popup = document.getElementById('ad-popup');
     const closeBtn = document.getElementById('close-popup');
     const countdown = popup.querySelector('.countdown');
     
-    popup.style.display = 'flex';
+    popup.style.display = 'block';
     document.body.style.overflow = 'hidden';
-    
-    // 광고 요소 초기화 및 새로 로드
-    const adContainer = popup.querySelector('.adsbygoogle');
-    if (adContainer) {
-        adContainer.innerHTML = '';
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    }
     
     let count = 5;
     countdown.textContent = count;
@@ -178,14 +171,14 @@ function showAdPopup() {
         
         if (count <= 0) {
             clearInterval(timer);
+            countdown.style.display = 'none';
             closeBtn.disabled = false;
             closeBtn.classList.add('active');
-            countdown.style.display = 'none';
         }
     }, 1000);
     
     closeBtn.onclick = function() {
-        if (closeBtn.classList.contains('active')) {
+        if (!closeBtn.disabled) {
             popup.style.display = 'none';
             document.body.style.overflow = '';
             showResult();
