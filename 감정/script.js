@@ -140,16 +140,37 @@ function loadAds() {
     }
 }
 
-// 결과 표시 전 광고 표시
-function showResultWithAd() {
-    const resultAd = document.getElementById('result-ad');
-    resultAd.style.display = 'block';
-    loadAds();
+// 광고 팝업 표시 함수 수정
+function showAdPopup() {
+    const popup = document.getElementById('ad-popup');
+    const closeBtn = document.getElementById('close-popup');
+    const countdown = popup.querySelector('.countdown');
     
-    // 광고 로드 후 결과 표시
-    setTimeout(() => {
-        showFinalResult();
+    popup.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    
+    // 광고 스크립트 실행
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    
+    let count = 7;
+    countdown.textContent = count;
+    
+    const timer = setInterval(() => {
+        count--;
+        countdown.textContent = count;
+        
+        if (count < 0) {
+            clearInterval(timer);
+            closeBtn.disabled = false;
+            closeBtn.classList.add('active');
+        }
     }, 1000);
+    
+    closeBtn.onclick = function() {
+        popup.style.display = 'none';
+        document.body.style.overflow = '';
+        showFinalResult();
+    };
 }
 
 // 기존 handleAnswer 함수 수정
@@ -161,7 +182,7 @@ function handleAnswer(value) {
     if (currentQuestion < questions.length) {
         showQuestion(currentQuestion);
     } else {
-        showResultWithAd();
+        showAdPopup();
     }
 }
 
