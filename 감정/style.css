@@ -286,15 +286,6 @@ body {
     background: rgba(0, 0, 0, 0.9);
 }
 
-.ad-wrapper {
-    width: 336px;
-    height: 280px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--background-color);
-}
-
 /* 불필요한 스타일 제거 */
 .middle-ad {
     display: none;
@@ -343,13 +334,39 @@ body {
     background: rgba(255, 255, 255, 0.2);
 }
 
-.popup .ad-container {
-    width: 336px;
-    height: 280px;
-    margin: 0;
-    display: flex;
+/* 팝업 스타일 */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
+}
+
+.popup-content {
+    background: var(--card-background);
+    padding: 20px;
+    border-radius: 10px;
+    width: 336px;
+    overflow: hidden;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-color);
+    cursor: pointer;
 }
 
 /* 모바일 대응 */
@@ -392,70 +409,5 @@ body {
     
     #quiz-container {
         padding: 30px;
-    }
-}
-
-/* 팝업 스타일 */
-.popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1000;
-}
-
-.popup-content {
-    position: relative;
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    width: 70%;
-    max-width: 500px;
-    border-radius: 5px;
-}
-
-.close-btn {
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.ad-content {
-    text-align: center;
-}
-
-.ad-content img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* 광고 컨테이너 스타일 */
-.ad-container {
-    width: 100%;
-    max-width: 780px;
-    margin: 20px auto;
-    text-align: center;
-    background: var(--card-background);
-    padding: 15px;
-    border-radius: 10px;
-    min-height: 90px;
-}
-
-@media (max-width: 600px) {
-    .ad-container {
-        padding: 10px;
-        margin: 15px auto;
-    }
-}
-
-/* 모바일 광고 조정 */
-@media (max-width: 600px) {
-    .ad-container {
-        margin: 15px auto;
     }
 }

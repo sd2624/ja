@@ -165,44 +165,6 @@ function handleAnswer(value) {
     }
 }
 
-// 광고 팝업 표시 함수 수정
-function showAdPopup() {
-    const popup = document.getElementById('ad-popup');
-    const closeBtn = document.getElementById('close-popup');
-    const countdown = popup.querySelector('.countdown');
-    
-    popup.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.log("Ad error:", e);
-    }
-    
-    let count = 7;
-    countdown.textContent = count;
-    
-    const timer = setInterval(() => {
-        count--;
-        countdown.textContent = count;
-        
-        if (count < 0) {
-            clearInterval(timer);
-            closeBtn.disabled = false;
-            closeBtn.classList.add('active');
-        }
-    }, 1000);
-    
-    closeBtn.onclick = function() {
-        if (!this.disabled) {
-            popup.style.display = 'none';
-            document.body.style.overflow = '';
-            showFinalResult();
-        }
-    };
-}
-
 // 최종 결과 표시 함수 수정
 function showFinalResult() {
     const quizContainer = document.getElementById('quiz-container');
@@ -276,27 +238,16 @@ function retakeTest() {
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
-});
 
-// 팝업 관련 기능
-window.onload = function() {
-    const popup = document.getElementById('adPopup');
-    const closeBtn = document.querySelector('.close-btn');
-
-    // 페이지 로드 3초 후 팝업 표시
+    // 페이지 로드 2초 후 팝업 표시
     setTimeout(() => {
-        popup.style.display = 'block';
-    }, 3000);
-
-    // 닫기 버튼 클릭 시 팝업 닫기
-    closeBtn.onclick = function() {
-        popup.style.display = 'none';
-    }
-
-    // 팝업 외부 클릭 시 닫기
-    window.onclick = function(event) {
-        if (event.target == popup) {
+        const popup = document.getElementById('ad-popup');
+        const closeBtn = document.getElementById('close-popup');
+        
+        popup.style.display = 'flex';
+        
+        closeBtn.onclick = function() {
             popup.style.display = 'none';
         }
-    }
-}
+    }, 2000);
+});
