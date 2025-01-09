@@ -256,3 +256,26 @@ function retakeTest() {
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
 });
+
+// 팝업 관련 기능
+window.onload = function() {
+    const popup = document.getElementById('adPopup');
+    const closeBtn = document.querySelector('.close-btn');
+
+    // 페이지 로드 3초 후 팝업 표시
+    setTimeout(() => {
+        popup.style.display = 'block';
+    }, 3000);
+
+    // 닫기 버튼 클릭 시 팝업 닫기
+    closeBtn.onclick = function() {
+        popup.style.display = 'none';
+    }
+
+    // 팝업 외부 클릭 시 닫기
+    window.onclick = function(event) {
+        if (event.target == popup) {
+            popup.style.display = 'none';
+        }
+    }
+}
