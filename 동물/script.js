@@ -125,8 +125,8 @@ let userAnswers = [];
 
 // 테스트 시작
 document.getElementById('start-test').addEventListener('click', () => {
-    document.querySelector('.intro-section').style.display = 'none';
-    document.getElementById('question-container').style.display = 'block';
+    document.querySelector('.intro-text').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
     showQuestion();
 });
 
@@ -171,7 +171,7 @@ function showAdPopup() {
         count--;
         if (count < 0) {
             clearInterval(timer);
-            countdown.style.display = 'none'; // 카운터 숫자 사라지게 함
+            countdown.style.display = 'none'; // 카운ター 숫자 사라지게 함
             closeBtn.disabled = false;
             closeBtn.classList.add('active');
         } else {
@@ -193,7 +193,7 @@ function showFinalResult() {
     const resultText = document.getElementById('result-text');
     const meterFill = document.querySelector('.meter-fill');
     
-    // 퀴즈 컨테이너 숨기기
+    // 퀴즈 컨テ이너 숨기기
     quizContainer.style.display = 'none';
     
     // 점수 계산 및 결과 설정
@@ -211,7 +211,7 @@ function showFinalResult() {
         meterFill.style.width = '40%';
     }
     
-    // 결과 텍스트 설정 및 컨테이너 표시
+    // 결과 텍スト 설정 및 컨테이너 표시
     resultText.innerHTML = result.replace(/\n/g, '<br>');
     resultContainer.style.display = 'block';
     resultContainer.scrollIntoView({ behavior: 'smooth' });
@@ -274,7 +274,7 @@ function goToHome() {
 
 // 테스트 초기화 함수 추가
 function initializeTest() {
-    document.querySelector('.intro-section').style.display = 'block';
+    document.querySelector('.intro-text').style.display = 'block';
     document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('result-container').style.display = 'none';
 }
