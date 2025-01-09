@@ -144,15 +144,14 @@ function handleAnswer(value) {
     }
 }
 
-// 광고 팝업 표시 함수 추가
+// 광고 팝업 표시 함수 수정
 function showAdPopup() {
     const popup = document.getElementById('ad-popup');
     const closeBtn = document.getElementById('close-popup');
+    const countdown = popup.querySelector('.countdown');
+    
     popup.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    
-    let count = 7;
-    const countdown = popup.querySelector('.countdown');
     
     // 광고 로드
     try {
@@ -161,25 +160,26 @@ function showAdPopup() {
         console.log("Popup ad error:", e);
     }
     
+    let count = 7;
     const timer = setInterval(() => {
         countdown.textContent = count;
         count--;
         
         if (count < 0) {
             clearInterval(timer);
-            closeBtn.disabled = false;
-            closeBtn.style.opacity = '1';
+            closeBtn.classList.add('active');
             closeBtn.style.cursor = 'pointer';
+            closeBtn.disabled = false;
         }
     }, 1000);
     
-    closeBtn.addEventListener('click', () => {
+    closeBtn.onclick = () => {
         if (!closeBtn.disabled) {
             popup.style.display = 'none';
             document.body.style.overflow = '';
             showFinalResult();
         }
-    });
+    };
 }
 
 // 최종 결과 표시
