@@ -140,7 +140,7 @@ function showQuestion() {
         `).join('')}
     `;
 }
-// 답변 처리 함수
+// 답변 처리 함수 수정
 function handleAnswer(choiceIndex) {
     userAnswers.push(choiceIndex);
     
@@ -148,11 +148,12 @@ function handleAnswer(choiceIndex) {
         currentQuestion++;
         showQuestion();
     } else {
+        // 마지막 질문 후 바로 광고 표시
         showAdPopup();
     }
 }
 
-// 광고 팝업 표시 함수
+// 광고 팝업 표시 함수 수정
 function showAdPopup() {
     const popup = document.getElementById('ad-popup');
     const closeBtn = document.getElementById('close-popup');
@@ -161,11 +162,11 @@ function showAdPopup() {
     popup.style.display = 'block';
     document.body.style.overflow = 'hidden';
     
-    // 광고 로드
-    try {
+    // 광고 요소 초기화 및 새로 로드
+    const adContainer = popup.querySelector('.adsbygoogle');
+    if (adContainer) {
+        adContainer.innerHTML = '';
         (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.error('광고 로드 실패:', e);
     }
     
     let count = 5;
