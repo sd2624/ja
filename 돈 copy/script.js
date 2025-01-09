@@ -233,41 +233,7 @@ function initializeAds() {
     });
 }
 
-// 광고 팝업 표시 함수 수정
-function showAdPopup() {
-    const popup = document.getElementById('ad-popup');
-    const closeBtn = document.getElementById('close-popup');
-    const countdown = popup.querySelector('.countdown');
-    
-    popup.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    
-    // 광고 스크립트 실행
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    
-    let count = 7;
-    countdown.textContent = count;
-    
-    const timer = setInterval(() => {
-        count--;
-        if (count < 0) {
-            clearInterval(timer);
-            countdown.style.display = 'none'; // 카운터 숫자 사라지게 함
-            closeBtn.disabled = false;
-            closeBtn.classList.add('active');
-        } else {
-            countdown.textContent = count;
-        }
-    }, 1000);
-    
-    closeBtn.onclick = function() {
-        popup.style.display = 'none';
-        document.body.style.overflow = '';
-        showFinalResult();
-    };
-}
-
-// 페이지가読み込まれた時に実行
+// ページが読み込まれた時に実行
 document.addEventListener('DOMContentLoaded', () => {
     initializeTest();
     initializeAds();

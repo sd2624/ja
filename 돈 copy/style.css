@@ -167,34 +167,6 @@ body {
     height: 100%;
 }
 
-.popup-controls {
-    position: absolute;
-    top: 0; /* 위치를 더 위로 올림 */
-    right: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.countdown {
-    color: var(--text-color);
-    font-size: 1em; /* 원래 폰트 크기 */
-    background: rgba(0, 0, 0, 0.6);
-    padding: 4px 10px;
-    border-radius: 15px;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 24px; /* 원래 X 버튼의 폰트 크기 */
-    color: var(--text-color);
-    cursor: pointer;
-    position: absolute;
-    top: 0; /* 위치를 더 위로 올림 */
-    right: 10px;
-}
-
 /* 결과 컨테이너 */
 #result-container {
     background: #fff;
