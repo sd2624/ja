@@ -164,24 +164,29 @@ function handleAnswer(choiceIndex) {
     }
 }
 
-// 광고 팝업 표시 함수 추가
+// 광고 팝업 표시 함수 수정
 function showAdPopup() {
     const popup = document.getElementById('ad-popup');
     const countdown = popup.querySelector('.countdown');
     popup.style.display = 'flex';
     
     // 애드센스 광고 로드
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    try {
+        const adElement = popup.querySelector('.adsbygoogle');
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error('Ad load error:', e);
+    }
     
     let timeLeft = 7;
     const timer = setInterval(() => {
-        timeLeft--;
         countdown.textContent = timeLeft;
+        timeLeft--;
         
-        if (timeLeft <= 0) {
+        if (timeLeft < 0) {
             clearInterval(timer);
             popup.style.display = 'none';
-            showResult(); // 7초 후 결과 표시
+            showResult();
         }
     }, 1000);
 }

@@ -300,6 +300,7 @@ body {
     border-radius: 10px;
     position: relative;
     width: 336px;
+    text-align: center;
 }
 
 .popup-header {
@@ -387,7 +388,7 @@ body {
     text-align: center;
 }
 
-/* 광고 팝업 스타일 */
+/* 광고 팝업 스타일 수정 */
 .popup {
     display: none;
     position: fixed;
@@ -407,41 +408,39 @@ body {
     border-radius: 10px;
     position: relative;
     width: 336px;
-}
-
-.popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
     text-align: center;
 }
 
-.countdown {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--primary-color);
+.popup-header {
+    margin-bottom: 20px;
 }
 
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
+.analysis-text {
+    font-size: 1.2em;
+    margin-bottom: 15px;
     color: #333;
-    cursor: not-allowed;
-    opacity: 0.5;
 }
 
-.close-btn.active {
-    cursor: pointer;
-    opacity: 1;
-}
-
-.popup-body {
-    min-height: 280px;
+.personality-loader {
     display: flex;
     justify-content: center;
-    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.personality-loader span {
+    font-size: 24px;
+    animation: bounce 1s infinite;
+}
+
+.personality-loader span:nth-child(2) { animation-delay: 0.2s; }
+.personality-loader span:nth-child(3) { animation-delay: 0.4s; }
+.personality-loader span:nth-child(4) { animation-delay: 0.6s; }
+
+.popup-ad-container {
+    width: 336px;
+    height: 280px;
+    margin: 0 auto;
 }
 
 /* 다른 테스트 팝업 스타일 */
