@@ -130,16 +130,28 @@ document.getElementById('start-test').addEventListener('click', () => {
     showQuestion();
 });
 
+// 진행률 업데이트 함수
+function updateProgress() {
+    const progressBar = document.querySelector('.progress-bar');
+    const progress = ((currentQuestion + 1) / questions.length) * 100;
+    progressBar.style.width = `${progress}%`;
+}
+
 // 질문 표시 함수
 function showQuestion() {
     const questionContainer = document.getElementById('question-container');
     questionContainer.innerHTML = `
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
         <div class="question">${questions[currentQuestion]}</div>
         ${choices[currentQuestion].map((choice, index) => `
             <button class="answer-btn" onclick="handleAnswer(${index})">${choice}</button>
         `).join('')}
     `;
+    updateProgress();
 }
+
 // 답변 처리 함수 수정
 function handleAnswer(choiceIndex) {
     userAnswers.push(choiceIndex);
@@ -153,40 +165,27 @@ function handleAnswer(choiceIndex) {
     }
 }
 
-// 광고 팝업 표시 함수 수정
+// 광고 팝업 표시 함수
 function showAdPopup() {
-    const popup = document.getElementById('ad-popup');
-    const closeBtn = document.getElementById('close-popup');
-    const countdown = popup.querySelector('.countdown');
-    
+    const popup = document.querySelector('.ad-popup');
     popup.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
     
-    // 광고 스크립트 실행
+    // 애드센스 광고 로드
     (adsbygoogle = window.adsbygoogle || []).push({});
     
-    let count = 7;
-    countdown.textContent = count;
+    let timeLeft = 5;
+    const countdownElement = document.getElementById('ad-countdown');
     
     const timer = setInterval(() => {
-        count--;
-        if (count < 0) {
+        timeLeft--;
+        countdownElement.textContent = timeLeft;
+        
+        if (timeLeft <= 0) {
             clearInterval(timer);
-            countdown.style.display = 'none';
-            closeBtn.disabled = false;
-            closeBtn.classList.add('active');
-        } else {
-            countdown.textContent = count;
+            popup.style.display = 'none';
+            showResult();
         }
     }, 1000);
-    
-    closeBtn.onclick = function() {
-        if (!closeBtn.disabled) {
-            popup.style.display = 'none';
-            document.body.style.overflow = '';
-            showResult(); // 동물 테스트에 맞는 결과 표시 함수 호출
-        }
-    };
 }
 
 // 최종 결과 표시 함수 수정
