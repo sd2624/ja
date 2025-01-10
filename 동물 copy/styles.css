@@ -1,152 +1,503 @@
-/* 기본 스타일 */
+/* 기본 설정: 활기차고 대조적인 색상 조합 */
 :root {
-    --primary-color: #4a90e2;
-    --secondary-color: #f39c12;
-    --background-color: #f5f6fa;
-    --text-color: #2c3e50;
+    --primary-color: #FF5722; /* 생동감 있는 주황색 */
+    --secondary-color: #2196F3; /* 선명한 파란색 */
+    --accent-color: #FFC107; /* 따뜻한 노란색 */
+    --text-color: #212121; /* 진한 검정색 텍스트 */
+    --background-color: #FAFAFA; /* 부드러운 밝은 회색 */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* 은은한 그림자 */
+    --card-background: #FFFFFF; /* 순백색 카드 배경 */
 }
 
+/* 전체 레이아웃: 넓고 시원한 느낌의 여백 */
 body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background-color: var(--background-color);
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    background: var(--background-color);
+    color: var(--text-color);
     line-height: 1.6;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
+.content-wrapper {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 40px;
+    background: var(--card-background);
+    box-shadow: 0 4px 20px var(--shadow-color);
+    border-radius: 20px;
+}
+
+/* 메인 타이틀: 밝고 대담한 스타일 */
+.main-title {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 3em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 30px 0;
+    text-transform: uppercase;
+}
+
+/* 인트로 섹션: 시각적으로 강조된 카드 스타일 */
+.intro-text {
+    background: var(--accent-color);
+    color: #FFFFFF;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(255, 193, 7, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.expert-icon {
+    font-size: 70px;
+    margin-bottom: 30px;
+    color: #FFFFFF;
+    animation: bounce 2s infinite;
+}
+
+/* 시작 버튼: 강렬한 대조와 애니메이션 추가 */
+.start-container {
+    text-align: center;
+    margin: 40px 0;
+    margin-bottom: 20px;
+}
+
+.start-btn {
+    background: var(--primary-color);
+    color: #FFFFFF;
+    font-size: 1.4em;
+    padding: 15px 60px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 15px rgba(255, 87, 34, 0.3);
+}
+
+.start-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 87, 34, 0.5);
+}
+
+/* 진행 상태바: 부드러운 움직임과 생동감 */
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: var(--background-color);
+    border-radius: 10px;
+    margin: 20px 0;
+    overflow: hidden;
+    box-shadow: inset 0 2px 5px var(--shadow-color);
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: width 0.3s ease-in-out;
+}
+
+/* 질문 컨테이너: 깔끔하고 집중된 스타일 */
+#quiz-container {
+    background: var(--card-background);
+    padding: 30px;
+    border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 6px 20px var(--shadow-color);
+    border-left: 5px solid var(--primary-color);
+    max-width: 600px;
+    margin: 20px auto;
     padding: 20px;
 }
 
-/* 광고 컨테이너 스타일 */
-.ad-container-top {
-    width: 100%;
-    min-height: 90px;
-    margin: 20px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.ad-container-popup {
-    width: 300px;
-    height: 250px;
-    margin: 20px auto;
-}
-/* 인트로 섹션 애니메이션과 스타일 */
-.intro-section {
-    text-align: center;
-    animation: fadeIn 1.5s ease-in;
-    padding: 30px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.intro-section h1 {
-    font-size: 2em;
-    color: var(--text-color);
-    margin-bottom: 20px;
-    animation: bounce 1s ease infinite;
-}
-
-/* 시작 버튼 스타일 */
-.start-button {
-    background: linear-gradient(45deg, #4a90e2, #67b26f);
-    color: white;
-    border: none;
-    padding: 15px 40px;
-    border-radius: 25px;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    margin-top: 20px;
-}
-
-.start-button:hover {
-    transform: scale(1.05);
-}
-
-/* 질문 컨테이너 스타일 */
-.question-container {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    animation: slideIn 0.5s ease-out;
-}
-
+/* 질문 텍스트 크기 조정 */
 .question {
     font-size: 1.2em;
     margin-bottom: 20px;
-    color: var(--text-color);
+    line-height: 1.4;
+    text-align: center;
 }
 
-/* 답변 버튼 스타일 */
+/* 답변 버튼: 역동적인 버튼 디자인 */
 .answer-btn {
-    display: block;
     width: 100%;
     padding: 15px;
     margin: 10px 0;
     border: none;
     border-radius: 8px;
-    background: #f8f9fa;
-    color: var(--text-color);
+    background: var(--secondary-color);
+    color: #FFFFFF;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size: 1em;
+    max-width: 400px;
+    margin: 8px auto;
+    padding: 12px;
+    font-size: 0.95em;
 }
 
 .answer-btn:hover {
     background: var(--primary-color);
-    color: white;
-    transform: translateX(10px);
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
 }
 
-/* 팝업 스타일 */
-.popup-container {
+/* 애니메이션: 자연스러운 움직임 */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* 반응형 디자인: 모바일 친화적 레이아웃 */
+@media (max-width: 600px) {
+    .content-wrapper {
+        padding: 20px;
+    }
+
+    .main-title {
+        font-size: 2em;
+    }
+
+    .start-btn {
+        font-size: 1.2em;
+        padding: 12px 40px;
+    }
+
+    .answer-btn {
+        font-size: 0.9em;
+    }
+}
+
+/* 결과 분석 팝업 */
+#result-analysis-popup .popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: auto;
+    min-width: 300px;
+}
+
+.analysis-text {
+    font-size: 1.3em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#result-countdown {
+    font-size: 2em;
+    color: var(--primary-color);
+}
+
+/* 결과 컨테이너 */
+#result-container {
+    background: var(--card-background);
+    padding: 40px;
+    border-radius: 15px;
+    margin: 30px 0;
+    box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+/* 행복 지수 미터 */
+.happiness-meter {
+    width: 100%;
+    height: 20px;
+    background: var(--background-color);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 30px 0;
+    box-shadow: inset 0 4px 10px var(--shadow-color);
+}
+
+.meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    width: 0%;
+    transition: width 2s cubic-bezier(0.5, 0, 0.5, 1);
+    position: relative;
+}
+
+/* 공유 버튼 */
+.share-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.share-btn {
+    padding: 16px 28px;
+    border: none;
+    border-radius: 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-weight: bold;
+    background: var(--primary-color);
+    color: white;
+}
+
+.share-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+.line-btn { background: #2c6e49; }
+.copy-btn { background: #3578e5; }
+.retake-btn { background: #d32f2f; }
+.home-btn { background: #8e24aa; text-decoration: none; }
+
+/* 애니메이션 */
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 불필요한 스타일 제거 */
+.middle-ad {
+    display: none;
+}
+
+/* 불필요한 광고 관련 스타일 제거 */
+.top-ad,
+.middle-ad,
+.bottom-ad,
+.start-ad {
+    display: none;
+}
+
+/* 팝업 광고 스타일만 유지 */
+.popup {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    width: 336px;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.countdown {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.close-btn.active {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.popup-body {
+    min-height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 모바일 대응 */
+@media (max-width: 800px) {
+    .popup-content {
+        width: 336px;
+    }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+    .content-wrapper {
+        padding: 12px;
+    }
+    
+    .answer-btn {
+        padding: 10px;     /* 모바일에서 더 작게 */
+        margin: 4px 0;     /* 간격 더 축소 */
+        font-size: 0.9em;  /* 폰트 더 작게 */
+    }
+
+    #quiz-container {
+        padding: 15px;    /* 모바일에서 컨테이너 패딩 축소 */
+    }
+    
+    .share-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .main-title {
+        font-size: 1.8em;
+    }
+}
+
+@media (min-width: 601px) {
+    .answer-btn {
+        max-width: 600px;  /* PC에서 최대 너비 제한 */
+        margin: 6px auto;  /* 가운데 정렬 */
+    }
+    
+    #quiz-container {
+        padding: 30px;
+    }
+}
+
+/* 시작 버튼 아래 광고 컨테이너 */
+.start-ad {
+    max-width: 336px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* 광고 팝업 스타일 */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    width: 336px;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.countdown {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.close-btn.active {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.popup-body {
+    min-height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 다른 테스트 팝업 스타일 */
+.other-tests-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
-.popup-content {
+.other-tests-popup .popup-content {
     background: white;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    width: 300px;
 }
 
-/* 카운트다운 스타일 */
-.countdown {
-    font-size: 3em;
-    color: var(--primary-color);
+.test-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     margin: 20px 0;
 }
 
-/* 애니메이션 정의 */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.test-link {
+    padding: 10px;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: all 0.3s ease;
 }
 
-@keyframes slideIn {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
+.test-link:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
 }
 
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+.other-tests-popup button {
+    width: 100%;
+    padding: 10px;
+    background: #ccc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* 공유 버튼 추가 스타일 */
+.share-btn.other-btn {
+    background: #9c27b0;
+}
+
+.share-btn.home-btn {
+    background: #2196f3;
 }

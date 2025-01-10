@@ -124,11 +124,18 @@ let currentQuestion = 0;
 let userAnswers = [];
 
 // 테스트 시작
-document.getElementById('start-btn').addEventListener('click', () => {
-    document.querySelector('.intro-section').style.display = 'none';
-    document.getElementById('question-container').style.display = 'block';
+document.getElementById('start-test').addEventListener('click', () => {
+    document.querySelector('.intro-text').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
     showQuestion();
 });
+
+// 진행률 업데이트 함수 추가
+function updateProgress() {
+    const progressBar = document.querySelector('.progress-fill');
+    const progress = ((currentQuestion + 1) / questions.length) * 100;
+    progressBar.style.width = `${progress}%`;
+}
 
 // 질문 표시 함수
 function showQuestion() {
@@ -139,41 +146,102 @@ function showQuestion() {
             <button class="answer-btn" onclick="handleAnswer(${index})">${choice}</button>
         `).join('')}
     `;
+    updateProgress();
 }
-// 답변 처리 함수
+
+// 답변 처리 함수 수정
 function handleAnswer(choiceIndex) {
+    const buttons = document.querySelectorAll('.answer-btn');
+    buttons.forEach(btn => btn.disabled = true);
+    
     userAnswers.push(choiceIndex);
     
     if (currentQuestion < questions.length - 1) {
         currentQuestion++;
-        showQuestion();
+        setTimeout(() => {
+            showQuestion();
+            buttons.forEach(btn => btn.disabled = false);
+        }, 300);
     } else {
-        showAnalysisPopup();
+        // 마지막 질문 후 광고 팝업 표시
+        showAdPopup();
     }
 }
 
-// 분석 팝업 표시
-function showAnalysisPopup() {
-    const popup = document.getElementById('analysis-popup');
+// 광고 팝업 표시 함수 수정
+function showAdPopup() {
+    const popup = document.getElementById('ad-popup');
+    const closeBtn = document.getElementById('close-popup');
+    const countdown = popup.querySelector('.countdown');
+    
+    // 팝업이 이미 표시되어 있다면 중복 실행 방지
+    if (popup.style.display === 'flex') return;
+    
     popup.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
     
-    let countdown = 7;
-    const countdownDisplay = document.querySelector('.countdown');
-    
-    // 광고 표시
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    // 광고 로드 (수정된 부분)
+    try {
+        const adElement = popup.querySelector('.adsbygoogle');
+        if (adElement) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    } catch (e) {
+        console.error('Ad load error:', e);
+    }
     
     // 카운트다운 시작
+    let count = 7;
+    countdown.textContent = count;
+    
     const timer = setInterval(() => {
-        countdown--;
-        countdownDisplay.textContent = countdown;
-        
-        if (countdown <= 0) {
+        count--;
+        countdown.textContent = count;
+        if (count <= 0) {
             clearInterval(timer);
-            showResult();
-            popup.style.display = 'none';
+            closeBtn.disabled = false;
+            closeBtn.classList.add('active');
         }
     }, 1000);
+    
+    closeBtn.onclick = function() {
+        if (!closeBtn.disabled) {
+            popup.style.display = 'none';
+            document.body.style.overflow = '';
+            showResult(); // 결과 표시
+        }
+    };
+}
+
+// 최종 결과 표시 함수 수정
+function showFinalResult() {
+    const quizContainer = document.getElementById('quiz-container');
+    const resultContainer = document.getElementById('result-container');
+    const resultText = document.getElementById('result-text');
+    const meterFill = document.querySelector('.meter-fill');
+    
+    // 퀴즈 컨테이너 숨기기
+    quizContainer.style.display = 'none';
+    
+    // 점수 계산 및 결과 설정
+    const finalScore = Math.floor((score / (totalQuestions * 5)) * 100);
+    
+    let result;
+    if (finalScore > 75) {
+        result = results.high;
+        meterFill.style.width = '90%';
+    } else if (finalScore > 50) {
+        result = results.medium;
+        meterFill.style.width = '65%';
+    } else {
+        result = results.low;
+        meterFill.style.width = '40%';
+    }
+    
+    // 결과 텍스트 설정 및 컨테이너 표시
+    resultText.innerHTML = result.replace(/\n/g, '<br>');
+    resultContainer.style.display = 'block';
+    resultContainer.scrollIntoView({ behavior: 'smooth' });
 }
 
 // 결과 계산 함수
@@ -184,7 +252,7 @@ function calculateResult() {
     return results[answerSum % 5];
 }
 
-// 결과 표시 함수
+// 결과 표시 함수 수정
 function showResult() {
     const resultType = calculateResult();
     const animal = animalTypes[resultType];
@@ -199,10 +267,21 @@ function showResult() {
                 ${animal.description.map(text => `<p>${text}</p>`).join('')}
             </div>
             <div class="share-buttons">
-                <button onclick="shareLine()">LINEで共有</button>
-                <button onclick="copyUrl()">URLをコピー</button>
-                <button onclick="retakeTest()">もう一度診断する</button>
-                <button onclick="goToHome()">他のテストを見る</button>
+                <button onclick="shareLine()" class="share-btn line-btn">
+                    <span class="icon">📱</span> LINEで共有
+                </button>
+                <button onclick="copyUrl()" class="share-btn copy-btn">
+                    <span class="icon">📋</span> URLをコピー
+                </button>
+                <button onclick="retakeTest()" class="share-btn retake-btn">
+                    <span class="icon">🔄</span> もう一度診断
+                </button>
+                <button onclick="goToOtherTests()" class="share-btn other-btn">
+                    <span class="icon">🎮</span> 他のテスト
+                </button>
+                <a href="http://japan.testpro.site/" class="share-btn home-btn">
+                    <span class="icon">🏠</span> ホームへ
+                </a>
             </div>
         </div>
     `;
@@ -216,7 +295,8 @@ function shareLine() {
 }
 
 function copyUrl() {
-    navigator.clipboard.writeText(window.location.href)
+    const url = window.location.href;
+    navigator.clipboard.writeText(url)
         .then(() => alert('URLをコピーしました！'));
 }
 
@@ -224,9 +304,47 @@ function retakeTest() {
     currentQuestion = 0;
     userAnswers = [];
     document.getElementById('result-container').style.display = 'none';
-    document.querySelector('.intro-section').style.display = 'block';
+    document.getElementById('quiz-container').style.display = 'none';
+    document.querySelector('.intro-text').style.display = 'block';
 }
 
 function goToHome() {
     window.location.href = 'http://japan.testpro.site/';
 }
+
+function goToOtherTests() {
+    const testLinks = {
+        'MBTI診断テスト': 'http://japan.testpro.site/mbti/',
+        '感情診断テスト': 'http://japan.testpro.site/感情/',
+        '相性診断テスト': 'http://japan.testpro.site/相性/',
+        // 다른 테스트 링크 추가 가능
+    };
+    
+    let linksHtml = Object.entries(testLinks)
+        .map(([name, url]) => `<a href="${url}" class="test-link">${name}</a>`)
+        .join('');
+    
+    const popup = document.createElement('div');
+    popup.className = 'other-tests-popup';
+    popup.innerHTML = `
+        <div class="popup-content">
+            <h3>他の診断テスト</h3>
+            <div class="test-links">${linksHtml}</div>
+            <button onclick="this.parentElement.parentElement.remove()">閉じる</button>
+        </div>
+    `;
+    
+    document.body.appendChild(popup);
+}
+
+// 테스트 초기화 함수 추가
+function initializeTest() {
+    document.querySelector('.intro-text').style.display = 'block';
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('result-container').style.display = 'none';
+}
+
+// 페이지 로드 시 실행
+document.addEventListener('DOMContentLoaded', () => {
+    initializeTest();
+});
