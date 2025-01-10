@@ -162,9 +162,6 @@ function showAdPopup() {
     popup.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     
-    // 광고 스크립트 실행
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    
     let count = 7;
     countdown.textContent = count;
     
@@ -184,7 +181,7 @@ function showAdPopup() {
         if (!closeBtn.disabled) {
             popup.style.display = 'none';
             document.body.style.overflow = '';
-            showFinalResult();
+            showResult(); // showFinalResult() 대신 showResult() 사용
         }
     };
 }
