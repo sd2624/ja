@@ -62,6 +62,7 @@ body {
 .start-container {
     text-align: center;
     margin: 40px 0;
+    margin-bottom: 20px;
 }
 
 .start-btn {
@@ -107,6 +108,17 @@ body {
     margin: 20px 0;
     box-shadow: 0 6px 20px var(--shadow-color);
     border-left: 5px solid var(--primary-color);
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* 질문 텍스트 크기 조정 */
+.question {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    text-align: center;
 }
 
 /* 답변 버튼: 역동적인 버튼 디자인 */
@@ -121,6 +133,10 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 1em;
+    max-width: 400px;
+    margin: 8px auto;
+    padding: 12px;
+    font-size: 0.95em;
 }
 
 .answer-btn:hover {
@@ -294,4 +310,11 @@ body {
     #quiz-container {
         padding: 30px;
     }
+}
+
+/* 시작 버튼 아래 광고 컨테이너 */
+.start-ad {
+    max-width: 336px;
+    margin: 20px auto;
+    text-align: center;
 }
