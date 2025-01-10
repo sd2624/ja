@@ -43,18 +43,18 @@
         <!-- 광고 팝업 수정 -->
         <div id="ad-popup" class="popup">
             <div class="popup-content">
-                <div class="popup-header">
-                    <span class="countdown">7</span>
-                    <button id="close-popup" class="close-btn" disabled>×</button>
+                <div class="analysis-header">
+                    <div class="analysis-text">動物タイプを分析中...</div>
+                    <div class="personality-loader">
+                        <span>🐺</span>
+                        <span>🦊</span>
+                        <span>🦉</span>
+                        <span>🦌</span>
+                    </div>
+                    <div class="countdown">7</div>
                 </div>
-                <div class="popup-body">
-                    <!-- 광고 요소 수정 -->
-                    <ins class="adsbygoogle"
-                         style="display:block; width:336px; height:280px;"
-                         data-ad-client="ca-pub-9374368296307755"
-                         data-ad-slot="3201247599"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true">
+                
+                <!-- 팝업 광고 -->
                     </ins>
                 </div>
             </div>
@@ -71,16 +71,19 @@
             <!-- 공유 버튼 -->
             <div class="share-buttons">
                 <button onclick="shareLine()" class="share-btn line-btn">
-                    <span class="icon">📱</span> LINEで共有
+                    <span class="icon">📱</span> LINEで共有する
                 </button>
                 <button onclick="copyURL()" class="share-btn copy-btn">
-                    <span class="icon">📋</span> URLをコピー
+                    <span class="icon">📋</span> URLをコピーする
                 </button>
                 <button onclick="retakeTest()" class="share-btn retake-btn">
-                    <span class="icon">🔄</span> もう一度診断
+                    <span class="icon">🔄</span> もう一度診断する
+                </button>
+                <button onclick="goToOtherTests()" class="share-btn other-btn">
+                    <span class="icon">🎮</span> 他のテストを見る
                 </button>
                 <a href="http://japan.testpro.site/" class="share-btn home-btn">
-                    <span class="icon">🏠</span> 他のテストを見る
+                    <span class="icon">🏠</span> ホームに戻る
                 </a>
             </div>
         </div>

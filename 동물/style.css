@@ -223,24 +223,22 @@ body {
 /* 공유 버튼 */
 .share-buttons {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin: 30px 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 20px 0;
 }
 
 .share-btn {
-    padding: 16px 28px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 32px;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    font-weight: bold;
-    background: var(--primary-color);
-    color: white;
+    gap: 8px;
 }
 
 .share-btn:hover {
@@ -262,6 +260,11 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    20%, 80% { opacity: 1; }
 }
 
 /* 불필요한 스타일 제거 */
@@ -301,9 +304,6 @@ body {
 
 .popup-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
 }
 
 .countdown {

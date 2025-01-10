@@ -130,13 +130,6 @@ document.getElementById('start-test').addEventListener('click', () => {
     showQuestion();
 });
 
-// 진행률 업데이트 함수 추가
-function updateProgress() {
-    const progressBar = document.querySelector('.progress-fill');
-    const progress = ((currentQuestion + 1) / questions.length) * 100;
-    progressBar.style.width = `${progress}%`;
-}
-
 // 질문 표시 함수
 function showQuestion() {
     const questionContainer = document.getElementById('question-container');
@@ -146,24 +139,16 @@ function showQuestion() {
             <button class="answer-btn" onclick="handleAnswer(${index})">${choice}</button>
         `).join('')}
     `;
-    updateProgress();
 }
-
 // 답변 처리 함수 수정
 function handleAnswer(choiceIndex) {
-    const buttons = document.querySelectorAll('.answer-btn');
-    buttons.forEach(btn => btn.disabled = true);
-    
     userAnswers.push(choiceIndex);
     
     if (currentQuestion < questions.length - 1) {
         currentQuestion++;
-        setTimeout(() => {
-            showQuestion();
-            buttons.forEach(btn => btn.disabled = false);
-        }, 300);
+        showQuestion();
     } else {
-        // 마지막 질문 후 광고 팝업 표시
+        // 마지막 질문 후 바로 광고 표시
         showAdPopup();
     }
 }
@@ -174,33 +159,24 @@ function showAdPopup() {
     const closeBtn = document.getElementById('close-popup');
     const countdown = popup.querySelector('.countdown');
     
-    // 팝업이 이미 표시되어 있다면 중복 실행 방지
-    if (popup.style.display === 'flex') return;
-    
     popup.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     
-    // 광고 로드 (수정된 부분)
-    try {
-        const adElement = popup.querySelector('.adsbygoogle');
-        if (adElement) {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-    } catch (e) {
-        console.error('Ad load error:', e);
-    }
+    // 광고 스크립트 실행
+    (adsbygoogle = window.adsbygoogle || []).push({});
     
-    // 카운트다운 시작
     let count = 7;
     countdown.textContent = count;
     
     const timer = setInterval(() => {
         count--;
-        countdown.textContent = count;
-        if (count <= 0) {
+        if (count < 0) {
             clearInterval(timer);
+            countdown.style.display = 'none';
             closeBtn.disabled = false;
             closeBtn.classList.add('active');
+        } else {
+            countdown.textContent = count;
         }
     }, 1000);
     
@@ -208,7 +184,7 @@ function showAdPopup() {
         if (!closeBtn.disabled) {
             popup.style.display = 'none';
             document.body.style.overflow = '';
-            showResult(); // 결과 표시
+            showResult(); // 동물 테스트에 맞는 결과 표시 함수 호출
         }
     };
 }
@@ -238,7 +214,7 @@ function showFinalResult() {
         meterFill.style.width = '40%';
     }
     
-    // 결과 텍스트 설정 및 컨테이너 표시
+    // 결과 텍スト 설정 및 컨테이너 표시
     resultText.innerHTML = result.replace(/\n/g, '<br>');
     resultContainer.style.display = 'block';
     resultContainer.scrollIntoView({ behavior: 'smooth' });
@@ -252,7 +228,7 @@ function calculateResult() {
     return results[answerSum % 5];
 }
 
-// 결과 표시 함수 수정
+// 결과 표시 함수
 function showResult() {
     const resultType = calculateResult();
     const animal = animalTypes[resultType];
@@ -267,21 +243,10 @@ function showResult() {
                 ${animal.description.map(text => `<p>${text}</p>`).join('')}
             </div>
             <div class="share-buttons">
-                <button onclick="shareLine()" class="share-btn line-btn">
-                    <span class="icon">📱</span> LINEで共有
-                </button>
-                <button onclick="copyUrl()" class="share-btn copy-btn">
-                    <span class="icon">📋</span> URLをコピー
-                </button>
-                <button onclick="retakeTest()" class="share-btn retake-btn">
-                    <span class="icon">🔄</span> もう一度診断
-                </button>
-                <button onclick="goToOtherTests()" class="share-btn other-btn">
-                    <span class="icon">🎮</span> 他のテスト
-                </button>
-                <a href="http://japan.testpro.site/" class="share-btn home-btn">
-                    <span class="icon">🏠</span> ホームへ
-                </a>
+                <button onclick="shareLine()">LINEで共有</button>
+                <button onclick="copyUrl()">URLをコピー</button>
+                <button onclick="retakeTest()">もう一度診断する</button>
+                <button onclick="goToHome()">他のテストを見る</button>
             </div>
         </div>
     `;
@@ -295,8 +260,7 @@ function shareLine() {
 }
 
 function copyUrl() {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url)
+    navigator.clipboard.writeText(window.location.href)
         .then(() => alert('URLをコピーしました！'));
 }
 
@@ -304,37 +268,11 @@ function retakeTest() {
     currentQuestion = 0;
     userAnswers = [];
     document.getElementById('result-container').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'none';
-    document.querySelector('.intro-text').style.display = 'block';
+    document.querySelector('.intro-section').style.display = 'block';
 }
 
 function goToHome() {
     window.location.href = 'http://japan.testpro.site/';
-}
-
-function goToOtherTests() {
-    const testLinks = {
-        'MBTI診断テスト': 'http://japan.testpro.site/mbti/',
-        '感情診断テスト': 'http://japan.testpro.site/感情/',
-        '相性診断テスト': 'http://japan.testpro.site/相性/',
-        // 다른 테스트 링크 추가 가능
-    };
-    
-    let linksHtml = Object.entries(testLinks)
-        .map(([name, url]) => `<a href="${url}" class="test-link">${name}</a>`)
-        .join('');
-    
-    const popup = document.createElement('div');
-    popup.className = 'other-tests-popup';
-    popup.innerHTML = `
-        <div class="popup-content">
-            <h3>他の診断テスト</h3>
-            <div class="test-links">${linksHtml}</div>
-            <button onclick="this.parentElement.parentElement.remove()">閉じる</button>
-        </div>
-    `;
-    
-    document.body.appendChild(popup);
 }
 
 // 테스트 초기화 함수 추가

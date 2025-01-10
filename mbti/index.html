@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
     <!-- Event snippet for 페이지 조회 conversion page -->
 <script>
@@ -18,7 +18,7 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3분만에 보는 MBTI 테스트</title>
+    <title>3分で分かるMBTI診断テスト</title>
     <link rel="stylesheet" href="style.css">
     <!-- 카카오 SDK -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -46,9 +46,9 @@
                     <span class="emoji">🤓</span>
                     <span class="emoji">😎</span>
                 </div>
-                <h1>3분만에 보는 MBTI 테스트</h1>
-                <p class="intro-text">12개의 질문으로 알아보는 나의 성격유형!</p>
-                <button id="start-btn" class="pulse-btn">테스트 시작하기</button>
+                <h1>3分で分かるMBTI診断テスト</h1>
+                <p class="intro-text">12の質問であなたの性格タイプを診断！</p>
+                <button id="start-btn" class="pulse-btn">テストを始める</button>
             </div>
 
             <!-- 질문 페이지 -->
@@ -72,25 +72,35 @@
                     <div class="result-type-icon">
                         <span class="type-emoji"></span>
                     </div>
-                    <h2>당신의 MBTI는</h2>
+                    <h2>당신のMBTIは</h2>
                     <h1 id="mbti-result"></h1>
                 </div>
                 <div class="result-content">
                     <h3 id="result-title"></h3>
                     <p id="result-description"></p>
                     <div class="personality-traits">
-                        <h4>성격 특징</h4>
+                        <h4>性格特徴</h4>
                         <ul id="traits-list"></ul>
                     </div>
                     <div class="famous-people">
-                        <h4>같은 유형의 유명인</h4>
+                        <h4>同じタイプの有名人</h4>
                         <p id="famous-list"></p>
                     </div>
                 </div>
                 <div class="share-container">
-                    <button class="share-btn">결과 공유하기</button>
-                    <button class="retry-btn">다시 테스트하기</button>
-                    <a href="https://testpro.site" class="home-btn">다른 테스트 하기</a>
+                    <button onclick="shareLine()" class="share-btn">
+                        <span class="icon">📱</span> LINEで共有
+                    </button>
+                    <button onclick="copyURL()" class="share-btn copy-btn">
+                        <span class="icon">📋</span> URLをコピー
+                    </button>
+                    </button>
+                    <button onclick="retakeTest()" class="retry-btn">
+                        <span class="icon">🔄</span> もう一度診断
+                    </button>
+                    <a href="http://japan.testpro.site/" class="home-btn">
+                        <span class="icon">🏠</span> 他のテストを見る
+                    </a>
                 </div>
             </div>
         </div>
