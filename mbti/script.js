@@ -394,7 +394,7 @@ document.querySelector('.share-btn').addEventListener('click', () => {
     Kakao.Link.sendDefault({
         objectType: 'feed',
         content: {
-            title: '3분만에 보는 MBTI 테스트',
+            title: '3分만에 보는 MBTI 테스트',
             description: `나의 MBTI는 ${mbtiType}입니다!`,
             imageUrl: 'YOUR_IMAGE_URL', // 실제 이미지 URL로 교체 필요
             link: {
@@ -413,6 +413,32 @@ document.querySelector('.share-btn').addEventListener('click', () => {
         ]
     });
 });
+
+// LINE 공유 함수
+function shareLine() {
+    const mbtiType = calculateMBTI();
+    const text = `私のMBTIは${mbtiType}です！\n3分でできるMBTI性格診断テスト`;
+    const url = 'https://testpro.site';
+    const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(text + '\n' + url)}`;
+    window.open(lineUrl, '_blank');
+}
+
+// URL 복사 함수
+function copyURL() {
+    const url = 'https://testpro.site';
+    navigator.clipboard.writeText(url).then(() => {
+        alert('URLをコピーしました！');
+    }).catch(err => {
+        // 클립보드 복사가 실패한 경우 대체 방법
+        const textarea = document.createElement('textarea');
+        textarea.value = url;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        alert('URLをコピーしました！');
+    });
+}
 
 // 다시하기 버튼
 document.querySelector('.retry-btn').addEventListener('click', () => {
