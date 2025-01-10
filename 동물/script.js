@@ -149,69 +149,23 @@ function showQuestion() {
     updateProgress();
 }
 
-// 답변 처리 함수 수정
+// 답변 처리 함수 수정 - 팝업 없이 바로 결과로 이동
 function handleAnswer(choiceIndex) {
-    // 중복 클릭 방지를 위해 모든 버튼 비활성화
     const buttons = document.querySelectorAll('.answer-btn');
     buttons.forEach(btn => btn.disabled = true);
     
     userAnswers.push(choiceIndex);
     
-    // 마지막 질문(14번째 인덱스)인 경우
-    if (currentQuestion === questions.length - 1) {
-        // 바로 광고 팝업 표시
-        showAdPopup();
-    } else {
-        // 다음 질문으로
+    if (currentQuestion < questions.length - 1) {
         currentQuestion++;
         setTimeout(() => {
             showQuestion();
             buttons.forEach(btn => btn.disabled = false);
         }, 300);
+    } else {
+        // 마지막 질문 후 바로 결과 표시
+        showResult();
     }
-}
-
-// 광고 팝업 표시 함수 수정
-function showAdPopup() {
-    const popup = document.getElementById('ad-popup');
-    const closeBtn = document.getElementById('close-popup');
-    const countdown = popup.querySelector('.countdown');
-    
-    // 팝업이 이미 표시되어 있다면 중복 실행 방지
-    if (popup.style.display === 'flex') return;
-    
-    popup.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    
-    // 광고 로드
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.error('Ad load error:', e);
-    }
-    
-    // 카운트다운 시작
-    let count = 7;
-    countdown.textContent = count;
-    
-    const timer = setInterval(() => {
-        count--;
-        countdown.textContent = count;
-        if (count <= 0) {
-            clearInterval(timer);
-            countdown.style.display = 'none';
-            closeBtn.disabled = false;
-            closeBtn.classList.add('active');
-        }
-    }, 1000);
-    
-    closeBtn.onclick = function() {
-        if (!closeBtn.disabled) {
-            popup.style.display = 'none';
-            document.body.style.overflow = '';
-            showResult();
-        }
-    };
 }
 
 // 최종 결과 표시 함수 수정
@@ -221,7 +175,7 @@ function showFinalResult() {
     const resultText = document.getElementById('result-text');
     const meterFill = document.querySelector('.meter-fill');
     
-    // 퀴즈 컨테이너 숨기기
+    // 퀴즈 컨テ이너 숨기기
     quizContainer.style.display = 'none';
     
     // 점수 계산 및 결과 설정
