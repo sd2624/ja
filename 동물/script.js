@@ -151,13 +151,20 @@ function showQuestion() {
 
 // 답변 처리 함수 수정
 function handleAnswer(choiceIndex) {
+    // 중복 클릭 방지
+    const buttons = document.querySelectorAll('.answer-btn');
+    buttons.forEach(btn => btn.disabled = true);
+    
     userAnswers.push(choiceIndex);
     
     if (currentQuestion < questions.length - 1) {
         currentQuestion++;
-        showQuestion();
+        setTimeout(() => {
+            showQuestion();
+            buttons.forEach(btn => btn.disabled = false);
+        }, 300);
     } else {
-        // 마지막 질문 후 바로 광고 표시
+        // 마지막 질문일 경우 바로 광고 표시
         showAdPopup();
     }
 }
@@ -167,35 +174,43 @@ function showAdPopup() {
     const popup = document.getElementById('ad-popup');
     const closeBtn = document.getElementById('close-popup');
     const countdown = popup.querySelector('.countdown');
+    let isTimerStarted = false;
     
     popup.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     
-    // 광고 스크립트 실행
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    // 광고 초기화
+    try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+        console.error('Ad load error:', e);
+    }
     
-    let count = 7;
-    countdown.textContent = count;
-    
-    const timer = setInterval(() => {
-        count--;
-        if (count < 0) {
-            clearInterval(timer);
-            countdown.style.display = 'none';
-            closeBtn.disabled = false;
-            closeBtn.classList.add('active');
-        } else {
-            countdown.textContent = count;
-        }
-    }, 1000);
-    
-    closeBtn.onclick = function() {
-        if (!closeBtn.disabled) {
-            popup.style.display = 'none';
-            document.body.style.overflow = '';
-            showResult(); // 동물 테스트에 맞는 결과 표시 함수 호출
-        }
-    };
+    if (!isTimerStarted) {
+        isTimerStarted = true;
+        let count = 7;
+        countdown.textContent = count;
+        
+        const timer = setInterval(() => {
+            count--;
+            if (count < 0) {
+                clearInterval(timer);
+                countdown.style.display = 'none';
+                closeBtn.disabled = false;
+                closeBtn.classList.add('active');
+            } else {
+                countdown.textContent = count;
+            }
+        }, 1000);
+        
+        closeBtn.onclick = function() {
+            if (!closeBtn.disabled) {
+                popup.style.display = 'none';
+                document.body.style.overflow = '';
+                showResult();
+            }
+        };
+    }
 }
 
 // 최종 결과 표시 함수 수정
