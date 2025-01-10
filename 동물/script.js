@@ -160,30 +160,28 @@ function handleAnswer(choiceIndex) {
         currentQuestion++;
         showQuestion();
     } else {
-        // 마지막 질문 후 바로 광고 표시
-        showAdPopup();
+        showAdPopup(); // 마지막 질문 후 광고 팝업 표시
     }
 }
 
-// 광고 팝업 표시 함수
+// 광고 팝업 표시 함수 추가
 function showAdPopup() {
-    const popup = document.querySelector('.ad-popup');
+    const popup = document.getElementById('ad-popup');
+    const countdown = popup.querySelector('.countdown');
     popup.style.display = 'flex';
     
     // 애드센스 광고 로드
     (adsbygoogle = window.adsbygoogle || []).push({});
     
-    let timeLeft = 5;
-    const countdownElement = document.getElementById('ad-countdown');
-    
+    let timeLeft = 7;
     const timer = setInterval(() => {
         timeLeft--;
-        countdownElement.textContent = timeLeft;
+        countdown.textContent = timeLeft;
         
         if (timeLeft <= 0) {
             clearInterval(timer);
             popup.style.display = 'none';
-            showResult();
+            showResult(); // 7초 후 결과 표시
         }
     }, 1000);
 }
