@@ -343,26 +343,24 @@ body {
 
 .popup-header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
     margin-bottom: 10px;
 }
 
 .countdown {
-    font-size: 1.2em;
+    font-size: 24px;
     font-weight: bold;
-    color: #FF5722;
+    color: var(--primary-color);
 }
 
 .close-btn {
     background: none;
     border: none;
     font-size: 24px;
+    color: #333;
     cursor: not-allowed;
     opacity: 0.5;
-    padding: 5px;
-    color: #333;
 }
 
 .close-btn.active {
@@ -372,4 +370,7 @@ body {
 
 .popup-body {
     min-height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -168,18 +168,24 @@ function handleAnswer(choiceIndex) {
     }
 }
 
-// 광고 팝업 표시 함수
+// 광고 팝업 표시 함수 수정
 function showAdPopup() {
     const popup = document.getElementById('ad-popup');
     const closeBtn = document.getElementById('close-popup');
     const countdown = popup.querySelector('.countdown');
     
+    // 팝업이 이미 표시되어 있다면 중복 실행 방지
+    if (popup.style.display === 'flex') return;
+    
     popup.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     
-    // 광고 로드
+    // 광고 로드 (수정된 부분)
     try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
+        const adElement = popup.querySelector('.adsbygoogle');
+        if (adElement) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
     } catch (e) {
         console.error('Ad load error:', e);
     }
