@@ -130,6 +130,13 @@ document.getElementById('start-test').addEventListener('click', () => {
     showQuestion();
 });
 
+// 진행률 업데이트 함수 추가
+function updateProgress() {
+    const progressBar = document.querySelector('.progress-fill');
+    const progress = ((currentQuestion + 1) / questions.length) * 100;
+    progressBar.style.width = `${progress}%`;
+}
+
 // 질문 표시 함수
 function showQuestion() {
     const questionContainer = document.getElementById('question-container');
@@ -139,7 +146,9 @@ function showQuestion() {
             <button class="answer-btn" onclick="handleAnswer(${index})">${choice}</button>
         `).join('')}
     `;
+    updateProgress();
 }
+
 // 답변 처리 함수 수정
 function handleAnswer(choiceIndex) {
     userAnswers.push(choiceIndex);
