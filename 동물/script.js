@@ -238,7 +238,7 @@ function showFinalResult() {
         meterFill.style.width = '40%';
     }
     
-    // 결과 텍スト 설정 및 컨테이너 표시
+    // 결과 텍스트 설정 및 컨테이너 표시
     resultText.innerHTML = result.replace(/\n/g, '<br>');
     resultContainer.style.display = 'block';
     resultContainer.scrollIntoView({ behavior: 'smooth' });
@@ -252,7 +252,7 @@ function calculateResult() {
     return results[answerSum % 5];
 }
 
-// 결과 표시 함수
+// 결과 표시 함수 수정
 function showResult() {
     const resultType = calculateResult();
     const animal = animalTypes[resultType];
@@ -267,10 +267,21 @@ function showResult() {
                 ${animal.description.map(text => `<p>${text}</p>`).join('')}
             </div>
             <div class="share-buttons">
-                <button onclick="shareLine()">LINEで共有</button>
-                <button onclick="copyUrl()">URLをコピー</button>
-                <button onclick="retakeTest()">もう一度診断する</button>
-                <button onclick="goToHome()">他のテストを見る</button>
+                <button onclick="shareLine()" class="share-btn line-btn">
+                    <span class="icon">📱</span> LINEで共有
+                </button>
+                <button onclick="copyUrl()" class="share-btn copy-btn">
+                    <span class="icon">📋</span> URLをコピー
+                </button>
+                <button onclick="retakeTest()" class="share-btn retake-btn">
+                    <span class="icon">🔄</span> もう一度診断
+                </button>
+                <button onclick="goToOtherTests()" class="share-btn other-btn">
+                    <span class="icon">🎮</span> 他のテスト
+                </button>
+                <a href="http://japan.testpro.site/" class="share-btn home-btn">
+                    <span class="icon">🏠</span> ホームへ
+                </a>
             </div>
         </div>
     `;
@@ -284,7 +295,8 @@ function shareLine() {
 }
 
 function copyUrl() {
-    navigator.clipboard.writeText(window.location.href)
+    const url = window.location.href;
+    navigator.clipboard.writeText(url)
         .then(() => alert('URLをコピーしました！'));
 }
 
@@ -292,11 +304,37 @@ function retakeTest() {
     currentQuestion = 0;
     userAnswers = [];
     document.getElementById('result-container').style.display = 'none';
-    document.querySelector('.intro-section').style.display = 'block';
+    document.getElementById('quiz-container').style.display = 'none';
+    document.querySelector('.intro-text').style.display = 'block';
 }
 
 function goToHome() {
     window.location.href = 'http://japan.testpro.site/';
+}
+
+function goToOtherTests() {
+    const testLinks = {
+        'MBTI診断テスト': 'http://japan.testpro.site/mbti/',
+        '感情診断テスト': 'http://japan.testpro.site/感情/',
+        '相性診断テスト': 'http://japan.testpro.site/相性/',
+        // 다른 테스트 링크 추가 가능
+    };
+    
+    let linksHtml = Object.entries(testLinks)
+        .map(([name, url]) => `<a href="${url}" class="test-link">${name}</a>`)
+        .join('');
+    
+    const popup = document.createElement('div');
+    popup.className = 'other-tests-popup';
+    popup.innerHTML = `
+        <div class="popup-content">
+            <h3>他の診断テスト</h3>
+            <div class="test-links">${linksHtml}</div>
+            <button onclick="this.parentElement.parentElement.remove()">閉じる</button>
+        </div>
+    `;
+    
+    document.body.appendChild(popup);
 }
 
 // 테스트 초기화 함수 추가
