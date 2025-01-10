@@ -159,21 +159,24 @@ function showAdPopup() {
     const closeBtn = document.getElementById('close-popup');
     const countdown = popup.querySelector('.countdown');
     
-    popup.style.display = 'block';
+    popup.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     
-    let count = 5;
+    // 광고 스크립트 실행
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    
+    let count = 7;
     countdown.textContent = count;
     
     const timer = setInterval(() => {
         count--;
-        countdown.textContent = count;
-        
-        if (count <= 0) {
+        if (count < 0) {
             clearInterval(timer);
             countdown.style.display = 'none';
             closeBtn.disabled = false;
             closeBtn.classList.add('active');
+        } else {
+            countdown.textContent = count;
         }
     }, 1000);
     
@@ -181,7 +184,7 @@ function showAdPopup() {
         if (!closeBtn.disabled) {
             popup.style.display = 'none';
             document.body.style.overflow = '';
-            showResult();
+            showFinalResult();
         }
     };
 }

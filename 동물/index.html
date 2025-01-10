@@ -66,7 +66,7 @@
         <div id="ad-popup" class="popup">
             <div class="popup-content">
                 <div class="popup-controls">
-                    <span class="countdown">5</span>
+                    <span class="countdown">7</span>
                     <button class="close-btn" id="close-popup" disabled>×</button>
                 </div>
                 <ins class="adsbygoogle"
@@ -122,6 +122,11 @@
             (adsbygoogle = window.adsbygoogle || []).push({});
         }
 
+        document.getElementById('ad-popup').addEventListener('click', function() {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        });
+        
+        // 팝업 광고 초기화
         document.getElementById('ad-popup').addEventListener('click', function() {
             (adsbygoogle = window.adsbygoogle || []).push({});
         });
